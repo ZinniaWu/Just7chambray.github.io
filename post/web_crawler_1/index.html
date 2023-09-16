@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>『第一周』网络爬虫之规则 | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/web_crawler_1/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>『第一周』网络爬虫之规则</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2020-03-31</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/WDEFvVHzy/" class="tag">Python</a> | 	<a href="https://Just7chambray.github.io/tag/7e4gCi1Ge6/" class="tag">爬虫</a> | 	<a href="https://Just7chambray.github.io/tag/vFqmDBjhB/" class="tag">科技</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">4334字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">23 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://Just7chambray.github.io/post-images/web_crawler_1.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>中国大学MOOC课程笔记</p>
+<!-- more -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>【第一周】网络爬虫之规则</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+<p>html,<br>
+body {<br>
+margin: 0;<br>
+padding: 0;<br>
+}<br>
+@media only screen {<br>
+body {<br>
+margin: 2em auto;<br>
+max-width: 900px;<br>
+color: rgb(55, 53, 47);<br>
+}<br>
+}</p>
+<p>body {<br>
+line-height: 1.5;<br>
+white-space: pre-wrap;<br>
+}</p>
+<p>a,<br>
+a.visited {<br>
+color: inherit;<br>
+text-decoration: underline;<br>
+}</p>
+<p>.pdf-relative-link-path {<br>
+font-size: 80%;<br>
+color: #444;<br>
+}</p>
+<p>h1,<br>
+h2,<br>
+h3 {<br>
+letter-spacing: -0.01em;<br>
+line-height: 1.2;<br>
+font-weight: 600;<br>
+margin-bottom: 0;<br>
+}</p>
+<p>.page-title {<br>
+font-size: 2.5rem;<br>
+font-weight: 700;<br>
+margin-top: 0;<br>
+margin-bottom: 0.75em;<br>
+}</p>
+<p>h1 {<br>
+font-size: 1.875rem;<br>
+margin-top: 1.875rem;<br>
+}</p>
+<p>h2 {<br>
+font-size: 1.5rem;<br>
+margin-top: 1.5rem;<br>
+}</p>
+<p>h3 {<br>
+font-size: 1.25rem;<br>
+margin-top: 1.25rem;<br>
+}</p>
+<p>.source {<br>
+border: 1px solid #ddd;<br>
+border-radius: 3px;<br>
+padding: 1.5em;<br>
+word-break: break-all;<br>
+}</p>
+<p>.callout {<br>
+border-radius: 3px;<br>
+padding: 1rem;<br>
+}</p>
+<p>figure {<br>
+margin: 1.25em 0;<br>
+page-break-inside: avoid;<br>
+}</p>
+<p>figcaption {<br>
+opacity: 0.5;<br>
+font-size: 85%;<br>
+margin-top: 0.5em;<br>
+}</p>
+<p>mark {<br>
+background-color: transparent;<br>
+}</p>
+<p>.indented {<br>
+padding-left: 1.5em;<br>
+}</p>
+<p>hr {<br>
+background: transparent;<br>
+display: block;<br>
+width: 100%;<br>
+height: 1px;<br>
+visibility: visible;<br>
+border: none;<br>
+border-bottom: 1px solid rgba(55, 53, 47, 0.09);<br>
+}</p>
+<p>img {<br>
+max-width: 100%;<br>
+}</p>
+<p>@media only print {<br>
+img {<br>
+max-height: 100vh;<br>
+object-fit: contain;<br>
+}<br>
+}</p>
+<p>@page {<br>
+margin: 1in;<br>
+}</p>
+<p>.collection-content {<br>
+font-size: 0.875rem;<br>
+}</p>
+<p>.column-list {<br>
+display: flex;<br>
+justify-content: space-between;<br>
+}</p>
+<p>.column {<br>
+padding: 0 1em;<br>
+}</p>
+<p>.column:first-child {<br>
+padding-left: 0;<br>
+}</p>
+<p>.column:last-child {<br>
+padding-right: 0;<br>
+}</p>
+<p>.table_of_contents-item {<br>
+display: block;<br>
+font-size: 0.875rem;<br>
+line-height: 1.3;<br>
+padding: 0.125rem;<br>
+}</p>
+<p>.table_of_contents-indent-1 {<br>
+margin-left: 1.5rem;<br>
+}</p>
+<p>.table_of_contents-indent-2 {<br>
+margin-left: 3rem;<br>
+}</p>
+<p>.table_of_contents-indent-3 {<br>
+margin-left: 4.5rem;<br>
+}</p>
+<p>.table_of_contents-link {<br>
+text-decoration: none;<br>
+opacity: 0.7;<br>
+border-bottom: 1px solid rgba(55, 53, 47, 0.18);<br>
+}</p>
+<p>table,<br>
+th,<br>
+td {<br>
+border: 1px solid rgba(55, 53, 47, 0.09);<br>
+border-collapse: collapse;<br>
+}</p>
+<p>table {<br>
+border-left: none;<br>
+border-right: none;<br>
+}</p>
+<p>th,<br>
+td {<br>
+font-weight: normal;<br>
+padding: 0.25em 0.5em;<br>
+line-height: 1.5;<br>
+min-height: 1.5em;<br>
+text-align: left;<br>
+}</p>
+<p>th {<br>
+color: rgba(55, 53, 47, 0.6);<br>
+}</p>
+<p>ol,<br>
+ul {<br>
+margin: 0;<br>
+margin-block-start: 0.6em;<br>
+margin-block-end: 0.6em;<br>
+}</p>
+<p>li &gt; ol:first-child,<br>
+li &gt; ul:first-child {<br>
+margin-block-start: 0.6em;<br>
+}</p>
+<p>ul &gt; li {<br>
+list-style: disc;<br>
+}</p>
+<p>ul.to-do-list {<br>
+text-indent: -1.7em;<br>
+}</p>
+<p>ul.to-do-list &gt; li {<br>
+list-style: none;<br>
+}</p>
+<p>.to-do-children-checked {<br>
+text-decoration: line-through;<br>
+opacity: 0.375;<br>
+}</p>
+<p>ul.toggle &gt; li {<br>
+list-style: none;<br>
+}</p>
+<p>ul {<br>
+padding-inline-start: 1.7em;<br>
+}</p>
+<p>ul &gt; li {<br>
+padding-left: 0.1em;<br>
+}</p>
+<p>ol {<br>
+padding-inline-start: 1.6em;<br>
+}</p>
+<p>ol &gt; li {<br>
+padding-left: 0.2em;<br>
+}</p>
+<p>.mono ol {<br>
+padding-inline-start: 2em;<br>
+}</p>
+<p>.mono ol &gt; li {<br>
+text-indent: -0.4em;<br>
+}</p>
+<p>.toggle {<br>
+padding-inline-start: 0em;<br>
+list-style-type: none;<br>
+}</p>
+<p>/* Indent toggle children */<br>
+.toggle &gt; li &gt; details {<br>
+padding-left: 1.7em;<br>
+}</p>
+<p>.toggle &gt; li &gt; details &gt; summary {<br>
+margin-left: -1.1em;<br>
+}</p>
+<p>.selected-value {<br>
+display: inline-block;<br>
+padding: 0 0.5em;<br>
+background: rgba(206, 205, 202, 0.5);<br>
+border-radius: 3px;<br>
+margin-right: 0.5em;<br>
+margin-top: 0.3em;<br>
+margin-bottom: 0.3em;<br>
+white-space: nowrap;<br>
+}</p>
+<p>.collection-title {<br>
+display: inline-block;<br>
+margin-right: 1em;<br>
+}</p>
+<p>time {<br>
+opacity: 0.5;<br>
+}</p>
+<p>.icon {<br>
+display: inline-block;<br>
+max-width: 1.2em;<br>
+max-height: 1.2em;<br>
+text-decoration: none;<br>
+vertical-align: text-bottom;<br>
+margin-right: 0.5em;<br>
+}</p>
+<p>img.icon {<br>
+border-radius: 3px;<br>
+}</p>
+<p>.user-icon {<br>
+width: 1.5em;<br>
+height: 1.5em;<br>
+border-radius: 100%;<br>
+margin-right: 0.5rem;<br>
+}</p>
+<p>.user-icon-inner {<br>
+font-size: 0.8em;<br>
+}</p>
+<p>.text-icon {<br>
+border: 1px solid #000;<br>
+text-align: center;<br>
+}</p>
+<p>.page-cover-image {<br>
+display: block;<br>
+object-fit: cover;<br>
+width: 100%;<br>
+height: 30vh;<br>
+}</p>
+<p>.page-header-icon {<br>
+font-size: 3rem;<br>
+margin-bottom: 1rem;<br>
+}</p>
+<p>.page-header-icon-with-cover {<br>
+margin-top: -0.72em;<br>
+margin-left: 0.07em;<br>
+}</p>
+<p>.page-header-icon img {<br>
+border-radius: 3px;<br>
+}</p>
+<p>.link-to-page {<br>
+margin: 1em 0;<br>
+padding: 0;<br>
+border: none;<br>
+font-weight: 500;<br>
+}</p>
+<p>p &gt; .user {<br>
+opacity: 0.5;<br>
+}</p>
+<p>td &gt; .user,<br>
+td &gt; time {<br>
+white-space: nowrap;<br>
+}</p>
+<p>input[type=&quot;checkbox&quot;] {<br>
+transform: scale(1.5);<br>
+margin-right: 0.6em;<br>
+vertical-align: middle;<br>
+}</p>
+<p>p {<br>
+margin-top: 0.5em;<br>
+margin-bottom: 0.5em;<br>
+}</p>
+<p>.image {<br>
+border: none;<br>
+margin: 1.5em 0;<br>
+padding: 0;<br>
+border-radius: 0;<br>
+text-align: center;<br>
+}</p>
+<p>.code,<br>
+code {<br>
+background: rgba(135, 131, 120, 0.15);<br>
+border-radius: 3px;<br>
+padding: 0.2em 0.4em;<br>
+border-radius: 3px;<br>
+font-size: 85%;<br>
+tab-size: 2;<br>
+}</p>
+<p>code {<br>
+color: #eb5757;<br>
+}</p>
+<p>.code {<br>
+padding: 1.5em 1em;<br>
+}</p>
+<p>.code &gt; code {<br>
+background: none;<br>
+padding: 0;<br>
+font-size: 100%;<br>
+color: inherit;<br>
+}</p>
+<p>blockquote {<br>
+font-size: 1.25em;<br>
+margin: 1em 0;<br>
+padding-left: 1em;<br>
+border-left: 3px solid rgb(55, 53, 47);<br>
+}</p>
+<p>.bookmark {<br>
+text-decoration: none;<br>
+max-height: 8em;<br>
+padding: 0;<br>
+display: flex;<br>
+width: 100%;<br>
+align-items: stretch;<br>
+}</p>
+<p>.bookmark-title {<br>
+font-size: 0.85em;<br>
+overflow: hidden;<br>
+text-overflow: ellipsis;<br>
+height: 1.75em;<br>
+white-space: nowrap;<br>
+}</p>
+<p>.bookmark-text {<br>
+display: flex;<br>
+flex-direction: column;<br>
+}</p>
+<p>.bookmark-info {<br>
+flex: 4 1 180px;<br>
+padding: 12px 14px 14px;<br>
+display: flex;<br>
+flex-direction: column;<br>
+justify-content: space-between;<br>
+}</p>
+<p>.bookmark-image {<br>
+width: 33%;<br>
+flex: 1 1 180px;<br>
+display: block;<br>
+position: relative;<br>
+object-fit: cover;<br>
+border-radius: 1px;<br>
+}</p>
+<p>.bookmark-description {<br>
+color: rgba(55, 53, 47, 0.6);<br>
+font-size: 0.75em;<br>
+overflow: hidden;<br>
+max-height: 4.5em;<br>
+word-break: break-word;<br>
+}</p>
+<p>.bookmark-href {<br>
+font-size: 0.75em;<br>
+margin-top: 0.25em;<br>
+}</p>
+<p>.sans { font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; }<br>
+.code { font-family: &quot;SFMono-Regular&quot;, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace; }<br>
+.serif { font-family: Lyon-Text, Georgia, YuMincho, &quot;Yu Mincho&quot;, &quot;Hiragino Mincho ProN&quot;, &quot;Hiragino Mincho Pro&quot;, &quot;Songti TC&quot;, &quot;Songti SC&quot;, &quot;SimSun&quot;, &quot;Nanum Myeongjo&quot;, NanumMyeongjo, Batang, serif; }<br>
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }<br>
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }</p>
+<p>.pdf .code { font-family: Source Code Pro, &quot;SFMono-Regular&quot;, Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }</p>
+<p>.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, &quot;Yu Mincho&quot;, &quot;Hiragino Mincho ProN&quot;, &quot;Hiragino Mincho Pro&quot;, &quot;Songti TC&quot;, &quot;Songti SC&quot;, &quot;SimSun&quot;, &quot;Nanum Myeongjo&quot;, NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }</p>
+<p>.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }</p>
+<p>.highlight-default {<br>
+}<br>
+.highlight-gray {<br>
+color: rgb(155,154,151);<br>
+}<br>
+.highlight-brown {<br>
+color: rgb(100,71,58);<br>
+}<br>
+.highlight-orange {<br>
+color: rgb(217,115,13);<br>
+}<br>
+.highlight-yellow {<br>
+color: rgb(223,171,1);<br>
+}<br>
+.highlight-teal {<br>
+color: rgb(15,123,108);<br>
+}<br>
+.highlight-blue {<br>
+color: rgb(11,110,153);<br>
+}<br>
+.highlight-purple {<br>
+color: rgb(105,64,165);<br>
+}<br>
+.highlight-pink {<br>
+color: rgb(173,26,114);<br>
+}<br>
+.highlight-red {<br>
+color: rgb(224,62,62);<br>
+}<br>
+.highlight-gray_background {<br>
+background: rgb(235,236,237);<br>
+}<br>
+.highlight-brown_background {<br>
+background: rgb(233,229,227);<br>
+}<br>
+.highlight-orange_background {<br>
+background: rgb(250,235,221);<br>
+}<br>
+.highlight-yellow_background {<br>
+background: rgb(251,243,219);<br>
+}<br>
+.highlight-teal_background {<br>
+background: rgb(221,237,234);<br>
+}<br>
+.highlight-blue_background {<br>
+background: rgb(221,235,241);<br>
+}<br>
+.highlight-purple_background {<br>
+background: rgb(234,228,242);<br>
+}<br>
+.highlight-pink_background {<br>
+background: rgb(244,223,235);<br>
+}<br>
+.highlight-red_background {<br>
+background: rgb(251,228,228);<br>
+}<br>
+.block-color-default {<br>
+color: inherit;<br>
+fill: inherit;<br>
+}<br>
+.block-color-gray {<br>
+color: rgba(55, 53, 47, 0.6);<br>
+fill: rgba(55, 53, 47, 0.6);<br>
+}<br>
+.block-color-brown {<br>
+color: rgb(100,71,58);<br>
+fill: rgb(100,71,58);<br>
+}<br>
+.block-color-orange {<br>
+color: rgb(217,115,13);<br>
+fill: rgb(217,115,13);<br>
+}<br>
+.block-color-yellow {<br>
+color: rgb(223,171,1);<br>
+fill: rgb(223,171,1);<br>
+}<br>
+.block-color-teal {<br>
+color: rgb(15,123,108);<br>
+fill: rgb(15,123,108);<br>
+}<br>
+.block-color-blue {<br>
+color: rgb(11,110,153);<br>
+fill: rgb(11,110,153);<br>
+}<br>
+.block-color-purple {<br>
+color: rgb(105,64,165);<br>
+fill: rgb(105,64,165);<br>
+}<br>
+.block-color-pink {<br>
+color: rgb(173,26,114);<br>
+fill: rgb(173,26,114);<br>
+}<br>
+.block-color-red {<br>
+color: rgb(224,62,62);<br>
+fill: rgb(224,62,62);<br>
+}<br>
+.block-color-gray_background {<br>
+background: rgb(235,236,237);<br>
+}<br>
+.block-color-brown_background {<br>
+background: rgb(233,229,227);<br>
+}<br>
+.block-color-orange_background {<br>
+background: rgb(250,235,221);<br>
+}<br>
+.block-color-yellow_background {<br>
+background: rgb(251,243,219);<br>
+}<br>
+.block-color-teal_background {<br>
+background: rgb(221,237,234);<br>
+}<br>
+.block-color-blue_background {<br>
+background: rgb(221,235,241);<br>
+}<br>
+.block-color-purple_background {<br>
+background: rgb(234,228,242);<br>
+}<br>
+.block-color-pink_background {<br>
+background: rgb(244,223,235);<br>
+}<br>
+.block-color-red_background {<br>
+background: rgb(251,228,228);<br>
+}<br>
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }<br>
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }<br>
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }<br>
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }<br>
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }<br>
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }<br>
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }<br>
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }<br>
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }<br>
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }</p>
+<p>.checkbox {<br>
+display: inline-flex;<br>
+vertical-align: text-bottom;<br>
+width: 16;<br>
+height: 16;<br>
+background-size: 16px;<br>
+margin-left: 2px;<br>
+margin-right: 5px;<br>
+}</p>
+<p>.checkbox-on {<br>
+background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E&quot;);<br>
+}</p>
+<p>.checkbox-off {<br>
+background-image: url(&quot;data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E&quot;);<br>
+}</p>
+<p></style></head></p>
+<body>
+	<article id="20bb172b-49b9-4bec-b4d7-b3091cbf92a4" class="page sans">
+		<header>
+			<h1 class="page-title">【第一周】网络爬虫之规则</h1>
+		</header>
+		<div class="page-body"><h1 id="a2dc9639-39c7-4217-abba-527a6568116f" class=""><strong>单元1：Requests库入门</strong></h1><h2 id="0e3e2a88-effc-4008-920b-00e016cde78f" class="">安装</h2><pre id="553720b0-c1c5-4de4-8d44-0af3c5778b9f" class="code"><code>win+R cmd
+pip install requsets</code></pre>
+<p id="c1c4a2f5-1f69-4500-947e-aa7a3cee0a99" class="">测试安装成功</p><pre id="caf032a3-d1b5-47a0-8cec-ff65adc51be9" class="code"><code>import requests</code></pre><h2 id="f208b97d-ef66-4d3f-a2ff-f87e0dff9ec6" class=""><strong>get()方法</strong></h2><pre id="e5733d71-c902-4387-8b4c-74b4cddf56bb" class="code"><code>r = requests.get(url)#获得网页
+#返回一个包含服务器资源的response对象
+#构造一个向服务器请求资源的request对象</code></pre><p id="61c68d60-0b30-4be2-a541-0ff804a12ec2" class="">完整使用方法：</p><pre id="9ff9725a-b8f7-4f90-8a98-bb9272de1e91" class="code"><code>request.get(url,params=None,**kwargs)
+#url:拟获取页面的url链接
+#params:Url中的额外参数，字典或字节流格式，可选
+#**kwargs:12个控制访问的参数</code></pre><div id="59c5ecc9-a3bd-484f-889f-8e0e98375dde" class="collection-content"><h4 class="collection-title">Response对象的属性</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>属性</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>说明</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>具体说明</th></tr></thead><tbody><tr id="27ef4ac9-9337-4fae-8d67-704f2022a32a"><td class="cell-title"><a href="https://www.notion.so/r-status_code-27ef4ac993374fae8d67704f2022a32a">r.status_code</a></td><td class="cell-q&#x27;!\">Http请求的返回状态,200表示连接成功，404表示失败</td><td class="cell-P8)5">只有返回200，response其他属性才可用；404或其他某些原因出错将产生异常</td></tr><tr id="9c574611-6eee-4015-a7a7-394917e6940e"><td class="cell-title"><a href="https://www.notion.so/r-text-9c5746116eee4015a7a7394917e6940e">r.text</a></td><td class="cell-q&#x27;!\">Http响应内容的字符串形式,即，url对应的页面内容</td><td class="cell-P8)5"></td></tr><tr id="3db1b968-e1dd-433e-b00c-96623e8a6512"><td class="cell-title"><a href="https://www.notion.so/r-encoding-3db1b968e1dd433eb00c96623e8a6512">r.encoding</a></td><td class="cell-q&#x27;!\">从HTTP header中猜测的响应内容编码方式</td><td class="cell-P8)5">如果header中不存在charset，则认为编码为ISO-8859-1</td></tr><tr id="4822850a-46d4-4e51-b23d-6b1071b7f297"><td class="cell-title"><a href="https://www.notion.so/r-apparent_encoding-4822850a46d44e51b23d6b1071b7f297">r.apparent_encoding</a></td><td class="cell-q&#x27;!\">从内容中分析出的相应内容编码方式（备选编码方式）</td><td class="cell-P8)5">根据网页内容分析出的编码方式，更准确</td></tr><tr id="1ea1b18a-f684-4a94-b845-4b9d5681fa3a"><td class="cell-title"><a href="https://www.notion.so/r-content-1ea1b18af6844a94b8454b9d5681fa3a">r.content</a></td><td class="cell-q&#x27;!\">Http响应内容的二进制形式</td><td class="cell-P8)5"></td></tr></tbody></table></div><p id="aed2a0c8-7a8a-4b68-9cf8-459c0f2bd8b2" class="">
+</p><h2 id="2ae66bda-ff9e-4e9a-a721-f9007b5f42b2" class=""><strong>爬取网页的通用代码框架</strong></h2><div id="7c6fc79a-e12f-4598-bced-c58b74b82355" class="collection-content"><h4 class="collection-title">理解requests库的异常</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>异常</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>说明</th></tr></thead><tbody><tr id="b6babd28-c362-4354-92a9-b3f2ea1e69e6"><td class="cell-title"><a href="https://www.notion.so/requests-ConnectionError-b6babd28c362435492a9b3f2ea1e69e6">requests.ConnectionError</a></td><td class="cell-nfco">网络连接错误异常，如DNS查询失败，拒绝连接等</td></tr><tr id="b918bb81-cddd-4316-94c9-a24b5f49434b"><td class="cell-title"><a href="https://www.notion.so/requests-HTTPError-b918bb81cddd431694c9a24b5f49434b">requests.HTTPError</a></td><td class="cell-nfco">Http错误异常</td></tr><tr id="2009f7c0-dbd6-4752-914d-bff8c84b36df"><td class="cell-title"><a href="https://www.notion.so/requests-URLRequired-2009f7c0dbd64752914dbff8c84b36df">requests.URLRequired</a></td><td class="cell-nfco">Url缺失异常</td></tr><tr id="b949d882-1281-4e38-84d3-55e6dc38842d"><td class="cell-title"><a href="https://www.notion.so/requests-TooManyRedirects-b949d88212814e3884d355e6dc38842d"> requests.TooManyRedirects</a></td><td class="cell-nfco">超过最大重定向次数，产生重定向异常</td></tr><tr id="c299c673-bf3d-4b97-9b6e-060fd4c1964e"><td class="cell-title"><a href="https://www.notion.so/requests-ConnectTimeout-c299c673bf3d4b979b6e060fd4c1964e"> requests.ConnectTimeout</a></td><td class="cell-nfco">连接远程服务器时超时异常</td></tr><tr id="05617fa0-28de-4c9c-8140-5ae1d7740c5f"><td class="cell-title"><a href="https://www.notion.so/requests-Timeout-05617fa028de4c9c81405ae1d7740c5f"> requests.Timeout</a></td><td class="cell-nfco"> 请求url超时产生超时异常</td></tr><tr id="17b8527a-72f3-44c4-9a8d-ccacdc7551eb"><td class="cell-title"><a href="https://www.notion.so/r-raise_for_status-17b8527a72f344c49a8dccacdc7551eb">r.raise_for_status()</a></td><td class="cell-nfco">如果不是200，产生异常requests.HTTPError</td></tr></tbody></table></div><pre id="bfcc1532-18a1-4d5e-a6a4-7a18a6654ef1" class="code"><code>#有效稳定的代码框架
+import requests
+<p>def getHTMLText(url):<br>
+try:<br>
+r = requests.get(url, timeout = 30)<br>
+r.raise_for_status()#如果状态不是200，引发HTTPError异常<br>
+r.encoding = r.apparent_encoding<br>
+return r.text<br>
+except:<br>
+return &quot;error&quot;</p>
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
+url = &quot;http://www.baidu.com&quot;<br>
+print(getHTMLText(url))</code></pre><p id="b0039b9b-fc50-450f-92fb-a41bd2587b15" class=""></p>
+</p><h2 id="6d14dd04-8053-41b6-a33c-cbac8760885a" class=""><strong>HTTP协议及Requests库方法</strong></h2><div id="6b982216-7aed-452d-8103-fb08a7e90067" class="collection-content"><h4 class="collection-title">Requests库的7个主要方法</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>方法</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>说明</th></tr></thead><tbody><tr id="c176508e-9c2b-43ea-9511-81703f14710d"><td class="cell-title"><a href="https://www.notion.so/requests-request-c176508e9c2b43ea951181703f14710d">requests.request()</a></td><td class="cell-IBk\">构造一个请求，支撑以下各方法的基础方法</td></tr><tr id="213c954b-b663-4111-a8a2-e13bb6cf5939"><td class="cell-title"><a href="https://www.notion.so/requests-get-213c954bb6634111a8a2e13bb6cf5939">requests.get()</a></td><td class="cell-IBk\">获取HTML网页的主要方法，对应于HTTP的GET</td></tr><tr id="a5b8499e-7cca-45c3-b460-801127f397a9"><td class="cell-title"><a href="https://www.notion.so/requests-head-a5b8499e7cca45c3b460801127f397a9">requests.head()</a></td><td class="cell-IBk\">获取HTML网页头信息的方法，对应于HTTP的HEAD</td></tr><tr id="79578cc6-5949-4e79-9030-7465012fdbd7"><td class="cell-title"><a href="https://www.notion.so/requests-post-79578cc659494e7990307465012fdbd7">requests.post()</a></td><td class="cell-IBk\">向HTML网页提交POST请求的方法，对应于HTTP的POST</td></tr><tr id="ab173097-87e5-4452-86c6-d59861351372"><td class="cell-title"><a href="https://www.notion.so/requests-put-ab17309787e5445286c6d59861351372">requests.put()</a></td><td class="cell-IBk\">向HTML网页提交PUT请求的方法，对应于HTTP的PUT</td></tr><tr id="ce9f0c4c-844a-4c07-b566-3ad0008d680e"><td class="cell-title"><a href="https://www.notion.so/requests-patch-ce9f0c4c844a4c07b5663ad0008d680e">requests.patch()</a></td><td class="cell-IBk\">向HTML网页提交局部修改请求，对应于HTTP的PATCH</td></tr><tr id="cf64ff4d-9b30-4af5-9a86-9d2ba791a6d8"><td class="cell-title"><a href="https://www.notion.so/requests-delete-cf64ff4d9b304af59a869d2ba791a6d8">requests.delete()</a></td><td class="cell-IBk\">向HTML页面提交删除请求，对应于HTTP的DELETE</td></tr></tbody></table></div><p id="212a60b5-757c-471c-92b3-64f6f1d1062c" class="">
+</p><div id="22761afb-708b-4ad9-ad20-c9ee9fa75682" class="collection-content"><h4 class="collection-title">Http协议与request库</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>HTTP协议方法</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Requests库方法</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>功能一致性</th></tr></thead><tbody><tr id="c406bf2d-a8a3-4d98-a53b-8787ebf1a5df"><td class="cell-title"><a href="https://www.notion.so/GET-c406bf2da8a34d98a53b8787ebf1a5df">GET</a></td><td class="cell-w/ZR">requests.get()</td><td class="cell-#X{%">一致</td></tr><tr id="49dc40d3-c091-41b6-b716-6d4440961225"><td class="cell-title"><a href="https://www.notion.so/HEAD-49dc40d3c09141b6b7166d4440961225">HEAD</a></td><td class="cell-w/ZR">requests.head()</td><td class="cell-#X{%">一致</td></tr><tr id="ddb2af93-44fa-45cb-a21c-af2f8886dcfe"><td class="cell-title"><a href="https://www.notion.so/POST-ddb2af9344fa45cba21caf2f8886dcfe">POST</a></td><td class="cell-w/ZR">requests.post()</td><td class="cell-#X{%">一致</td></tr><tr id="2d347f72-8537-444f-9722-c2f6eeb40c88"><td class="cell-title"><a href="https://www.notion.so/PUT-2d347f728537444f9722c2f6eeb40c88">PUT</a></td><td class="cell-w/ZR">requests.put()</td><td class="cell-#X{%">一致</td></tr><tr id="8c95c1ab-c01d-4cf9-a733-d0c739017a2a"><td class="cell-title"><a href="https://www.notion.so/PATCH-8c95c1abc01d4cf9a733d0c739017a2a">PATCH</a></td><td class="cell-w/ZR">requests.patch()</td><td class="cell-#X{%">一致</td></tr><tr id="7c8618df-277a-4e31-9bca-5cf41edba4e7"><td class="cell-title"><a href="https://www.notion.so/DELETE-7c8618df277a4e319bca5cf41edba4e7">DELETE</a></td><td class="cell-w/ZR">requests.delete()</td><td class="cell-#X{%">一致</td></tr></tbody></table></div><h3 id="f968494b-616b-4a59-9089-b832c9dd4494" class="">head()方法</h3><pre id="ef1751d9-2da3-475b-9b8d-7b0db13b34ba" class="code"><code>&gt;&gt;&gt;r=requests.head(&#x27;http://httpbin.org/get&#x27;)
+&gt;&gt;&gt;r.headers
+{&#x27;Content-Length&#x27;:&#x27;238&#x27;,&#x27;Access-Control-Allow-Origin&#x27;:&#x27;*&#x27;,
+&#x27;Access-control-Allow-Credentials&#x27;:&#x27;true&#x27;,
+&#x27;Content-Type&#x27;:&#x27;application/json&#x27;,
+&#x27;Server&#x27;:‘nginx&#x27;,&#x27;Connection&#x27;:‘keep-alive&#x27;,
+&#x27;Date&#x27;:&#x27;Sat,18 Feb 2017 12:07:44GMT&#x27;}
+&gt;&gt;&gt;r.text
+..</code></pre><h3 id="5cca22d8-35f2-4b3b-aa87-a2d5c190c78f" class="">post()方法</h3><pre id="163df19c-30af-443a-ad5c-75fc0918fc85" class="code"><code>#向URL POST一个字典自动编码为form（表单）
+&gt;&gt;&gt;payload={&#x27;key1&#x27;:&#x27;value1&#x27;,&#x27;key2&#x27;:&#x27;value2&#x27;}
+&gt;&gt;&gt;r=requests.post(&quot;http://httpbin.org/post&#x27;,data=payload)
+&gt;&gt;&gt;print(r.text)
+{..
+    &quot;form&quot;:{
+		    &quot;key2&quot;:&quot;value2&quot;,
+				&quot;key1&quot;:&quot;value1&quot;
+		},
+}
+<p>#向URL POST一个字符串自动编码为data<br>
+&gt;&gt;&gt;r=requests.post('http://httpbin.org/post',data='ABC')<br>
+&gt;&gt;&gt;print(r.text)<br>
+{...<br>
+&quot;data&quot;:&quot;ABC&quot;<br>
+&quot;form&quot;:{},<br>
+}</code></pre><h3 id="3b43caa0-d46b-474a-a1bb-bb2d3a24028b" class="">put()方法</h3><pre id="e4dbb950-e558-4cfd-b844-f84d06f9ea65" class="code"><code>&gt;&gt;&gt;payload={'key1':'value1','key2':'value2'} }<br>
+&gt;&gt;&gt;r=requests.put('http://httpbin.org/put',data= payload)<br>
+&gt;&gt;&gt;print(r.text)<br>
+{...<br>
+&quot;form&quot;:{<br>
+&quot;key2&quot;:&quot;value2&quot;,<br>
+&quot;key1&quot;:&quot;value1&quot;<br>
+},<br>
+}</code></pre><p id="1f26a908-6536-49f1-9691-519dce4e4527" class=""></p>
+</p><h2 id="878f0e73-dea4-4ed3-8f92-b74648250046" class=""><strong>Requests库主要方法解析</strong></h2><div id="eedeea94-3a83-4ea5-97ae-bf3065c7316c" class="collection-content"><h4 class="collection-title">Requests库的7个主要方法</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>方法</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>说明</th></tr></thead><tbody><tr id="587d5a71-27bc-4e9c-8b1f-c77d6f55dca3"><td class="cell-title"><a href="https://www.notion.so/requests-request-587d5a7127bc4e9c8b1fc77d6f55dca3">requests.request()</a></td><td class="cell-IBk\">构造一个请求，支撑以下各方法的基础方法</td></tr><tr id="d05c8da9-823c-417d-b1ca-6422f6150a45"><td class="cell-title"><a href="https://www.notion.so/requests-get-d05c8da9823c417db1ca6422f6150a45">requests.get()</a></td><td class="cell-IBk\">获取HTML网页的主要方法，对应于HTTP的GET</td></tr><tr id="a4e97704-c5e4-45d1-b13b-2a5380252f13"><td class="cell-title"><a href="https://www.notion.so/requests-head-a4e97704c5e445d1b13b2a5380252f13">requests.head()</a></td><td class="cell-IBk\">获取HTML网页头信息的方法，对应于HTTP的HEAD</td></tr><tr id="82e2763a-4cf6-4a7b-809a-511c07e89cf1"><td class="cell-title"><a href="https://www.notion.so/requests-post-82e2763a4cf64a7b809a511c07e89cf1">requests.post()</a></td><td class="cell-IBk\">向HTML网页提交POST请求的方法，对应于HTTP的POST</td></tr><tr id="00affac4-017d-4615-8e5d-a9672601fc7d"><td class="cell-title"><a href="https://www.notion.so/requests-put-00affac4017d46158e5da9672601fc7d">requests.put()</a></td><td class="cell-IBk\">向HTML网页提交PUT请求的方法，对应于HTTP的PUT</td></tr><tr id="50fcd5c4-ddb9-4537-a741-4469c746de8c"><td class="cell-title"><a href="https://www.notion.so/requests-patch-50fcd5c4ddb94537a7414469c746de8c">requests.patch()</a></td><td class="cell-IBk\">向HTML网页提交局部修改请求，对应于HTTP的PATCH</td></tr><tr id="125842fc-625f-4b51-800a-9c0410fb38ef"><td class="cell-title"><a href="https://www.notion.so/requests-delete-125842fc625f4b51800a9c0410fb38ef">requests.delete()</a></td><td class="cell-IBk\">向HTML页面提交删除请求，对应于HTTP的DELETE</td></tr></tbody></table></div><pre id="a293ff64-e4bf-45c2-909a-c266329cf798" class="code"><code>1.
+requests.request(method,url,**kwargs)
+<p>#method:请求方式，对应get/put/post等7种<br>
+#url:拟获取页面的url链接<br>
+#**kwargs:控制访问的参数，共13个<br>
+#params:字典或字节序列，作为参数增加到url中<br>
+#data:字典、字节序列或文件对象，作为request的内容<br>
+#json:JSON格式的数据，作为Request的内容<br>
+#headers:字典，HTTP定制头<br>
+#cookies:字典或CookieJar，Request中的cookie<br>
+#auth:元组，支持HTTP认证功能<br>
+#files:字典类型，传输文件<br>
+#timeout:设定超时时间，单位为s<br>
+#防止对爬虫对逆追踪<br>
+#proxies:字典类型，设定访问代理服务器，可以增加登录认证<br>
+#高级功能<br>
+#allow_redirects:True/False，默认True，重定向开关<br>
+#stream:True/False,默认True,获取内容立即下载开关<br>
+#verify:True/False,默认True，认证SSL证书开关<br>
+#cert:本地SSL证书路径<br>
+</code></pre><p id="4edb2325-aa50-4e3f-8136-2def57984730" class=""></p>
+</p><pre id="e0e444b9-d120-4a3c-b145-e130c5e5a3a2" class="code"><code>2.
+requests.get(url,params=None,**kwargs)
+<p>#url:拟获取页面的url链接<br>
+#params:url中的额外参数，字典或字节流格式，可选<br>
+#**kwargs:12个控制访问的参数</code></pre><p id="31a44531-4742-435c-8b78-425d1b278556" class=""></p>
+</p><pre id="a3ce2a72-d0dd-4467-8c45-b20edeee1efe" class="code"><code>3.
+requests.head(url,**kwargs)
+<p>#url:拟获取页面的url链接<br>
+#**kwargs:13个控制访问的参数</code></pre><p id="d4196327-08c3-45a2-be65-20e164b5ca27" class=""></p>
+</p><pre id="36e3f119-915b-4910-8b28-13e567bdb366" class="code"><code>4.
+requests.post(url,data=None,json=None,**kwargs)
+<p>#url:拟获取页面的url链接<br>
+#data:字典、字节序列或文件，Request的内容<br>
+#json:JSON格式的数据，Request的内容<br>
+#**kwargs:11个控制访问的参数</code></pre><p id="9859bab8-8db7-4078-be23-9948883de951" class=""></p>
+</p><pre id="196752f2-374c-4152-803f-82c2aafc9ef5" class="code"><code>5.
+requests.put(url,data=None,**kwargs)
+<p>#url:拟获取页面的url链接<br>
+#data:字典、字节序列或文件，Request的内容<br>
+#**kwargs:12个控制访问的参数</code></pre><p id="4d4d83f2-5503-4e21-9ce0-b8ba79b8cd45" class=""></p>
+</p><pre id="3d2355e1-e325-4d6f-a22d-d0899f3370cb" class="code"><code>6.
+requests.patch(url,data=None,**kwargs)
+<p>#url:拟获取页面的url链接<br>
+#data:字典、字节序列或文件，Request的内容<br>
+#**kwargs:12个控制访问的参数</code></pre><p id="5fe63ebf-80ed-4a66-8b69-587eabc0865c" class=""></p>
+</p><pre id="8d016794-e34e-4e00-a358-18ada2353519" class="code"><code>7.
+requests.delete(url,**kwargs)
+<p>#url:拟获取页面的url链接<br>
+#**kwargs:13个控制访问的参数</code></pre><p id="03296821-71ff-46f6-8340-7a6116ed8095" class="">PS：不常用字段放在可选字段中</p><h2 id="02341130-7af1-4ce4-9719-d56ec798475e" class=""><strong>单元小结</strong></h2><p id="6b374a25-8025-4283-b440-f08e6b15ceb6" class="">网络连接有风险，异常处理很重要</p><h1 id="a536b84f-1451-422c-bf17-c948f82376ca" class=""><strong>单元2：网络爬虫的“盗亦有道”</strong></h1><h2 id="147abb13-1ae5-4833-8ba2-c38b6b4101a9" class=""><strong>网络爬虫引发的问题</strong></h2><h3 id="2d651fed-9e6e-4070-848d-ed2b0b932d4e" class="">网络爬虫的限制</h3><ul id="d1ca4eb4-6ed2-4e7c-9b4d-357e4c5a9e5f" class="bulleted-list"><li>来源审查：判断User-Agent进行限制<ul id="980b03fe-acd2-4a08-992c-9cefac28e0b9" class="bulleted-list"><li>检查来访HTTP协议头的User-Agent域，只响应浏览器或友好爬虫的访问。</li></ul></li></ul><ul id="b6708f60-ada9-4eb5-abc9-667197837be0" class="bulleted-list"><li>发布公告：Robots协议<ul id="de74546a-b463-41f3-ae9f-1e548109fb89" class="bulleted-list"><li>告知所有爬虫网站的爬取策略，要求爬虫遵守。</li></ul></li></ul><h2 id="01b16916-2620-4a40-bd7f-95a7ecf26c60" class=""><strong>Robots协议</strong></h2><p id="8303a8f9-f4c0-4ed4-b45e-6b9bab7ba227" class="">以京东（www.jd.com）为例访问其robots协议：<a href="http://www.jd.com/robots.txt">www.jd.com/robots.txt</a></p><figure id="0f9ec6f5-a4f2-48c2-9fc1-ba3ae480c337" class="image"><a href="Untitled/Untitled.png">&lt;img style=&quot;width:776px&quot; src=&quot;F:\7IT\GrideaDocument\images\第一周配图.png</p>
+<!-- more -->
+<p>&quot;/&gt;</a></figure><h3 id="b0c643da-19e8-49ea-bf15-fc94a882b7df" class="">Robots协议基本语法</h3><p id="cf45cb4e-6609-49f0-ae6c-eb2937c20ef0" class="">“#” 表示注释，“*”代表所有，“/”代表根目录</p><h2 id="1651d76b-8e98-42a8-bdad-192739400def" class=""><strong>Robots协议的遵守方式</strong></h2><h3 id="89d79c83-78bc-4275-a297-eae648bef9d1" class="">Robots协议的使用</h3><ul id="196dc336-397f-4b39-8465-1b5ca3b39356" class="bulleted-list"><li>网络爬虫：自动或人工识别robots.txt，再进行内容爬取。</li></ul><ul id="cfe6c7ae-1617-4efe-92da-4d095b81489b" class="bulleted-list"><li>约束性：Robots协议是建议但非约束性，网络爬虫可以不遵守，但存在法律风险。</li></ul><h3 id="756e9b0f-117f-43f3-8629-3b31e4e9d8d5" class="">对Robots协议的理解</h3><div id="e246ad3b-4476-4d41-a0ea-3d1b7b6bb3b5" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>1</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>2</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>3</th></tr></thead><tbody><tr id="45ca539f-5fa2-41d6-9032-713b8636e23a"><td class="cell-title"><a href="https://www.notion.so/45ca539f5fa241d69032713b8636e23a">访问量很小：可以遵守</a></td><td class="cell-97}Y">非商业且偶尔：建议遵守</td><td class="cell-&#x27;/&amp;]">必须遵守</td></tr><tr id="fc3493aa-80d9-4a86-8170-32ed90ed72fe"><td class="cell-title"><a href="https://www.notion.so/fc3493aa80d94a86817032ed90ed72fe">访问量较大：建议遵守 </a></td><td class="cell-97}Y">商业利益：必须遵守</td><td class="cell-&#x27;/&amp;]">必须遵守</td></tr><tr id="d87c9872-0049-4af5-8242-3af510efdbbf"><td class="cell-title"><a href="https://www.notion.so/d87c987200494af582423af510efdbbf">爬取网页   玩转网页</a></td><td class="cell-97}Y">爬取网站   爬取系列网站</td><td class="cell-&#x27;/&amp;]">爬取全网</td></tr></tbody></table></div><h1 id="f17c92f3-4b9f-45ae-81d6-c7b7936d8b79" class=""><strong>单元3：Requests库网络爬虫实战（5个实例）</strong></h1><h2 id="93078525-e043-4b9f-83af-d304eebfedf7" class=""><strong>实例1：京东商品页面的爬取</strong></h2><pre id="81ebebd2-d180-4400-a617-0dfee0da85da" class="code"><code>import requests<br>
+url = &quot;https://item.jd.com/6449103.html&quot;<br>
+try:<br>
+r = requests.get(url, timeout = 30)<br>
+r.raise_for_status()#如果状态不是200，引发HTTPError异常<br>
+r.encoding = r.apparent_encoding print(r.text[:1000])<br>
+except:<br>
+print(&quot;error&quot;)</code></pre><p id="31114e9c-9c81-4999-8da8-4bcb484b8607" class=""></p>
+</p><h2 id="85ac7b80-8313-41a7-9518-c2041b4b8afa" class=""><strong>实例2：亚马逊商品页面的爬取</strong></h2><pre id="7d2374c2-551c-4de1-bcb9-d09d80b473a8" class="code"><code>#初写代码
+import requests
+url = &quot;https://www.amazon.cn/dp/B07CM2DX6J/ref=sr_1_2?ie=UTF8&amp;qid=1549169407&amp;sr=8-2&amp;keywords=%E7%B4%A2%E5%B0%BC6300%E5%BE%AE%E5%8D%95&quot;
+r = requests.get(url)
+r.raise_for_status
+&#x27;&#x27;&#x27;
+out：
+&lt;bound method Response.raise_for_status of &lt;Response [503]&gt;&gt;
+&#x27;&#x27;&#x27;
+#在加上两行代码
+r.encoding = r.apparent_encoding
+r.request.headers
+&#x27;&#x27;&#x27;
+out：
+{&#x27;User-Agent&#x27;: &#x27;python-requests/2.14.2&#x27;, &#x27;Accept-Encoding&#x27;: &#x27;gzip, deflate&#x27;, &#x27;Accept&#x27;: &#x27;*/*&#x27;, &#x27;Connection&#x27;: &#x27;keep-alive&#x27;}
+!!!!!&#x27;User-Agent&#x27;: &#x27;python-requests/2.14.2&#x27;!!!!!
+&#x27;&#x27;&#x27;</code></pre><pre id="f7438a68-6789-4bd2-9c5f-8b85b77a443a" class="code"><code>#完整代码
+import requests
+url = &quot;https://www.amazon.cn/dp/B07CM2DX6J/ref=sr_1_2?ie=UTF8&amp;qid=1549169407&amp;sr=8-2&amp;keywords=%E7%B4%A2%E5%B0%BC6300%E5%BE%AE%E5%8D%95&quot;
+try: 
+		kv = {&#x27;User-Agent&#x27;:&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&#x27;} 
+		r = requests.get(url,headers = kv) 
+		r.raise_for_status()#如果状态不是200，引发HTTPError异常 
+		r.encoding = r.apparent_encoding print(r.text[:2000])
+except: 
+		print(&quot;error&quot;)</code></pre><p id="caaee5c1-306c-475d-a4d4-9dca71d12c34" class="">
+</p><h2 id="2dfb79b7-df05-4898-a7f6-07fda91eb4b2" class=""><strong>实例3：百度/360搜索关键词提交</strong></h2><h3 id="5b2233fe-15e8-4c04-9493-738bbcf56bb9" class="">搜索引擎关键词提交接口</h3><p id="d1464164-6b78-4fb4-b7d1-9ddf9032ac80" class="">百度的关键词接口：<a href="http://www.baidu.com/s?wd=keyword360%E7%9A%84%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%9Ahttp://www.so.com/s?q=keyword">http://www.baidu.com/s?wd=keyword</a></p><p id="e80d780c-9102-4a04-9e9e-9895f6c00ba9" class="">360的关键词接口：<a href="http://www.baidu.com/s?wd=keyword360%E7%9A%84%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%9Ahttp://www.so.com/s?q=keyword">http://www.so.com/s?q=keyword</a></p><pre id="21c506a5-e1ff-4c96-a455-5478e6634373" class="code"><code>#初写代码
+import requests
+kv = {&#x27;wd&#x27;:&#x27;python&#x27;}#构造键值对
+url = &quot;http://www.baidu.com/s&quot;
+r = requests.get(url,params = kv)
+r.status_code
+#Out[1]:200
+r.request.url
+#Out[2]:&#x27;http:www.baidu.com/s?wd=python&#x27;
+len(r.text)
+#Out[3]:430022 #430K左右</code></pre><pre id="bb5f6ba3-9d88-4a54-aa40-4d52c2e71fa7" class="code"><code>#完整代码
+import requests
+keyword = &quot;Python&quot;
+try: 
+		kv = {&#x27;wd&#x27;:keyword} 
+		url = &quot;http://www.baidu.com/s&quot; 
+		r = requests.get(url,params = kv) 
+		print(r.request.url) 
+		r.raise_for_status() 
+		print(len(r.text))
+except: 
+		print(&quot;error&quot;)</code></pre><h2 id="fd46cb5e-9181-40ed-aa47-1889fdd2ccda" class=""><strong>实例4：网络图片对爬取和存储</strong></h2><pre id="a971cec7-c628-4605-bcbc-c1116d09ff1a" class="code"><code>#初写代码
+import requests
+path = &quot;F:/7IT/JupyterNotebook/requests小实例/photo/abc.jpg&quot;
+url = &quot;http://image.nationalgeographic.com.cn/2017/0211/20170211061910157.jpg&quot;
+r = requests.get(url)
+r.raise_for_status
+#二进制存储
+with open(path, &#x27;wb&#x27;) as f: 
+		f.write(r.content) 
+		f.close()</code></pre><p id="07363b06-b624-494c-b553-8ce22cd6444a" class="">
+</p><pre id="5ea4722c-fa93-4ace-a00f-23dafd43db9e" class="code"><code>#完整代码
+import requests
+import os
+url = &quot;http://image.nationalgeographic.com.cn/2017/0211/20170211061910157.jpg&quot;
+root = &quot;F://7IT//JupyterNotebook//requests小实例//photo//&quot;
+path = root + url.split(&#x27;/&#x27;)[-1]
+try: 
+		if not os.path.exists(root):#检查路径是否存在 
+				os.mkdir(root)#创建目录 
+		if not os.path.exists(path): 
+				r = requests.get(url) 
+				with open(path, &#x27;wb&#x27;) as f: 
+						f.write(r.content) 
+						f.close() 
+						print(&quot;sucessfully save!&quot;) 
+		else: print(&quot;file exits&quot;)
+except: 
+		print(&quot;error&quot;)</code></pre><h2 id="1660480f-5e49-4761-a52b-e1b8a72fc146" class=""><strong>实例5：IP地址归属地的自动查询</strong></h2><pre id="0744f947-04ca-4572-b1fa-f25eecbce7ec" class="code"><code>#初写代码
+import requests
+url = &quot;http://www.ip138.com/ips138.asp?ip=&quot;
+r = requests.get(url + &#x27;202.204.80.112&#x27;)
+r.status_code
+r.encoding = r.apparent_encoding
+r.text[-500:]#检测数据时若无限制，会导致无效，尽量对text有所限制</code></pre><p id="c07e21f2-46d6-427b-a4f4-5af3dff2b54c" class="">
+</p><pre id="028c1cbf-c9cd-44b7-8c59-9488433a6411" class="code"><code>#完整代码
+import requests
+url = &quot;http://www.ip138.com/ips138.asp?ip=&quot;
+try: r = requests.get(url + &#x27;202.204.80.112&#x27;) r.raise_for_status() r.encoding = r.apparent_encoding print(r.text[-500:])
+except: print(&quot;errror&quot;)</code></pre></div></article></body></html>
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"></div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2020-03-31，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2020-03-31 15:20:40";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

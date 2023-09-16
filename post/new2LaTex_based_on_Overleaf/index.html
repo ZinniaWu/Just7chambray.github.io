@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>New to LaTex based on Overleaf | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/new2LaTex_based_on_Overleaf/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>New to LaTex based on Overleaf</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-04-14</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/T5W4xHLVa/" class="tag">Latex</a> | 	<a href="https://Just7chambray.github.io/tag/TILESCRKuS/" class="tag">效率</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1285字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">9 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/New%20to%20LaTex%20based%20on%20Overleaf.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h1 id="writing-your-first-piece-of-latex">Writing your first piece of LATEX</h1>
+<pre><code class="language-latex">\documentclass{article}
+
+\begin{document}
+First document. This is a simple example, with no extra parameters or packages included.
+\end{document}
+</code></pre>
+<h1 id="the-preamble-of-a-document">The preamble of a document</h1>
+<p>preamble means NOT the main body of the document.</p>
+<h2 id="declare-the-type-of-document">Declare the type of document</h2>
+<p><strong><code>\documentclass[font_size, paper_size]{the type of document}</code></strong></p>
+<ul>
+<li>font_size: default 10pt</li>
+<li>paper_size: a4paper, legalpaper...</li>
+<li>the type of document: article, report...<br>
+Here is the example.</li>
+</ul>
+<pre><code class="language-latex">\documentclass[12pt, a4paper]{article}
+</code></pre>
+<p>more info：<a href="https://www.overleaf.com/learn/Page_size_and_margins">https://www.overleaf.com/learn/Page_size_and_margins</a></p>
+<h2 id="declare-the-encoding">Declare the encoding</h2>
+<p><strong><code>\usepackage[utf8]{inputenc}</code></strong> Here  to recommend utf-8.</p>
+<h1 id="adding-a-title-author-and-date">Adding a title, author and date</h1>
+<p>Add three lines to the preamble</p>
+<h2 id="title">Title</h2>
+<p><strong><code>\title{Title_name}</code></strong></p>
+<h2 id="author">Author</h2>
+<p><strong><code>\author{Author_name}</code></strong> or <strong><code>\author{Author_name \thanks{funded by ...}}</code></strong></p>
+<p>It will add a superscript and a footnote with the text inside the braces. Useful if you need to thank an institution in your article.</p>
+<h2 id="date">Date</h2>
+<p><strong><code>\date{Month Day Year}</code>  or <code>\date{Month Year}</code>  or<code>\today</code></strong></p>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\documentclass[12pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+ 
+\title{First document}
+\author{Hubert Farnsworth \thanks{funded by the ShareLaTeX team}}
+\date{\today}
+
+\begin{document}
+ 
+\maketitle
+ 
+We have now added a title, author and date to our first \LaTeX{} document!
+ 
+\end{document}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%200.png" alt="" loading="lazy"></figure>
+<h1 id="adding-comments">Adding comments</h1>
+<p>Comments are pieces of text you can include in the document which will not be printed, and will not affect the document in any way.</p>
+<ul>
+<li>
+<p>One-line comments</p>
+<p>add**<code>%</code>** symbol at the beginning of the line</p>
+</li>
+</ul>
+<pre><code class="language-latex">\begin{document}
+
+\maketitle
+
+We have now added a title, author and date to our first \LaTeX{} document!
+
+% This line here is a comment. It will not be printed in the document.
+
+\end{document}
+</code></pre>
+<ul>
+<li>Multi-line comments</li>
+</ul>
+<pre><code class="language-latex">% first method
+\iffalse
+    This line here is a comment. It will not be printed in the document.
+\fi
+
+% second method
+% need to use a package
+\usepackage{verbatim}
+
+\begin{comment} 
+here
+are
+comments
+\end{comment}
+</code></pre>
+<h1 id="bold-italics-and-underlining">Bold, italics and underlining</h1>
+<ul>
+<li><strong>Bold</strong>:  <strong><code>\textbf{...}</code></strong></li>
+<li>Italics:  <strong><code>\textit{...}</code></strong></li>
+<li>Underline:  <strong><code>\underline{...}</code></strong></li>
+</ul>
+<pre><code class="language-latex">% Example
+Some of the \textbf{greatest}
+discoveries in \underline{science} 
+were made by \textbf{\textit{accident}}.
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%201.png" alt="" loading="lazy"></figure>
+<ul>
+<li>handling depends on the context:<strong><code>\emph{...}</code></strong></li>
+</ul>
+<pre><code class="language-latex">Some of the greatest \emph{discoveries} 
+in science 
+were made by accident.
+
+\textit{Some of the greatest \emph{discoveries} 
+in science 
+were made by accident.}
+
+\textbf{Some of the greatest \emph{discoveries} 
+in science 
+were made by accident.}
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%202.png" alt="" loading="lazy"></figure>
+<h1 id="adding-images">Adding images</h1>
+<p>Need to use a 「graphicx」 package <strong><code>\usepackage{graphicx}</code></strong> and Write in preamble.</p>
+<p>Here are 2 methods to add images</p>
+<ul>
+<li><strong><code>\graphicspath{ {images/} }</code></strong> , it needs to <a href="https://www.overleaf.com/learn/how-to/Including_images_on_Overleaf">upload the images</a>, and the images are kept in a folder named images under the current directory.</li>
+<li><strong><code>\includegraphics{image_name}</code></strong> , the image is actually included  in the document. The file name of the image should not contain white spaces nor multiple dots.</li>
+</ul>
+<p>For more details see the section about <a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#Generating_high-res_and_low-res_images">generating high resolution and low resolution images.</a></p>
+<h1 id="captions-labels-and-references">Captions, labels and references</h1>
+<p>There are three important commands :</p>
+<ul>
+<li><strong><code>\caption{a nice plot}</code></strong>: set the caption for the figure and place it above or below the figure.</li>
+<li><strong><code>\label{fig:mesh1}</code></strong>: refer the image within your document, set a label with this command. The label will number the image, and combined with the next command will allow you to reference it.</li>
+<li><strong><code>\ref{fig:mesh1}</code></strong>: substituted by the number corresponding to the referenced figure.</li>
+</ul>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+ 
+\begin{document}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{mesh.png}
+    \caption{a nice plot}
+    \label{fig:mesh1}
+\end{figure}
+ 
+As you can see in the figure \ref{fig:mesh1}, the 
+function grows near 0. Also, in the page \pageref{fig:mesh1} 
+is the same example.
+
+\end{document}
+</code></pre>
+<p><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%203.png" alt="" loading="lazy"><br>
+<img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%204.png" alt="" loading="lazy"></p>
+<blockquote>
+<p>Note: If you are using captions and references on your own computer, you will have to compile the document twice for the references to work. Overleaf will do this for you automatically.</p>
+</blockquote>
+<h1 id="creating-lists-in-latex">Creating lists in LATEX</h1>
+<p>Lists are very simple to create in LATEX. You can create lists using different list environments. Environments are sections of our document that you want to present in a different way to the rest of the document. They start with a <strong><code>\begin{...}</code></strong> command and end with an <strong><code>\end{...}</code></strong> command.</p>
+<h2 id="unordered-lists">Unordered lists</h2>
+<p>Environment: <strong>itemize</strong></p>
+<p>Each entry must be preceded by the control sequence  <strong><code>\item</code></strong> .</p>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\begin{itemize}
+\item One entry in the list
+\item Another entry in the list
+\end{itemize}
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%205.png" alt="" loading="lazy"></figure>
+<h2 id="ordered-lists">Ordered lists</h2>
+<p>Environment: <strong>enumerate</strong></p>
+<p>Have the same syntax inside a different environment.</p>
+<pre><code class="language-latex">\begin{enumerate}
+\item The labels consists of sequential numbers.
+\item The numbers starts at 1 with every call to the enumerate environment.
+\end{enumerate}
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%206.png" alt="" loading="lazy"></figure>
+<h1 id="adding-math-to-latex">Adding math to LATEX</h1>
+<p>2 writing modes for mathematical expressions:</p>
+<ol>
+<li>the <strong>inline</strong> mode
+<ol>
+<li><strong><code>\( ... \)</code></strong></li>
+<li><strong><code>$ ... $</code></strong></li>
+<li><strong><code>\begin{math} ... \end{math}</code></strong></li>
+</ol>
+</li>
+<li>the <strong>display</strong> mode (numbered &amp; unnumbered version)
+<ol>
+<li><strong><code>\[ ... \]</code> →</strong>unnumbered</li>
+<li><strong><code>\begin{displaymath} ... \end{displaymath}</code></strong>  →unnumbered</li>
+<li><strong><code>\begin{equation} ... \end{equation}</code> →</strong>numbered</li>
+<li><code>$$ ... $$</code>  (NOT encouraged)</li>
+</ol>
+</li>
+</ol>
+<h1 id="basic-formatting">Basic Formatting</h1>
+<h2 id="abstracts">Abstracts</h2>
+<p>The <strong>abstract environment</strong> will put the text in a special format at the top of your document.</p>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\begin{abstract}
+This is a simple paragraph at the beginning of the document. A brief introduction about the main subject.
+\end{abstract}
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%207.png" alt="" loading="lazy"></figure>
+<h2 id="paragraphs-and-newlines">Paragraphs and newlines</h2>
+<ul>
+<li>Start a new paragraph
+<ul>
+<li>hit the &quot;Enter&quot; key twice (to insert a double blank line).</li>
+<li>LATEX can automatically indents paragraphs.</li>
+</ul>
+</li>
+<li>Start a new line
+<ul>
+<li><strong><code>\\</code></strong></li>
+<li><strong><code>\newline</code></strong></li>
+<li>Don't use multiple <strong><code>\\</code></strong> or  <strong><code>\newline</code></strong> to simulate with larger spacing between paragraphs</li>
+</ul>
+</li>
+</ul>
+<h2 id="chapters-and-sections">Chapters and Sections</h2>
+<p>start with  <strong><code>\chapter{chapter_name}</code></strong></p>
+<p>start with  <strong><code>\section{section_name}</code></strong>  (section numbering is automatic)</p>
+<p>use <strong><code>\section*{section_name}</code></strong> to disable automatically numbering</p>
+<p>The basic levels of depth are listed below:</p>
+<ul>
+<li>-1｜**<code>\part{part}</code> →**available in report and book document classes</li>
+<li>0｜**<code>\chapter{chapter}</code> →**available in report and book document classes</li>
+<li>1｜**<code>\section{section}</code>**</li>
+<li>2｜**<code>\subsection{subsection}</code>**</li>
+<li>3｜**<code>\subsubsection{subsubsection}</code>**</li>
+<li>4｜**<code>\paragraph{paragraph}</code>**</li>
+<li>5｜**<code>\subparagraph{subparagraph}</code>**</li>
+</ul>
+<h1 id="creating-tables">Creating tables</h1>
+<h2 id="creating-a-simple-table-in-latex">Creating a simple table in LATEX</h2>
+<ul>
+<li>Environment: tabular</li>
+<li>Specify a parameter to env to declare the number of columns**<code>{c c c }</code>**</li>
+<li>Align
+<ul>
+<li><strong><code>r</code></strong> → right alignment</li>
+<li><strong><code>l</code></strong> → left alignment</li>
+<li>default center alignment</li>
+</ul>
+</li>
+<li>Symbol
+<ul>
+<li><strong><code>&amp;</code></strong> → specify the breaks in the table entries</li>
+<li><strong><code>\\</code></strong> → go to the next line of your table</li>
+</ul>
+</li>
+</ul>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\begin{tabular}{ c c c }
+  cell1 &amp; cell2 &amp; cell3 \\ 
+  cell4 &amp; cell5 &amp; cell6 \\  
+  cell7 &amp; cell8 &amp; cell9    
+\end{tabular}
+</code></pre>
+<p><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%208.png" alt="" loading="lazy"><br>
+ps: not in the center of the page but left</p>
+<h2 id="adding-borders">Adding borders</h2>
+<ul>
+<li><strong><code>|</code></strong>: insert  ****a vertical line <strong><code>{ |c|c|c| }</code></strong></li>
+<li><strong><code>\hline</code></strong>: insert a horizontal line.</li>
+</ul>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\begin{tabular}{ | c | c | c | } 
+  \hline
+  cell1 &amp; cell2 &amp; cell3 \\ 
+  cell4 &amp; cell5 &amp; cell6 \\ 
+  cell7 &amp; cell8 &amp; cell9 \\ 
+  \hline
+\end{tabular}
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%209.png" alt="" loading="lazy"></figure>
+<h2 id="captions-labels-and-references-2">Captions, labels and references</h2>
+<ul>
+<li>the same way as images</li>
+<li>Environment: table</li>
+</ul>
+<p>Here is the example.</p>
+<pre><code class="language-latex">%Referencing and captioning tables
+The table \ref{table:1} is an example of referenced \LaTeX{} elements.
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Col1 &amp; Col2 &amp; Col2 &amp; Col3 \\ [0.5ex] 
+ \hline\hline
+ 1 &amp; 6 &amp; 87837 &amp; 787 \\ 
+ 2 &amp; 7 &amp; 78 &amp; 5415 \\
+ 3 &amp; 545 &amp; 778 &amp; 7507 \\
+ 4 &amp; 545 &amp; 18744 &amp; 7560 \\
+ 5 &amp; 88 &amp; 788 &amp; 6344 \\ [1ex] 
+ \hline
+ \end{tabular}
+ \caption{Table to test captions and labels}
+ \label{table:1}
+\end{table}
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%2010.png" alt="" loading="lazy"></figure>
+<h1 id="adding-a-table-of-contents">Adding a Table of Contents</h1>
+<p><code>**\tabelofcontents**</code></p>
+<p>Here is the example.</p>
+<pre><code class="language-latex">\documentclass{article}
+\usepackage[utf8]{inputenc}
+ 
+\title{Sections and Chapters}
+\author{Gubert Farnsworth}
+\date{ }
+ 
+\begin{document}
+ 
+\maketitle
+ 
+\tableofcontents
+ 
+\section{Introduction}
+ 
+This is the first section.
+ 
+Lorem  ipsum  dolor  sit  amet,  consectetuer  adipiscing  
+elit.   Etiam  lobortisfacilisis sem.  Nullam nec mi et 
+neque pharetra sollicitudin.  Praesent imperdietmi nec ante. 
+Donec ullamcorper, felis non sodales...
+ 
+\section*{Unnumbered Section}
+\addcontentsline{toc}{section}{Unnumbered Section}
+ 
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante...
+ 
+\section{Second Section}
+ 
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+Etiam lobortis facilisissem.  Nullam nec mi et neque pharetra 
+sollicitudin.  Praesent imperdiet mi necante...
+ 
+\end{document}
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/latex/Untitled%2011.png" alt="" loading="lazy"></figure>
+<p><a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes#Basic_Formatting">References</a></p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#writing-your-first-piece-of-latex">Writing your first piece of LATEX</a></li>
+<li><a href="#the-preamble-of-a-document">The preamble of a document</a>
+<ul>
+<li><a href="#declare-the-type-of-document">Declare the type of document</a></li>
+<li><a href="#declare-the-encoding">Declare the encoding</a></li>
+</ul>
+</li>
+<li><a href="#adding-a-title-author-and-date">Adding a title, author and date</a>
+<ul>
+<li><a href="#title">Title</a></li>
+<li><a href="#author">Author</a></li>
+<li><a href="#date">Date</a></li>
+</ul>
+</li>
+<li><a href="#adding-comments">Adding comments</a></li>
+<li><a href="#bold-italics-and-underlining">Bold, italics and underlining</a></li>
+<li><a href="#adding-images">Adding images</a></li>
+<li><a href="#captions-labels-and-references">Captions, labels and references</a></li>
+<li><a href="#creating-lists-in-latex">Creating lists in LATEX</a>
+<ul>
+<li><a href="#unordered-lists">Unordered lists</a></li>
+<li><a href="#ordered-lists">Ordered lists</a></li>
+</ul>
+</li>
+<li><a href="#adding-math-to-latex">Adding math to LATEX</a></li>
+<li><a href="#basic-formatting">Basic Formatting</a>
+<ul>
+<li><a href="#abstracts">Abstracts</a></li>
+<li><a href="#paragraphs-and-newlines">Paragraphs and newlines</a></li>
+<li><a href="#chapters-and-sections">Chapters and Sections</a></li>
+</ul>
+</li>
+<li><a href="#creating-tables">Creating tables</a>
+<ul>
+<li><a href="#creating-a-simple-table-in-latex">Creating a simple table in LATEX</a></li>
+<li><a href="#adding-borders">Adding borders</a></li>
+<li><a href="#captions-labels-and-references-2">Captions, labels and references</a></li>
+</ul>
+</li>
+<li><a href="#adding-a-table-of-contents">Adding a Table of Contents</a></li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-04-14，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-04-14 21:04:45";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

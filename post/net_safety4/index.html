@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>网络安全（四） | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/net_safety4/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>网络安全（四）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2019-12-25</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/net_safety/" class="tag">网络安全</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">3393字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">12 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>本章要点：<br>
+针对不同攻击需要的基本安全服务；机密性服务的类型及相应的机制；完整性服务的类型及相应的机制；可用性服务的类型；可审性服务的基本功能；身份鉴别的方法以及在网络环境下的身份鉴别；数字签名原理；Kerberos鉴别工作原理；公钥基础设施结构；访问控制基本原理。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1.png" alt="第四章网络信息安全服务 思维导图" loading="lazy"></figure>
+<h1 id="第四章-网络信息安全服务">第四章 网络信息安全服务</h1>
+<h2 id="机密性服务">机密性服务</h2>
+<h3 id="概要">概要</h3>
+<ul>
+<li>机密性服务提供<strong>信息的保密</strong></li>
+<li>机密性服务能对抗<strong>访问攻击</strong></li>
+<li>机密性服务必须<strong>和可审性服务配合</strong>工作</li>
+<li>机密性服务应考虑<strong>信息所在的形式和状态</strong></li>
+</ul>
+<h3 id="文件机密性">文件机密性</h3>
+<ul>
+<li>
+<p><strong>纸面文件</strong></p>
+</li>
+<li>
+<p><strong>物理位置</strong>的访问控制</p>
+</li>
+<li>
+<p><strong>电子文件</strong></p>
+</li>
+<li>
+<p>所需机制</p>
+<ul>
+<li><strong>物理</strong>安全机制
+<ul>
+<li>计算机文件<strong>访问控制</strong></li>
+<li>文件<strong>加密</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>要求</p>
+<ul>
+<li><strong>身份标识和身份鉴别</strong>
+<ul>
+<li>正确的计算机<strong>系统配置</strong></li>
+<li>合适的<strong>密钥管理</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="信息传输机密性">信息传输机密性</h3>
+<ul>
+<li>
+<p>使用<strong>加密保护</strong>传输中的信息</p>
+<ul>
+<li>可<strong>基于每个报文信息</strong>进行加密保护</li>
+<li>可对<strong>链路上的所有通信</strong>进行加密</li>
+</ul>
+</li>
+<li>
+<p>要求</p>
+<ul>
+<li>加密能<strong>阻止窃听</strong>，但<strong>不能完全阻止信息的截获</strong></li>
+<li>合适的<strong>身份标识和身份鉴别</strong>，可决定远程端点的身份</li>
+</ul>
+</li>
+</ul>
+<h3 id="通信流机密性">通信流机密性</h3>
+<ul>
+<li>主要关心<strong>两个端点之间所发生的通信形式</strong></li>
+<li>加入<strong>模糊（遮掩）信息流</strong>可提供通信流机密性服务</li>
+</ul>
+<h2 id="完整性服务">完整性服务</h2>
+<h3 id="概要-2">概要</h3>
+<ul>
+<li>完整性服务提供<strong>信息的正确性</strong></li>
+<li>完整性服务必须<strong>和可审性服务配合</strong>工作</li>
+<li>完整性服务应<strong>考虑信息所在的形式和状态</strong></li>
+<li>完整性服务可<strong>阻止篡改攻击和否认攻击</strong></li>
+<li>正确地使用完整性服务，可使用户确信信息是正确的，未经非授权者修改过</li>
+</ul>
+<h3 id="文件完整性">文件完整性</h3>
+<ul>
+<li>
+<p><strong>纸面文件</strong></p>
+</li>
+<li>
+<p>每一页上签名、装订成册、分发多个文件复制本等</p>
+<ul>
+<li>使用与机密性服务相同的机制，<strong>完全阻止非授权者访问文件</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>电子文件</strong></p>
+</li>
+<li>
+<p>计算机文件<strong>访问控制</strong>和<strong>身份标识、身份鉴别</strong>功能结合</p>
+<ul>
+<li><strong>数字签名机制</strong>可识别非授权者对文件的改变</li>
+</ul>
+</li>
+</ul>
+<h3 id="信息传输完整性">信息传输完整性</h3>
+<ul>
+<li>如果不实施截获攻击，很难对传输中的信息进行修改</li>
+<li><strong>加密</strong>方法可<strong>阻止大部分的篡改攻击</strong></li>
+<li>当<strong>加密</strong>和身<strong>份标识、身份鉴别</strong>功能结合，可<strong>阻止截获攻击</strong></li>
+</ul>
+<h2 id="可用性服务">可用性服务</h2>
+<h3 id="概要-3">概要</h3>
+<ul>
+<li>可用性服务提供的<strong>信息是可用的</strong></li>
+<li>可用性使<strong>合法用户能访问</strong>计算机系统，<strong>存取</strong>该系统上的信息，<strong>运行</strong>各种应用程序</li>
+<li>可用性还提供<strong>两个计算机系统之间可用的传输信息的通信系统</strong></li>
+<li>可用性服务可用来<strong>减少拒绝服务攻击的影响</strong>，使系统得以在线恢复、正常运行</li>
+</ul>
+<h3 id="后备">后备</h3>
+<ul>
+<li><strong>最简单的可用性服务</strong></li>
+<li>是指对重要信息<strong>复制一份备份</strong>，并将其<strong>存储在安全的地方</strong></li>
+<li>通常后备提供<strong>信息可用性</strong>，并<strong>不需要提供及时的后备</strong></li>
+</ul>
+<h3 id="在线恢复">在线恢复</h3>
+<ul>
+<li><strong>提供信息和能力的重构</strong></li>
+<li>带有在线恢复配置的系统<strong>能检测出故障</strong>，并<strong>重建</strong>诸如处理、信息访问、通信等能力</li>
+<li>通过使用冗余硬件自动处理</li>
+<li>冗余系统可以在现场备用，以便在原始系统发生故障时再投入使用</li>
+</ul>
+<h3 id="灾难恢复">灾难恢复</h3>
+<ul>
+<li>针对大的灾难来<strong>保护系统、信息和能力</strong></li>
+<li><strong>是整个系统或重要的设备不可用时采取的重构一个组织的进程</strong></li>
+</ul>
+<h2 id="可审性服务">可审性服务</h2>
+<h3 id="概要-4">概要</h3>
+<ul>
+<li>可审性服务本身并<strong>不能针对攻击提供保护</strong>，<strong>必须和其他安全服务结合</strong></li>
+<li>可审性服务会<strong>增加系统的复杂性，降低系统的使用能力</strong></li>
+<li>如果没有可审性服务，机密性服务和完整性服务也会失效</li>
+</ul>
+<h3 id="身份标识与身份鉴别">身份标识与身份鉴别</h3>
+<ul>
+<li>
+<p>目的</p>
+<ul>
+<li>对试图执行一个功能的每个人的身<strong>份进行标识</strong></li>
+<li>验证这些人声称的身份</li>
+</ul>
+</li>
+<li>
+<p>鉴别方法</p>
+<ul>
+<li><strong>知识因子</strong>——知道什么，如口令</li>
+<li><strong>拥有因子</strong>——有什么，如智能卡或标记</li>
+<li><strong>生物因子</strong>——是什么，如指印、视网膜</li>
+<li><strong>双因子身份鉴别</strong></li>
+</ul>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>互相取长补短
+<ul>
+<li>更加有效</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>物理世界中，身份鉴别机制将物理现场与每个人的身份标识直接联系起来</p>
+</li>
+<li>
+<p>传统的用于计算机的身份鉴别机制是<strong>口令</strong></p>
+</li>
+</ul>
+<h3 id="网络环境下的身份鉴别">网络环境下的身份鉴别</h3>
+<ul>
+<li>
+<p>鉴别内容</p>
+<ul>
+<li>验证某个<strong>通信参与方的身份</strong>是否与他<strong>所声称的身份一致</strong>的过程</li>
+</ul>
+</li>
+<li>
+<p>实现方式</p>
+<ul>
+<li>一般通过<strong>身份认证协议</strong>实现</li>
+</ul>
+</li>
+<li>
+<p>身份认证技术</p>
+<ul>
+<li><strong>口令技术</strong></li>
+</ul>
+</li>
+<li>
+<p>常用的身份认证技术</p>
+<ul>
+<li>
+<p>泄露途径</p>
+</li>
+<li>
+<p><strong>在线攻击</strong></p>
+<ul>
+<li><strong>离线攻击</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>采用<strong>物理形式的身份认证标记</strong>进行身份认证的鉴别技术</p>
+<ul>
+<li>常用的身份认证标记是磁卡和智能卡</li>
+</ul>
+</li>
+<li>
+<p>身份认证协议</p>
+<ul>
+<li>
+<p>概要</p>
+<ul>
+<li>是一种特殊的通信协议</li>
+<li>定义了<strong>参与认证服务的所有通信方</strong>在<strong>身份认证过程</strong>中需要<strong>交换</strong>的所有<strong>消息的格式</strong>、这些消息<strong>发生的次序</strong>以及消息的<strong>语义</strong></li>
+<li>通常采用<strong>密码学机制</strong>更加安全，例如<strong>加密算法</strong>来保证消息的完整性、保密性</li>
+<li>各种密码学算法均可用来构造身份认证协议</li>
+<li>身份认证协议一般有<strong>两个通信方</strong>，可能还会有一个<strong>双方都信任的第三方</strong>参与进行</li>
+</ul>
+</li>
+<li>
+<p>分类</p>
+<ul>
+<li><strong>会话密钥</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>定义</p>
+<ul>
+<li>在<strong>一次会话过程中</strong>使用的密钥，一般都是由机器<strong>随机</strong>生成的</li>
+</ul>
+</li>
+<li>
+<p>大量数据的加密采用<strong>传统密钥</strong></p>
+<ul>
+<li>需要建立会话密钥的认证协议也被称为<strong>密钥分发协议</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>共享密钥认证</strong></p>
+<ul>
+<li>
+<p>从通过口令认证用户发展来的</p>
+</li>
+<li>
+<p>采用既能够<strong>验证对方拥有共同的秘密</strong>又<strong>不会在通信过程中泄露该秘密</strong>的方法——<strong>挑战/响应技术</strong></p>
+<ul>
+<li>
+<p><strong>密钥分发中心KDC</strong></p>
+<ul>
+<li>KDC在网络环境中<strong>为大家所信任</strong>，并且<strong>与每个网络通信方都有一个共享密钥</strong></li>
+<li>KDC负责<strong>给通信双方创建并分发共享密钥</strong>，通信双方获得共享密钥后再利用挑战/响应协议建立相互信任关系</li>
+</ul>
+</li>
+<li>
+<p><strong>公钥认证</strong></p>
+</li>
+<li>
+<p>可以让对方通过<strong>密码运算验证自己的身份</strong>而不需要将自己的私钥告诉对方</p>
+</li>
+</ul>
+</li>
+<li>
+<p>一些概念</p>
+</li>
+<li>
+<p>签名</p>
+<ul>
+<li>
+<p>利用私钥对明文信息进行的变换</p>
+<ul>
+<li>
+<p>封装/加密</p>
+<ul>
+<li>利用公钥对明文信息进行的变换</li>
+</ul>
+</li>
+<li>
+<p><strong>证书</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>一种特殊格式的数据记录</p>
+<ul>
+<li>
+<p><strong>分发公钥</strong></p>
+<ul>
+<li>包含</li>
+</ul>
+</li>
+<li>
+<p>证书代表的通信参与方的名字</p>
+<ul>
+<li>
+<p>身份信息</p>
+<ul>
+<li>公钥
+<ul>
+<li>签发日期</li>
+</ul>
+</li>
+<li>序列号
+<ul>
+<li>有效期
+<ul>
+<li>证书权威机构（Certificate Authority,CA）用自己的私钥进行签名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>可信第三方来参与分发公钥</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="审计功能">审计功能</h3>
+<ul>
+<li>
+<p>审计<strong>提供历史事件的记录</strong>，<strong>不能阻止攻击</strong></p>
+</li>
+<li>
+<p>将每个人及其在计算机系统中或在物理世界中的行动联系起来</p>
+</li>
+<li>
+<p><strong>依赖于正确的身份标识与身份鉴别</strong></p>
+</li>
+<li>
+<p>物理世界</p>
+<ul>
+<li>入门的日志</li>
+<li>签名本</li>
+<li>录像仪</li>
+</ul>
+</li>
+<li>
+<p>电子世界</p>
+<ul>
+<li>计算机系统提供日志</li>
+</ul>
+</li>
+</ul>
+<h2 id="数字签名">数字签名</h2>
+<h3 id="定义">定义</h3>
+<ul>
+<li>通信双方在网上交换信息<strong>用公钥密码防止伪造和欺骗的一种身份认证</strong></li>
+<li>传统签名的数字化</li>
+</ul>
+<h3 id="作用">作用</h3>
+<ul>
+<li>保证信息<strong>完整性</strong></li>
+<li>提供<strong>信息发送者的身份认证</strong></li>
+</ul>
+<h3 id="特征">特征</h3>
+<ul>
+<li><strong>能与所签文件“绑定”</strong></li>
+<li>签名者<strong>不能否认</strong>自己的签名</li>
+<li><strong>容易被自动验证</strong>，任何人都可验证</li>
+<li><strong>签名不能被伪造、复制、重用</strong></li>
+</ul>
+<h3 id="分类">分类</h3>
+<ul>
+<li>
+<p><strong>直接数字签名</strong></p>
+</li>
+<li>
+<p>数字签名的执行过程<strong>只有通信双方参与</strong>，并假定<strong>双方有共享的秘密密钥</strong>或接<strong>收一方知道发方的公开密钥</strong></p>
+<ul>
+<li><strong>不是所有公钥系统都具有数字签名的能力</strong>，RSA第一个提出这样的功能</li>
+</ul>
+</li>
+<li>
+<p><strong>仲裁数字签名</strong></p>
+</li>
+</ul>
+<h3 id="常见算法">常见算法</h3>
+<ul>
+<li><strong>RSA</strong></li>
+<li>DSS/DSA</li>
+<li>El Gamal</li>
+</ul>
+<h3 id="消息摘要">消息摘要</h3>
+<ul>
+<li>
+<p>对很长的消息进行数字签名会使计算机增加很大的负担</p>
+</li>
+<li>
+<p>算法</p>
+<ul>
+<li>一种散列函数（或称作哈希函数、杂凑函数）/密码编码的校验和</li>
+<li>SHA-2、SHA-3</li>
+</ul>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>简单</li>
+<li><strong>耗费的计算资源小得多</strong></li>
+<li><strong>效果同数字签名一样</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="kerberos鉴别">Kerberos鉴别</h2>
+<h3 id="定义-2">定义</h3>
+<ul>
+<li>是一种使用<strong>对称密钥加密算法</strong>来实现通过<strong>可信第三方密钥分发中心</strong>的<strong>身份认证系统</strong></li>
+</ul>
+<h3 id="功能">功能</h3>
+<ul>
+<li>提供网络通信方之间<strong>相互的身份认证</strong>手段</li>
+</ul>
+<h3 id="设计目标">设计目标</h3>
+<ul>
+<li>是在<strong>开放网络</strong>上运行，在<strong>物理网络并不安全</strong>的环境下使用</li>
+<li><strong>假设</strong>通过网络传输的<strong>包可以被任意截获、修改和插入</strong></li>
+</ul>
+<h3 id="具体">具体</h3>
+<ul>
+<li><strong>鉴别服务器</strong>（Authentication Server, AS）</li>
+<li><strong>凭据授予服务器</strong>（Ticket-Granting Server, TGS）</li>
+</ul>
+<h3 id="原理">原理</h3>
+<ul>
+<li>
+<p>A用明文（包括登记的身份）向鉴别服务器AS表明自己的身份</p>
+</li>
+<li>
+<p>AS向A发送用A的对称密钥KA加密的报文，此报文包含A和TGS通信的会话密钥KS以及AS要发送给TGS的凭据</p>
+</li>
+<li>
+<p>A向TGS发送三个项目</p>
+<ul>
+<li><strong>转发AS发来的凭据</strong></li>
+<li><strong>服务器B的名字</strong></li>
+<li><strong>用KS加密的时间戳T</strong>，<strong>用来防止重放攻击</strong></li>
+</ul>
+</li>
+<li>
+<p>TGS向A发送含两个凭据的报文，每一个凭据都包含会话密钥KAB</p>
+<ul>
+<li><strong>给A的凭据用KS加密</strong></li>
+<li><strong>给B的凭据用B的密钥KB加密</strong></li>
+</ul>
+</li>
+<li>
+<p>A向B转发TGS发来的凭据，同时发送用KAB加密的时间戳T</p>
+</li>
+<li>
+<p>B把时间戳T加1来证实收到了凭据。B向A发送的报文用密钥KAB加密</p>
+</li>
+<li>
+<p>以后，A和B就使用TGS给出的会话密钥KAB进行通信</p>
+</li>
+</ul>
+<h2 id="公钥基础设施pki">公钥基础设施PKI</h2>
+<h3 id="定义-3">定义</h3>
+<ul>
+<li>在<strong>分布式</strong>计算机系统中提供的使用<strong>公钥密码系统</strong>和X.509证书安全服务的基础设施</li>
+</ul>
+<h3 id="主要任务">主要任务</h3>
+<ul>
+<li>在<strong>开放环境</strong>中为<strong>开放性业务</strong>提供<strong>基于公开密钥技术</strong>的一系列安全服务，包括<strong>身份证书</strong>和<strong>密钥管理</strong>、<strong>机密性、完整性、身份认证和数字签名</strong>等</li>
+</ul>
+<h3 id="评价">评价</h3>
+<ul>
+<li>提供了一个框架，可以在该框架下实施基于加密的安全服务，<strong>更加标准化，普适灵活，方便可靠，互操作性强而且透明</strong></li>
+<li>PKI是一个良好的选择</li>
+<li><strong>适应大规模、大时空的范围</strong></li>
+<li><strong>提供完整性、保密性、不可否认性等服务</strong></li>
+<li><strong>可以构建信任网络环境</strong></li>
+<li><strong>支持安全的交往/交换/交易</strong></li>
+<li>PKI/CA得到迅速发展</li>
+</ul>
+<h3 id="提供的服务">提供的服务</h3>
+<ul>
+<li>
+<p><strong>认证</strong></p>
+</li>
+<li>
+<p>采用数<strong>字签名技术</strong>，签名作用于相应的数据之上</p>
+<ul>
+<li>
+<p>具体内容</p>
+</li>
+<li>
+<p>被认证的数据——数据源认证服务</p>
+<ul>
+<li>用户发送的远程请求——身份认证服务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>完整性</strong></p>
+</li>
+<li>
+<p><strong>数字签名</strong></p>
+<ul>
+<li>既可以是<strong>实体认证</strong>，也可以是<strong>数据完整性</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>保密性</strong></p>
+</li>
+<li>
+<p>用<strong>公钥分发随机密钥</strong>，然后用<strong>随机密钥对数据加密</strong></p>
+</li>
+<li>
+<p><strong>不可否认性</strong></p>
+</li>
+<li>
+<p><strong>发送方</strong>的不可否认——<strong>数字签名</strong></p>
+<ul>
+<li><strong>接收方</strong>的不可否认——<strong>收条+数字签名</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="理论基础">理论基础</h3>
+<ul>
+<li>
+<p>密码学</p>
+<ul>
+<li>见第一章</li>
+</ul>
+</li>
+<li>
+<p>目录服务</p>
+<ul>
+<li>
+<p>目的</p>
+<ul>
+<li>建立全局/局部统一的命令方案</li>
+<li>从技术的角度定义了人的身份和网络对象的关系</li>
+</ul>
+</li>
+<li>
+<p>规范网络行为和管理网络的一种重要手段</p>
+</li>
+</ul>
+</li>
+<li>
+<p>数字证书</p>
+<ul>
+<li>
+<p>别名</p>
+<ul>
+<li>网络身份证</li>
+<li>数字身份证</li>
+</ul>
+</li>
+<li>
+<p>由认证中心发放并经认证中心数字签名的</p>
+</li>
+<li>
+<p>包含公开密钥拥有者以及公开密钥相关信息的一种电子文件</p>
+</li>
+<li>
+<p>可以用来证明数字证书持有者的真实身份</p>
+</li>
+<li>
+<p>是PKI体系中<strong>最基本的元素</strong></p>
+</li>
+<li>
+<p>证书是一个机构颁发给一个安全个体的证明，所以证<strong>书的权威性取决于该机构的权威性</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="访问控制">访问控制</h2>
+<h3 id="访问控制概念">访问控制概念</h3>
+<ul>
+<li>
+<p>确定来访实体<strong>有无访问权以及实施访问权限</strong>的过程，一般都是基于安全策略和安全模型的</p>
+</li>
+<li>
+<p><strong>客体</strong></p>
+</li>
+<li>
+<p>被访问的数据，如文件、数据报文、分组数据包、数据帧等</p>
+</li>
+<li>
+<p><strong>主体</strong></p>
+</li>
+<li>
+<p>能访问或使用客体的活动实体，如用户以及作为用户代理的进程、作业或任务等</p>
+</li>
+<li>
+<p><strong>访问矩阵（Access Matrix）</strong></p>
+</li>
+<li>
+<p><strong>访问控制表（Access Control List, ACL）按行存储矩阵</strong></p>
+</li>
+</ul>
+<h3 id="访问控制分类">访问控制分类</h3>
+<ul>
+<li>
+<p>依据能够控制的<strong>访问对象粒度</strong>分类</p>
+<ul>
+<li><strong>粗粒</strong>度访问控制</li>
+<li><strong>中粒</strong>度访问控制</li>
+<li><strong>细粒</strong>度访问控制</li>
+</ul>
+</li>
+<li>
+<p>依据<strong>访问控制策略</strong>的不同</p>
+<ul>
+<li><strong>自主</strong>访问控制</li>
+<li><strong>强制</strong>访问控制</li>
+<li><strong>基于角色</strong>的访问控制</li>
+</ul>
+</li>
+</ul>
+<h3 id="访问控制实现">访问控制实现</h3>
+<ul>
+<li>在<strong>分布式系统和网络环境</strong>中，进行身份认证和设置访问控制权限时必须将<strong>远程用户</strong>和<strong>本地用户</strong>加以区分</li>
+<li>设置访问控制时<strong>按组进行设定</strong></li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1">第四章 网络信息安全服务</a>
+<ul>
+<li><a href="#%E6%9C%BA%E5%AF%86%E6%80%A7%E6%9C%8D%E5%8A%A1">机密性服务</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%A6%81">概要</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E6%9C%BA%E5%AF%86%E6%80%A7">文件机密性</a></li>
+<li><a href="#%E4%BF%A1%E6%81%AF%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%AF%86%E6%80%A7">信息传输机密性</a></li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E6%9C%BA%E5%AF%86%E6%80%A7">通信流机密性</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%8C%E6%95%B4%E6%80%A7%E6%9C%8D%E5%8A%A1">完整性服务</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%A6%81-2">概要</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%AE%8C%E6%95%B4%E6%80%A7">文件完整性</a></li>
+<li><a href="#%E4%BF%A1%E6%81%AF%E4%BC%A0%E8%BE%93%E5%AE%8C%E6%95%B4%E6%80%A7">信息传输完整性</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%AF%E7%94%A8%E6%80%A7%E6%9C%8D%E5%8A%A1">可用性服务</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%A6%81-3">概要</a></li>
+<li><a href="#%E5%90%8E%E5%A4%87">后备</a></li>
+<li><a href="#%E5%9C%A8%E7%BA%BF%E6%81%A2%E5%A4%8D">在线恢复</a></li>
+<li><a href="#%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D">灾难恢复</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%AF%E5%AE%A1%E6%80%A7%E6%9C%8D%E5%8A%A1">可审性服务</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%A6%81-4">概要</a></li>
+<li><a href="#%E8%BA%AB%E4%BB%BD%E6%A0%87%E8%AF%86%E4%B8%8E%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB">身份标识与身份鉴别</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB">网络环境下的身份鉴别</a></li>
+<li><a href="#%E5%AE%A1%E8%AE%A1%E5%8A%9F%E8%83%BD">审计功能</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D">数字签名</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
+<li><a href="#%E4%BD%9C%E7%94%A8">作用</a></li>
+<li><a href="#%E7%89%B9%E5%BE%81">特征</a></li>
+<li><a href="#%E5%88%86%E7%B1%BB">分类</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95">常见算法</a></li>
+<li><a href="#%E6%B6%88%E6%81%AF%E6%91%98%E8%A6%81">消息摘要</a></li>
+</ul>
+</li>
+<li><a href="#kerberos%E9%89%B4%E5%88%AB">Kerberos鉴别</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89-2">定义</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD">功能</a></li>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87">设计目标</a></li>
+<li><a href="#%E5%85%B7%E4%BD%93">具体</a></li>
+<li><a href="#%E5%8E%9F%E7%90%86">原理</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BDpki">公钥基础设施PKI</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89-3">定义</a></li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E4%BB%BB%E5%8A%A1">主要任务</a></li>
+<li><a href="#%E8%AF%84%E4%BB%B7">评价</a></li>
+<li><a href="#%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1">提供的服务</a></li>
+<li><a href="#%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80">理论基础</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6">访问控制</a>
+<ul>
+<li><a href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E6%A6%82%E5%BF%B5">访问控制概念</a></li>
+<li><a href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%86%E7%B1%BB">访问控制分类</a></li>
+<li><a href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%AE%9E%E7%8E%B0">访问控制实现</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2019-12-25，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2019-12-25 20:37:12";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

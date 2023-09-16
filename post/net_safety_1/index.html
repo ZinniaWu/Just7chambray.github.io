@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>网络安全（一） | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/net_safety_1/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>网络安全（一）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2019-12-24</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/net_safety/" class="tag">网络安全</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1786字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">7 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%BC%95%E8%AE%BA.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>本章要点：<br>
+分布网络环境下的安全；网络安全的定义；网络安全的基本属性；网络安全的层次结构；网络安全模型；网络安全挑战；密码基本概念。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%BC%95%E8%AE%BA.png" alt="第一章引论 思维导图" loading="lazy"></figure>
+<h1 id="第一章-引论">第一章 引论</h1>
+<h2 id="网络安全概述">网络安全概述</h2>
+<h3 id="网络安全的概念">网络安全的概念</h3>
+<ul>
+<li>
+<p><strong>信息安全</strong></p>
+<ul>
+<li>防止对<strong>知识</strong>、<strong>事实</strong>、<strong>数据</strong>或<strong>能力非授权使用</strong>、<strong>误用</strong>、<strong>篡改</strong>或<strong>拒绝使用</strong>所采取的<strong>措施（量度）</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>网络安全</strong></p>
+</li>
+<li>
+<p>在<strong>分布网络环境</strong>中，对<strong>信息载体</strong>（处理载体、存储载体、传输载体）和信息的<strong>处理、传输、存储、访问</strong>提供安全保护，以防止<strong>数据、信息内容或能力被非授权使用、篡改或拒绝服务</strong>。</p>
+</li>
+<li>
+<p>计算机网络的<strong>安全隐患</strong></p>
+<ul>
+<li>TCP/IP协议是在<strong>可信</strong>环境下，为网络互联专门设计的，缺乏安全措施的考虑。</li>
+<li><strong>IP安全</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>口令窃听</strong></p>
+<ul>
+<li><strong>IP欺骗</strong>
+<ul>
+<li>
+<p>通过主动插入和删除信息分组</p>
+</li>
+<li>
+<p><strong>路由攻击</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>攻击者告诉网上的两个结点，最近的传输线路就是经过他这台计算机的路径，使窃听变得更容易。</p>
+</li>
+<li>
+<p><strong>DNS安全</strong></p>
+<ul>
+<li>
+<p>Internet对每台计算机的命名方案称为域名系统</p>
+</li>
+<li>
+<p>DNS系统并<strong>不总是安全</strong>的</p>
+<ul>
+<li>黑客通过改变DNS表，使得黑客的计算机的IP地址成为可信任的IP地址</li>
+</ul>
+</li>
+<li>
+<p><strong>拒绝服务（Denial of Service, DoS）攻击</strong></p>
+</li>
+<li>
+<p><strong>发送SYN信息分组</strong></p>
+<ul>
+<li>利用TCP/IP协议的固有漏洞</li>
+</ul>
+</li>
+<li>
+<p>面向连接的<strong>TCP三次握手</strong>是该攻击存在的基础</p>
+</li>
+<li>
+<p><strong>邮件炸弹</strong></p>
+</li>
+<li>
+<p>发送<strong>过量的电子邮件</strong></p>
+</li>
+<li>
+<p><strong>分布式拒绝服务（Distributed Denial of Service,DDoS）攻击</strong></p>
+</li>
+<li>
+<p>拒绝服务群起进攻的方式</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络安全的属性">网络安全的属性</h3>
+<ul>
+<li>
+<p><strong>机密性</strong></p>
+</li>
+<li>
+<p>含义：保证信息与信息系统不被非授权者所获取与使用</p>
+<ul>
+<li>主要防范措施：<strong>密码技术</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>完整性</strong></p>
+</li>
+<li>
+<p>信息是<strong>真实可信</strong>的，其发布者不被冒充，来源不被伪造，内容不被篡改</p>
+<ul>
+<li>主要防范技术：<strong>校验与认证技术</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>可用性</strong></p>
+</li>
+<li>
+<p>保证信息与信息系统<strong>可被授权人正常使用</strong></p>
+<ul>
+<li>确保信息与信息系统处于一个可靠的运行状态之下</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络安全层次结构">网络安全层次结构</h3>
+<ul>
+<li><strong>物理层：搭线偷听</strong></li>
+<li><strong>数据链路层：点对点的链路</strong></li>
+<li><strong>网络层：防火墙技术</strong></li>
+<li><strong>传输层：端到端地加密</strong></li>
+<li><strong>应用层</strong>：指针对<strong>用户身份进行认证</strong>并且<strong>建立起安全的通信信道</strong></li>
+</ul>
+<h3 id="网络安全模型">网络安全模型</h3>
+<ul>
+<li>
+<p>安全机制和安全服务</p>
+<ul>
+<li>对发送的信息进行与安全相关的转换</li>
+<li>由两个主体共享的秘密信息，而对开放网络是保密的</li>
+</ul>
+</li>
+<li>
+<p><strong>基本任务</strong></p>
+</li>
+<li>
+<p><strong>设计加密算法</strong></p>
+<ul>
+<li><strong>密钥生成</strong></li>
+<li><strong>开发一个分发和共享秘密信息的方法</strong></li>
+<li><strong>确定两个主体使用的协议</strong></li>
+</ul>
+</li>
+<li>
+<p>网络访问安全模型</p>
+<ul>
+<li>
+<p>非授权访问</p>
+<ul>
+<li>
+<p>黑客攻击</p>
+<ul>
+<li>信息访问威胁</li>
+<li>服务威胁</li>
+</ul>
+</li>
+<li>
+<p>病毒与蠕虫</p>
+<ul>
+<li>移动存储介质引入系统</li>
+<li>网络引入系统</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>安全机制</p>
+<ul>
+<li>网闸功能</li>
+<li>内部的安全控制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="安全的历史回顾">安全的历史回顾</h2>
+<h3 id="通信安全">通信安全</h3>
+<ul>
+<li>
+<p>主要目的</p>
+<ul>
+<li><strong>解决数据传输的安全问题</strong></li>
+</ul>
+</li>
+<li>
+<p>主要措施</p>
+<ul>
+<li><strong>密码技术</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="计算机安全">计算机安全</h3>
+<ul>
+<li>
+<p>主要目的</p>
+<ul>
+<li>解决<strong>计算机信息载体</strong>及其运行的安全问题</li>
+</ul>
+</li>
+<li>
+<p>主要措施</p>
+<ul>
+<li>根据主、客体的<strong>安全级别</strong>，正确实施主体对客体的<strong>访问控制</strong></li>
+</ul>
+</li>
+<li>
+<p>历史评估标准</p>
+<ul>
+<li>安全计算机的操作模型</li>
+<li>美国可信计算机系统评估准则（Trusted Computer System Evaluation Criteria，<strong>TCSEC</strong>），即<strong>橘皮书</strong></li>
+<li>欧洲四国信息技术安全评估准则（Information Technology Security Evaluation Criteria，ITSEC），俗称<strong>白皮书</strong></li>
+</ul>
+</li>
+<li>
+<p>通用安全评估准则（Command Criteria for IT Security Evaluation，CC）</p>
+<ul>
+<li>中国计算机信息系统安全保护等级划分准则</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络安全">网络安全</h3>
+<ul>
+<li>
+<p>主要目的</p>
+<ul>
+<li>解决在<strong>分布网络环境</strong>中对<strong>信息载体及其运行</strong>提供的安全保护问题</li>
+</ul>
+</li>
+<li>
+<p>主要措施</p>
+<ul>
+<li>提供完整的<strong>信息安全保障体系</strong>，包括<strong>防护、检测、响应、恢复</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="密码学">密码学</h2>
+<h3 id="密码学的基本原理">密码学的基本原理</h3>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>以研究<strong>数据保密</strong>为目的，对存储或者传输的信息采取<strong>秘密的交换</strong>以防止第三者对信息的<strong>窃取</strong>的技术</li>
+</ul>
+</li>
+</ul>
+<h3 id="一些概念">一些概念</h3>
+<ul>
+<li>
+<p>明文</p>
+<ul>
+<li><strong>被变换的信息</strong>，可以是一段有意义的文字或者数据</li>
+</ul>
+</li>
+<li>
+<p>密文</p>
+<ul>
+<li><strong>变换过后的形式</strong>，一串杂乱排列的数据，从字面上没有任何含义</li>
+</ul>
+</li>
+<li>
+<p>加密</p>
+<ul>
+<li>从明文到密文的变换过程</li>
+</ul>
+</li>
+<li>
+<p>解密</p>
+<ul>
+<li>将密文C还原为明文P的变换过程</li>
+</ul>
+</li>
+</ul>
+<h3 id="密码体制的分类">密码体制的分类</h3>
+<ul>
+<li>
+<p><strong>对称密钥密码系统</strong></p>
+</li>
+<li>
+<p>在传统密码体制中<strong>加密和解密采用的是同一密钥</strong></p>
+</li>
+<li>
+<p><strong>非对称密钥密码系统（公共密钥密码系统）</strong></p>
+</li>
+<li>
+<p>现代密码体制中<strong>加密和解密采用不同的密钥</strong></p>
+<ul>
+<li>
+<p><strong>公钥</strong></p>
+</li>
+<li>
+<p><strong>加密密钥</strong></p>
+</li>
+<li>
+<p><strong>私钥</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>解密密钥</strong></p>
+</li>
+</ul>
+<h3 id="密码学研究">密码学研究</h3>
+<ul>
+<li>
+<p><strong>加密算法的设计与研究</strong></p>
+</li>
+<li>
+<p><strong>密码分析（密码破译技术）</strong></p>
+</li>
+<li>
+<p>被动攻击</p>
+<ul>
+<li>能够被动地监听通信信道上的所有信息</li>
+</ul>
+</li>
+<li>
+<p>主动攻击</p>
+<ul>
+<li>还能够对通信信道上传输的信息进行截取、修改甚至主动发送信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="对称密钥密码技术">对称密钥密码技术</h3>
+<ul>
+<li>
+<p>加密模式分类</p>
+<ul>
+<li>
+<p>序列密码（流密码）</p>
+<ul>
+<li>
+<p>原理</p>
+<ul>
+<li>通过有限状态机产生性能优良的伪随机序列，使用该序列加密信息流，逐位加密得到密文序列</li>
+</ul>
+</li>
+<li>
+<p>强度</p>
+<ul>
+<li>完全取决于它所产生的伪随机序列的好坏</li>
+</ul>
+</li>
+<li>
+<p>常见算法</p>
+<ul>
+<li><strong>RC4</strong>算法：可变密钥长度、面向字节操作的流密码。</li>
+</ul>
+</li>
+<li>
+<p>应用</p>
+<ul>
+<li>军事和外交场合使用</li>
+<li>通过一个数据通信信道或者网页浏览连接</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>分组密码</p>
+<ul>
+<li>
+<p>工作方式</p>
+<ul>
+<li>将明文分成固定长度的组（块）（如64位一组）</li>
+<li>用同一密钥和算法对每一块加密，输出固定长度的密文</li>
+</ul>
+</li>
+<li>
+<p>常见算法</p>
+<ul>
+<li><strong>DES</strong></li>
+<li>IDEA</li>
+<li>AES</li>
+</ul>
+</li>
+<li>
+<p>应用</p>
+<ul>
+<li><strong>处理成块的数据</strong>，比如<strong>文件传输</strong>、<strong>电子邮件</strong>和<strong>数据库</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>优缺点</p>
+<ul>
+<li>
+<p>优点</p>
+<ul>
+<li><strong>加解密速度快</strong></li>
+<li><strong>安全度高</strong></li>
+</ul>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>由于存在密钥发行与管理方面的不足，<strong>在提供数字签名、身份验证等方面需要与公开密钥密码技术共同使用</strong>，以达到更好的安全效果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="公钥密码技术">公钥密码技术</h3>
+<ul>
+<li>
+<p>用途</p>
+<ul>
+<li><strong>加密/解密</strong></li>
+<li><strong>密钥交换</strong></li>
+<li><strong>数字签名</strong></li>
+</ul>
+</li>
+<li>
+<p>常见公钥算法</p>
+<ul>
+<li><strong>RSA</strong>(使用最广)：实现加密和数字签名功能</li>
+<li>El Gamal和DSS算法：实现签名但是没有加密</li>
+<li>Diffie-Hellman算法：建立共享密钥</li>
+</ul>
+</li>
+</ul>
+<h2 id="网络安全挑战">网络安全挑战</h2>
+<h3 id="internet规模的扩大和关键应用的激增">Internet规模的扩大和关键应用的激增</h3>
+<h3 id="网络安全攻击的持续增加-安全漏洞的增长">网络安全攻击的持续增加、安全漏洞的增长</h3>
+<ul>
+<li>
+<p>原因</p>
+<ul>
+<li>不断增加的系统漏洞数量</li>
+<li>应付系统漏洞的过程中需要大量人工</li>
+<li>攻击本身的复杂性</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络安全的对策技术-人才-立法急需开发">网络安全的对策（技术、人才、立法）急需开发</h3>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%95%E8%AE%BA">第一章 引论</a>
+<ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%A6%82%E8%BF%B0">网络安全概述</a>
+<ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E6%A6%82%E5%BF%B5">网络安全的概念</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E5%B1%9E%E6%80%A7">网络安全的属性</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">网络安全层次结构</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9E%8B">网络安全模型</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E5%85%A8%E7%9A%84%E5%8E%86%E5%8F%B2%E5%9B%9E%E9%A1%BE">安全的历史回顾</a>
+<ul>
+<li><a href="#%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8">通信安全</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8">计算机安全</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8">网络安全</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a>
+<ul>
+<li><a href="#%E5%AF%86%E7%A0%81%E5%AD%A6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">密码学的基本原理</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5">一些概念</a></li>
+<li><a href="#%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6%E7%9A%84%E5%88%86%E7%B1%BB">密码体制的分类</a></li>
+<li><a href="#%E5%AF%86%E7%A0%81%E5%AD%A6%E7%A0%94%E7%A9%B6">密码学研究</a></li>
+<li><a href="#%E5%AF%B9%E7%A7%B0%E5%AF%86%E9%92%A5%E5%AF%86%E7%A0%81%E6%8A%80%E6%9C%AF">对称密钥密码技术</a></li>
+<li><a href="#%E5%85%AC%E9%92%A5%E5%AF%86%E7%A0%81%E6%8A%80%E6%9C%AF">公钥密码技术</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98">网络安全挑战</a>
+<ul>
+<li><a href="#internet%E8%A7%84%E6%A8%A1%E7%9A%84%E6%89%A9%E5%A4%A7%E5%92%8C%E5%85%B3%E9%94%AE%E5%BA%94%E7%94%A8%E7%9A%84%E6%BF%80%E5%A2%9E">Internet规模的扩大和关键应用的激增</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E5%87%BB%E7%9A%84%E6%8C%81%E7%BB%AD%E5%A2%9E%E5%8A%A0-%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%A2%9E%E9%95%BF">网络安全攻击的持续增加、安全漏洞的增长</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E5%AF%B9%E7%AD%96%E6%8A%80%E6%9C%AF-%E4%BA%BA%E6%89%8D-%E7%AB%8B%E6%B3%95%E6%80%A5%E9%9C%80%E5%BC%80%E5%8F%91">网络安全的对策（技术、人才、立法）急需开发</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2019-12-24，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2019-12-24 11:32:24";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

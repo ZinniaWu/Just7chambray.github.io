@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>网络安全（十） | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/net_safety10/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>网络安全（十）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2019-12-31</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/net_safety/" class="tag">网络安全</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">7200字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">26 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E7%AB%A0%20IPSec.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>本章要点：<br>
+IPSec的而概念、功能、体系结构；安全联盟和安全策略的概念；传输模式和隧道模式的功能和特点；IPSec安全协议的AN机制和功能；IPSec安全协议的ESP机制和功能；密钥管理协议ISAKMP机制和功能；Internet的密钥交换协议IKE机制和功能。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%AC%AC%E5%8D%81%E7%AB%A0%20IPSec.png" alt="第十章IPSec 思维导图" loading="lazy"></figure>
+<h1 id="第十章-ipsec">第十章 IPSec</h1>
+<h2 id="ipsec安全体系结构">IPSec安全体系结构</h2>
+<h3 id="ipsec的概念">IPSec的概念</h3>
+<ul>
+<li>IPSec（IP Security）是一种由IETF设计的端到端的确保IP层通信安全的机制</li>
+<li>IPSec不是一个单独的协议，而是一组协议</li>
+<li>IPSec协议的定义文件包括了12个RFC文件和几十个Internet草案，已经成为工业标准的网络安全协议</li>
+<li>IPSec是随着IPv6的制定而产生的，鉴于IPv4的应用仍然很广泛，所以后来在IPSec的制定中也增加了对IPv4的支持</li>
+<li>IPSec在IPv6中是必须支持的，而在IPv4中是可选的</li>
+<li>IP协议在当初设计时并没有过多地考虑安全问题，而只是为了能够使网络方便地进行互联互通，因此IP协议从本质上就是不安全的</li>
+<li>如果不采取安全措施，IP通信会暴露在多种威胁之下，例如：窃听、篡改、IP欺骗、重放攻击</li>
+<li>IP协议之所以如此不安全，是因为IP协议没有采取任何安全措施，既没有对数据包的内容进行完整性验证，又没有进行加密</li>
+<li>IPSec协议可以为IP网络通信提供透明的安全服务，保护IP通信免遭窃听和篡改，保证数据的完整性和机密性，有效抵御网络攻击，同时保持易用性</li>
+</ul>
+<h3 id="ipsec的功能">IPSec的功能</h3>
+<ul>
+<li>
+<p>作为一个隧道实现了VPN通信</p>
+<ul>
+<li>IPSec作为第三层的隧道协议，可以在IP层上创建一个安全的隧道</li>
+</ul>
+</li>
+<li>
+<p>保证数据来源可靠</p>
+<ul>
+<li>在IPSec通信之前双方要先用IKE认证对方身份并协商密钥，只有IKE协商成功之后才能通信</li>
+<li>由于第三方不可能知道验证和加密的算法以及相关密钥，因此无法冒充发送方，即使冒充，也会被接收方检测出来</li>
+</ul>
+</li>
+<li>
+<p>保证数据完整</p>
+<ul>
+<li>IPSec通过验证算法功能保证数据从发送方到接收方的传送过程中的任何数据篡改和丢失都可以被检测</li>
+</ul>
+</li>
+<li>
+<p>保证数据机密性</p>
+<ul>
+<li>IPSec通过加密算法使只有真正的接收方才能获取真正的发送内容，而他人无法获知数据的真正内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="ipsec体系结构">IPSec体系结构</h3>
+<ul>
+<li>
+<p>IPSec包含了3个最重要的协议</p>
+<ul>
+<li>
+<p>AH</p>
+<ul>
+<li>AH为IP数据包提供3种服务：无连接的数据完整性验证、数据源身份认证和防重放攻击</li>
+</ul>
+</li>
+<li>
+<p>ESP</p>
+<ul>
+<li>ESP除了为IP数据包提供AH已有的3种服务外，还提供另外两种服务：数据包加密、数据流加密</li>
+</ul>
+</li>
+<li>
+<p>IKE</p>
+<ul>
+<li>IKE协议负责密钥管理，定义了通信实体间进行身份认证、协商加密算法以及生成共享的会话密钥的方法。IKE将密钥协商的结果保留在安全联盟（SA）中，供AH和ESP以后通信时使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="安全联盟和安全联盟数据库">安全联盟和安全联盟数据库</h3>
+<ul>
+<li>
+<p>安全联盟（SA）</p>
+<ul>
+<li>
+<p>SA（SecurityAssociation，安全联盟）是两个IPSec实体（主机、安全网关）之间经过协商建立起来的一种协定</p>
+</li>
+<li>
+<p>内容包括采用何种IPSec协议（AH还是ESP）、运行模式、验证算法、加密算法、加密密钥、密钥生存期、抗重放窗口、计数器等，从而决定了保护什么、如何保护以及谁来保护</p>
+</li>
+<li>
+<p>SA是单向的，进入（inbound）SA负责处理接收到的数据包，外出（outbound）SA负责处理要发送的数据包</p>
+</li>
+<li>
+<p>因此每个通信方必须要有两种SA，一个进入SA，一个外出SA，这两个SA构成了一个SA束（SA Bundle）</p>
+</li>
+<li>
+<p>SA的管理包括创建和删除</p>
+</li>
+<li>
+<p>SA管理方式</p>
+<ul>
+<li>
+<p>手工管理</p>
+<ul>
+<li>SA的内容由管理员手工指定、手工维护</li>
+<li>手工维护容易出错，而且手工建立的SA没有生存周期限制，一旦建立了，就不会过期，除非手工删除，因此有安全隐患</li>
+</ul>
+</li>
+<li>
+<p>IKE自动管理</p>
+<ul>
+<li>SA的自动建立和动态维护是通过IKE进行的</li>
+<li>利用IKE创建和删除SA，不需要管理员手工维护，而且SA有生命期</li>
+<li>如果安全策略要求建立安全、保密的连接，但又不存在与该连接相应的SA，IPSec的内核会立刻启动IKE来协商SA</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>SA标识</p>
+<ul>
+<li>
+<p>每个SA由三元组&lt;SPI，源/目的IP地址，IPSec协议&gt;唯一标识</p>
+<ul>
+<li>SPI（Security Parameter Index，安全参数索引）是32位的安全参数索引，标识同一个目的地的SA</li>
+<li>源/目的IP地址：表示对方IP地址。对于外出数据包，指目的IP地址；对于进入数据包，指源IP地址</li>
+<li>IPSec协议：采用AH或ESP</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>安全联盟数据库（SAD）</p>
+<ul>
+<li>SAD（Security Association Database，安全联盟数据库）并不是通常意义上的“数据库”，而是将所有的SA以某种数据结构集中存储的一个列表</li>
+<li>对于外出的流量，如果需要使用IPSec处理，然而相应的SA不存在，则IPSec将启动IKE来协商出一个SA，并存储到SAD中</li>
+<li>对于进入的流量，如果需要进行IPSec处理，IPSec将从IP包中得到三元组，并利用这个三元组在SAD中查找一个SA</li>
+</ul>
+</li>
+</ul>
+<h3 id="安全策略和安全策略数据库">安全策略和安全策略数据库</h3>
+<ul>
+<li>
+<p>SP（Security Policy，安全策略）指示对IP数据包提供何种保护，并以何种方式实施保护</p>
+</li>
+<li>
+<p>SP主要根据源IP地址、目的IP地址、入数据还是出数据等来标识</p>
+</li>
+<li>
+<p>IPSec还定义了用户能以何种粒度来设定自己的安全策略，由“选择符”来控制粒度的大小，不仅可以控制到IP地址，还可以控制到传输层协议或者TCP/UDP端口等</p>
+</li>
+<li>
+<p>SPD（Security<br>
+Policy Database，安全策略数据库）是将所有的SP以某种数据结构集中存储的列表</p>
+</li>
+<li>
+<p>当要将IP包发送出去时，或者接收到IP包时，首先要查找SPD来决定如何进行处理</p>
+</li>
+<li>
+<p>可能的处理方式</p>
+<ul>
+<li>
+<p>丢弃</p>
+<ul>
+<li>流量不能离开主机或者发送到应用程序，也不能进行转发</li>
+</ul>
+</li>
+<li>
+<p>不用IPSec</p>
+<ul>
+<li>对流量作为普通流量处理，不需要额外的IPSec保护</li>
+</ul>
+</li>
+<li>
+<p>使用IPSec</p>
+<ul>
+<li>对流量应用IPSec保护，此时这条安全策略要指向一个SA</li>
+<li>对于外出流量，如果该SA尚不存在，则启动IKE进行协商，把协商的结果连接到该安全策略上</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ipsec运行模式">IPSec运行模式</h3>
+<ul>
+<li>
+<p>传输模式（Transport Mode）</p>
+<ul>
+<li>传输模式要保护的内容是IP包的载荷，传输模式为上层协议提供安全保护</li>
+<li>通常情况下，传输模式只用于两台主机之间的安全通信</li>
+<li>正常情况下，传输层数据包在IP中被添加一个IP头部构成IP包。启用IPSec之后，IPSec会在传输层数据前面增加AH或者ESP或者二者同时增加，构成一个AH数据包或者ESP数据包，然后再添加IP头部组成新的IP包</li>
+</ul>
+</li>
+<li>
+<p>隧道模式（Tunnel Mode）</p>
+<ul>
+<li>
+<p>隧道模式保护的内容是整个原始IP包，隧道模式为IP协议提供安全保护</p>
+</li>
+<li>
+<p>通常情况下，只要IPSec双方有一方是安全网关或路由器，就必须使用隧道模式</p>
+</li>
+<li>
+<p>路由器将需要进行IPSec保护的原始IP包看作一个整体，将这个IP包作为要保护的内容，前面添加AH或者ESP头部，然后再添加新的IP头部，组成新的IP包之后再转发出去</p>
+</li>
+<li>
+<p>数据包的两个IP头</p>
+<ul>
+<li>内部头：由路由器背后的主机创建</li>
+<li>外部头：由提供IPSec的设备（可能是主机，也可能是路由器）创建</li>
+</ul>
+</li>
+<li>
+<p>隧道模式下，通信终点由受保护的内部IP头指定，而IPSec终点则由外部IP头指定。如IPSec终点为安全网关，则该网关会还原出内部IP包，再转发到最终目的地</p>
+</li>
+</ul>
+</li>
+<li>
+<p>AH和ESP都支持这两种模式，因此有4种可能的组合：传输模式的AH、隧道模式的AH、传输模式的ESP和隧道模式的ESP。</p>
+</li>
+</ul>
+<h2 id="ipsec安全协议an">IPSec安全协议——AN</h2>
+<h3 id="ah概述">AH概述</h3>
+<ul>
+<li>AH（Authentication Header，验证头部协议）由RFC2402定义，是用于增强IP层安全的一个IPSec协议，该协议可以提供无连接的数据完整性、数据来源验证和抗重放攻击服务</li>
+<li>AH协议对IP层的数据使用密码学中的验证算法，从而使得对IP包的修改可以被检测出来</li>
+<li>具体地说，这个验证算法是密码学中的MAC（Message Authentication Codes，报文验证码）算法，MAC算法将一段给定的任意长度的报文和一个密钥作为输入，产生一个固定长度的输出报文，称为报文摘要或者指纹</li>
+<li>MAC算法与HASH算法非常相似，区别在于MAC算法需要一个密钥（key），而HASH算法不需要</li>
+<li>实际上，MAC算法一般是由HASH算法演变而来，也就是将输入报文和密钥结合在一起然后应用HASH算法。这种MAC算法称为HMAC，例如HMAC-MD5、HMAC-SHA1等</li>
+<li>为了使通信双方能产生相同的报文摘要，通信双方必须采用相同的HMAC算法和密钥</li>
+<li>对同一段报文使用不同的密钥来产生相同的报文摘要是不可能的。因此，只有采用相同的HMAC算法并共享密钥的通信双方才能产生相同的验证数据</li>
+</ul>
+<h3 id="ah头部格式">AH头部格式</h3>
+<ul>
+<li>
+<p>AH协议和TCP、UDP协议一样，是被IP协议封装的协议之一</p>
+</li>
+<li>
+<p>一个IP包的载荷是否是AH协议，由IP协议头部中的协议字段判断，正如TCP协议是6，UDP协议是17一样，AH协议是51</p>
+</li>
+<li>
+<p>如果一个IP包封装的是AH协议，在IP包头（包括选项字段）后面紧跟的就是AH协议头部</p>
+</li>
+<li>
+<p>组成</p>
+<ul>
+<li>
+<p>下一个头（Next Header）</p>
+<ul>
+<li>最开始的8位，表示紧跟在AH头部的下一个载荷的类型，也就是紧跟在AH头部后面数据的协议</li>
+<li>在传输模式下，该字段是处于保护中的传输层协议的值，比如6（TCP）、17（UDP）或者50（ESP）。在隧道模式下，AH所保护的是整个IP包，该值是4，表示IP-in-IP协议</li>
+</ul>
+</li>
+<li>
+<p>载荷长度（Payload Length）</p>
+<ul>
+<li>接下来的8位，其值是以32位（4字节）为单位的整个AH数据（包括头部和变长的认证数据）的长度再减2</li>
+</ul>
+</li>
+<li>
+<p>保留（reserved）</p>
+<ul>
+<li>16位，作为保留用，实现中应全部设置为0</li>
+</ul>
+</li>
+<li>
+<p>SPI(Security Parameter Index，安全参数索引)</p>
+<ul>
+<li>SPI是一个32位整数，与源/目的IP地址、IPSec协议一起组成的三元组可以为该IP包惟一地确定一个SA</li>
+<li>[1，255]保留为将来使用，0保留本地的特定实现使用。因此，可用的SPI值为[256，2^32-1]</li>
+</ul>
+</li>
+<li>
+<p>序列号</p>
+<ul>
+<li>序列号是一个32位整数，作为一个单调递增的计数器，为每个AH包赋予一个序号</li>
+<li>当通信双方建立SA时，计数器初始化为0。SA是单向的，每发送一个包，外出SA的计数器增1；每接收一个包，进入SA的计数器增1</li>
+<li>该字段可以用于抵抗重放攻击</li>
+</ul>
+</li>
+<li>
+<p>验证信息</p>
+<ul>
+<li>可变长部分，包含了验证数据，也就是HMAC算法的结果，称为ICV（Integrity Check Value，完整性校验值）</li>
+<li>该字段必须为32位的整数倍，如果ICV不是32位的整数倍，必须进行填充，用于生成ICV的算法由SA指定</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ah运行模式">AH运行模式</h3>
+<ul>
+<li>
+<p>AH传输模式</p>
+<ul>
+<li>被AH验证的区域是整个IP包（可变字段除外），包括IP包头部，因此源IP地址、目的IP地址是不能修改的，否则会被检测出来</li>
+<li>然而，如果该包在传送的过程中经过NAT（Network Address Translation，网络地址转换）网关，其源/目的IP地址将被改变，将造成到达目的地址后的完整性验证失败</li>
+<li>因此，AH在传输模式下和NAT是冲突的，不能同时使用，或者可以说AH不能穿越NAT</li>
+</ul>
+</li>
+<li>
+<p>AH隧道模式</p>
+<ul>
+<li>在隧道模式中，AH插入到原始IP头部字段之前，然后在AH之前再增加一个新的IP头部</li>
+<li>隧道模式下，AH验证的范围也是整个IP包，因此AH和NAT的冲突在隧道模式下也存在</li>
+<li>在隧道模式中，AH可以单独使用，也可以和ESP一起嵌套使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据完整性检查">数据完整性检查</h3>
+<ul>
+<li>
+<p>AH协议验证的范围包括整个IP包</p>
+</li>
+<li>
+<p>验证过程</p>
+<ul>
+<li>
+<p>在发送方，整个IP包和验证密钥被作为输入，经过HMAC算法计算后得到的结果被填充到AH头部的“验证数据”字段中</p>
+</li>
+<li>
+<p>在接收方，整个IP包和验证算法所用的密钥也被作为输入，经过HMAC算法计算的结果和AH头部的“验证数据”字段进行比较，如果一致，说明该IP包数据没有被篡改，内容是真实可信的</p>
+</li>
+<li>
+<p>可变字段</p>
+<ul>
+<li>
+<p>在应用HMAC算法时，有一些因素需要考虑。在IP字段中，有一些是可变的，而且在传输过程中被修改也是合理的，这些字段在计算HMAC时被临时用0填充（另外，AH头部的验证数据字段在计算之前也要用0填充，计算之后再填充验证结果）</p>
+</li>
+<li>
+<p>ToS（Type of Service）</p>
+<ul>
+<li>8位的服务类型字段指出了延时、吞吐量和可靠性方面的要求。某些路由器会修改该字段以达到特定的QoS服务质量</li>
+</ul>
+</li>
+<li>
+<p>标志字段</p>
+<ul>
+<li>这是指用于表示分片的3位标志——路由器可能会修改这3个标志</li>
+</ul>
+</li>
+<li>
+<p>分片偏移字段</p>
+<ul>
+<li>标志字段后面的13位的偏移字段</li>
+</ul>
+</li>
+<li>
+<p>TTL</p>
+<ul>
+<li>生命期，为了防止IP包的无限次路由，每经过一个路由器，该字段减1，当TTL变为0时，被路由器抛弃</li>
+</ul>
+</li>
+<li>
+<p>头部校验和</p>
+<ul>
+<li>中间路由器对IP包头部作了任何修改之后，必须重新计算头部校验和，因此该字段也是可变的</li>
+</ul>
+</li>
+<li>
+<p>选项字段</p>
+</li>
+</ul>
+</li>
+<li>
+<p>不变字段</p>
+<ul>
+<li>对于一个IP包，除可变字段外，其余部分是应该不变的，这些部分也正是受到AH协议保护的部分</li>
+<li>版本字段</li>
+<li>头部长度字段</li>
+<li>IP总长字段</li>
+<li>ID字段</li>
+<li>协议字段</li>
+<li>源IP字段</li>
+<li>目的地址字段</li>
+<li>AH头中除“验证数据”意外的其他字段</li>
+<li>数据：指经过AH处理之后，在AH头部后面的数据。传输方式下，指TCP、UDP或ICMP等数据；隧道模式下，指被封装的原IP包</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ipsec安全协议esp">IPSec安全协议——ESP</h2>
+<h3 id="esp概述">ESP概述</h3>
+<ul>
+<li>与AH一样，ESP（Encapsulating Security Payload，封装安全载荷）协议也是一种增强IP层安全的IPSec协议，由RFC2406定义</li>
+<li>ESP协议除了可以提供无连接的完整性、数据来源验证和抗重放攻击服务之外，还提供数据包加密和数据流加密服务</li>
+<li>ESP协议提供数据完整性和数据来源验证的原理和AH一样，也是通过验证算法实现</li>
+<li>ESP协议规定了所有IPSec系统必须实现的验证算法：HMAC-MD5、HMAC-SHA1、NULL</li>
+<li>NULL认证算法是指实际不进行认证</li>
+<li>数据包加密服务通过对单个IP包或IP包载荷应用加密算法实现；数据流加密是通过隧道模式下对整个IP包应用加密算法实现</li>
+<li>ESP的加密采用的是对称密钥加密算法</li>
+<li>为了保证互操作性，ESP协议规定了所有IPSec系统都必须实现的算法：DES-CBC、NULL</li>
+<li>NULL加密算法是指实际不进行加密</li>
+<li>之所以有NULL算法，是因为加密和认证都是可选的，但是ESP协议规定加密和认证不能同时为NULL</li>
+<li>换句话说，如果采用ESP，加密和认证至少必选其一，当然也可以二者都选，但是不能二者都不选</li>
+</ul>
+<h3 id="esp头部格式">ESP头部格式</h3>
+<ul>
+<li>
+<p>ESP协议和TCP、UDP、AH协议一样，是被IP协议封装的协议之一</p>
+</li>
+<li>
+<p>一个IP包的载荷是否是ESP协议，由IP协议头部中的协议字段判断，ESP协议字段是50</p>
+</li>
+<li>
+<p>如果一个IP包封装的是ESP协议，在IP包头（包括选项字段）后面紧跟的就是ESP协议头部</p>
+</li>
+<li>
+<p>组成</p>
+<ul>
+<li>
+<p>SPI</p>
+<ul>
+<li>SPI是一个32位整数，与源/目的IP地址、IPSec协议一起组成的三元组可以为该IP包惟一地确定一个SA</li>
+</ul>
+</li>
+<li>
+<p>序列号（Sequence Number）</p>
+<ul>
+<li>序列号是一个32位整数，作为一个单调递增的计数器，为每个ESP包赋予一个序号。当通信双方建立SA时，计数器初始化为0</li>
+<li>SA是单向的，每发送一个包，外出SA的计数器增1；每接收一个包，进入SA的计数器增1。该字段可以用于抵抗重放攻击</li>
+</ul>
+</li>
+<li>
+<p>载荷数据（Payload Data）</p>
+<ul>
+<li>这是变长字段，包含了实际的载荷数据。不管SA是否需要加密，该字段总是必需的</li>
+<li>如果采用了加密，该部分就是加密后的密文；如果没有加密，该部分就是明文</li>
+<li>如果采用的加密算法需要一个IV（Initial Vector，初始向量），IV也是在本字段中传输的。该加密算法的规范必须能够指明IV的长度以及在本字段中的位置</li>
+<li>本字段的长度必须是8位的整数倍</li>
+</ul>
+</li>
+<li>
+<p>填充（Padding）</p>
+<ul>
+<li>填充字段包含了填充位</li>
+</ul>
+</li>
+<li>
+<p>填充长度（Pad Length）</p>
+<ul>
+<li>填充长度字段是一个8位字段，以字节为单位指示了填充字段的长度，其范围为[0，255]</li>
+</ul>
+</li>
+<li>
+<p>下一个头（Next Header）</p>
+<ul>
+<li>8位字段，指明了封装在载荷中的数据类型，例如6表示TCP数据</li>
+</ul>
+</li>
+<li>
+<p>验证数据（Authentication Data）</p>
+<ul>
+<li>变长字段。只有选择了验证服务时才会有该字段，包含了验证的结果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="esp运行模式">ESP运行模式</h3>
+<ul>
+<li>
+<p>运行模式决定了ESP插入的位置以及保护的对象</p>
+</li>
+<li>
+<p>ESP传输模式</p>
+<ul>
+<li>
+<p>传输模式保护的是IP包的载荷，例如TCP、UDP、ICMP等，也可以是其他IPSec协议的头部</p>
+</li>
+<li>
+<p>ESP插入到IP头部（含选项字段）之后，任何被IP协议所封装的协议（如传输层协议TCP、UDP、ICMP，或者IPSec协议）之前</p>
+<ul>
+<li>ESP头部包含SPI和序列号字段</li>
+<li>ESP尾部包含填充、填充长度和下一个头字段</li>
+</ul>
+</li>
+<li>
+<p>如果使用了加密，SPI和序号字段不能被加密</p>
+</li>
+<li>
+<p>如果使用了验证，验证数据也不会被加密，因为如果需要ESP的验证服务，那么接收端会在进行任何后续处理（例如检查重放、解密）之前进行先验</p>
+</li>
+<li>
+<p>值得注意的是，和AH不同，ESP的验证不会对整个IP包进行验证，IP包头部（含选项字段）不会被验证。因此，ESP不存在像AH那样的和NAT模式冲突的问题</p>
+</li>
+<li>
+<p>当然，ESP在验证上的这种灵活性也有缺点：除了ESP头部之外，任何IP头部字段都可以修改，只要保证其校验和计算正确，接收端就不能检测出这种修改</p>
+</li>
+<li>
+<p>ESP传输模式的验证服务要比AH传输模式弱一些</p>
+</li>
+<li>
+<p>如果需要更强的验证服务并且通信双方都是公有IP地址，应该采用AH来验证，或者将AH认证与ESP验证同时使用</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ESP隧道模式</p>
+<ul>
+<li>
+<p>隧道模式保护的是整个IP包，对整个IP包进行加密</p>
+</li>
+<li>
+<p>ESP插入到原IP头部（含选项字段）之前，在ESP之前再插入新的IP头部</p>
+</li>
+<li>
+<p>两个IP头部</p>
+<ul>
+<li>里面的IP头部是原始的IP头部，含有真实的源IP地址、最终的目的IP地址</li>
+<li>外面的IP头部可以包含与里面IP头部不同的IP地址，例如，可以是NAT网关的IP地址，这样两个子网中的主机可以利用ESP进行安全通信</li>
+</ul>
+</li>
+<li>
+<p>与传输模式一样，ESP头部含有SPI和序号字段；ESP尾部含有填充、填充长度和下一个头字段；如果选用了验证，ESP的验证数据字段中包含了验证数据</p>
+</li>
+<li>
+<p>ESP头部和ESP验证数据字段不被加密</p>
+</li>
+<li>
+<p>隧道模式中，内部IP头部被加密和验证</p>
+</li>
+<li>
+<p>而外部IP头部既不被加密也不被验证。不被加密是因为路由器需要这些信息来为其寻找路由；不被验证是为了能适用于NAT等情况</p>
+</li>
+<li>
+<p>ESP隧道模式的验证和加密能够提供比ESP传输模式更加强大的安全功能</p>
+</li>
+<li>
+<p>因为隧道模式下对整个原始IP包进行验证和加密，可以提供数据流加密服务；而ESP在传输模式下不能提供流加密服务，因为源、目的IP地址不被加密</p>
+</li>
+<li>
+<p>隧道模式下将占用更多的带宽，因为隧道模式要增加一个额外的IP头部</p>
+</li>
+<li>
+<p>因此，如果带宽利用率是一个关键问题，则传输模式更合适</p>
+</li>
+<li>
+<p>尽管ESP隧道模式的验证功能不像AH传输模式或隧道模式那么强大，但ESP隧道模式提供的安全功能已经足够了</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="isakmp协议">ISAKMP协议</h2>
+<h3 id="isakmp概述">ISAKMP概述</h3>
+<ul>
+<li>ISAKMP（Internet<br>
+Security Association Key Management Protocol，Internet安全联盟密钥管理协议）由RFC2408定义，定义了协商、建立、修改和删除SA的过程和包格式</li>
+<li>ISAKMP只是为SA的属性和协商、修改、删除SA的方法提供了一个通用的框架，并没有定义具体的SA格式</li>
+<li>ISAKMP没有定义任何密钥交换协议的细节，也没有定义任何具体的加密算法、密钥生成技术或者认证机制。这个通用的框架是与密钥交换独立的，可以被不同的密钥交换协议使用</li>
+<li>ISAKMP报文可以利用UDP或者TCP，端口都是500，一般情况下常用UDP协议</li>
+<li>ISAKMP双方交换的内容称为载荷（payload），ISAKMP目前定义了13种载荷</li>
+<li>载荷按照某种规则“叠放”在一起，然后在最前面添加上ISAKMP头部，这样就组成了一个ISAKMP报文</li>
+<li>ISAKMP报文按照一定的模式进行交换，从而完成SA的协商、修改和删除等功能</li>
+</ul>
+<h3 id="isakmp包头部格式">ISAKMP包头部格式</h3>
+<ul>
+<li>
+<p>ISAKMP报文的头部是固定长度的，包含了维护状态、处理载荷必要的信息；头部后面的载荷数目不定</p>
+</li>
+<li>
+<p>组成</p>
+<ul>
+<li>
+<p>发起方Cooikes（Initiator Cookie）</p>
+<ul>
+<li>发起方的Cookie，长度为64位（8字节）。Cookie可以帮助通信双方确认一个ISAKMP报文是否真的来自对方</li>
+<li>在发起方，如果收到的某报文的应答方Cookie字段和以前收到的该字段不同，则丢弃该报文</li>
+<li>同样，在应答方，如果收到的某报文的发起方Cookie和以前收到的该字段不同，则丢弃该报文</li>
+<li>这种机制可以防止DoS攻击</li>
+</ul>
+</li>
+<li>
+<p>应答方Cookie（Responder Cookie）</p>
+<ul>
+<li>应答方的Cookie，紧跟在发起方Cookie之后，长度为64位（8字节）</li>
+</ul>
+</li>
+<li>
+<p>下一个载荷（Next Payload）</p>
+<ul>
+<li>表示紧跟在ISAKMP头部之后的第一个载荷的类型值。目前定义了13种载荷</li>
+</ul>
+</li>
+<li>
+<p>主版本（Major Version）</p>
+<ul>
+<li>长度为4位，表示ISAKMP协议的主版本号</li>
+</ul>
+</li>
+<li>
+<p>次版本（Minor Version）</p>
+<ul>
+<li>长度为4位，表示ISAKMP协议的次版本号</li>
+</ul>
+</li>
+<li>
+<p>交换类型（Exchange Type）</p>
+<ul>
+<li>长度为8位，表示该报文所属的交换类型。目前定义了5种交换类型</li>
+</ul>
+</li>
+<li>
+<p>标志（Flags）</p>
+<ul>
+<li>
+<p>长度为8位，目前只有后3位有用，其余保留，用0填充。后3位的含义从最后一位往前依次为</p>
+<ul>
+<li>加密位（encryption）。加密位如果是1，表示ISAKMP头部后面的所有载荷都被加密了；如果是0，表示载荷是明文，没有加密</li>
+<li>提交位（commit）</li>
+<li>纯验证位（Authentication Only）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>报文ID（Message ID）</p>
+<ul>
+<li>长度32位，包含的是由第二阶段协商的发起方生成的随机值，这个唯一的报文标识可以唯一确定第二阶段的协议状态</li>
+</ul>
+</li>
+<li>
+<p>报文长度（Message Length）</p>
+<ul>
+<li>长度32位，以字节为单位表示了ISAKMP整个报文（头部 + 若干载荷）的总长度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="isakmp载荷头部">ISAKMP载荷头部</h3>
+<ul>
+<li>
+<p>不论何种载荷，都有一个相同格式的载荷头部</p>
+</li>
+<li>
+<p>组成</p>
+<ul>
+<li>
+<p>下一个载荷（Next Payload）</p>
+<ul>
+<li>8位字段，表示紧跟在本载荷后面的下一个载荷的类型</li>
+<li>通过该字段，不同的载荷可以像链条一样链接起来，每个载荷的类型都在前一个载荷中指明，第一个载荷的类型在ISAKMP头部中指明，最后一个载荷的Next<br>
+Payload类型为0，从而指明这是最后一个载荷</li>
+</ul>
+</li>
+<li>
+<p>保留（reserved）</p>
+<ul>
+<li>保留用，8位字段，全0</li>
+</ul>
+</li>
+<li>
+<p>载荷长度（Payload Length）</p>
+<ul>
+<li>以字节为单位表示的载荷长度（包括载荷头部），16位字段，该字段定义了每个载荷的边界</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="isakmp载荷">ISAKMP载荷</h3>
+<ul>
+<li>SA载荷</li>
+<li>建议载荷（proposal）</li>
+<li>交换载荷（transform）</li>
+<li>密钥交换载荷（Key Exchange）</li>
+<li>身份载荷（identification）</li>
+<li>证书载荷（certificate）</li>
+<li>证书请求载荷（Certificate Request）</li>
+<li>哈希（Hash）载荷</li>
+<li>签名载荷（signature）</li>
+<li>Nonce载荷</li>
+<li>通知载荷（notification）</li>
+<li>删除载荷（delete）</li>
+<li>厂商ID载荷（Vendor ID）</li>
+</ul>
+<h3 id="isakmp协商阶段">ISAKMP协商阶段</h3>
+<ul>
+<li>
+<p>ISAKMP的协商过程分为两个阶段：阶段1和阶段2</p>
+</li>
+<li>
+<p>两个阶段所协商的对象不同，但协商过程的交换方式是由ISAKMP定义的或者由密钥交换协议（例如IKE）定义的</p>
+</li>
+<li>
+<p>阶段1</p>
+<ul>
+<li>这个阶段要协商的SA可以称为ISAKMP SA（在IKE中可以称为IKE SA），该SA是为了保证阶段2的安全通信</li>
+</ul>
+</li>
+<li>
+<p>阶段2</p>
+<ul>
+<li>这个阶段要协商的SA是密钥交换协议最终要协商的SA，当IKE为IPSec协商时可以称为IPSec SA，是保证AH或者ESP的安全通信</li>
+<li>阶段2的安全由阶段1的协商结果来保证。阶段1所协商的一个SA可以用于协商多个阶段2的SA</li>
+</ul>
+</li>
+</ul>
+<h3 id="交换类型">交换类型</h3>
+<ul>
+<li>
+<p>交换类型定义的是在通信双方所传送的载荷的类型和顺序，比如一方先发送什么载荷，另一方应如何应答等</p>
+</li>
+<li>
+<p>这些交换模式的区别在于对传输信息的保护程度不同，并且传输的载荷多少也不同</p>
+</li>
+<li>
+<p>类型</p>
+<ul>
+<li>基本交换</li>
+<li>身份保护交换</li>
+<li>纯认证交换</li>
+<li>积极交换</li>
+<li>信息交换</li>
+</ul>
+</li>
+</ul>
+<h2 id="ike协议">IKE协议</h2>
+<h3 id="概述">概述</h3>
+<ul>
+<li>IKE是一种混合型协议，由RFC2409定义，包含了3个不同协议的有关部分：ISAKMP、Oakley和SKEME</li>
+<li>IKE和ISAKMP的不同之处在于：IKE真正定义了一个密钥交换的过程，而ISAKMP只是定义了一个通用的可以被任何密钥交换协议使用的框架</li>
+<li>IKE为IPSec通信双方提供密钥材料，这个材料用于生成加密密钥和验证密钥。另外，IKE也为IPSec协议AH和ESP协商SAa</li>
+</ul>
+<h3 id="身份认证方式">身份认证方式</h3>
+<ul>
+<li>基于数字签名，利用数字证书来表示身份，利用数字签名算法计算出一个签名来验证身份</li>
+<li>基于公开密钥，利用对方的公开密钥加密身份，通过检查对方发来的该HASH值作认证</li>
+<li>基于修正的公开密钥，对上述方式进行修正</li>
+<li>基于预共享字符串，双方事先通过某种方式商定好一个双方共享的字符串</li>
+</ul>
+<h3 id="交换模式">交换模式</h3>
+<ul>
+<li>主模式</li>
+<li>积极模式</li>
+<li>快速模式</li>
+<li>新组模式</li>
+<li>前面3个用于协商SA，最后一个用于协商Diffie-Hellman算法所用的组</li>
+<li>主模式和积极模式用于第一阶段；快速模式用于第二阶段；新组模式用于在第一个阶段后协商新的组</li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%AC%E5%8D%81%E7%AB%A0-ipsec">第十章 IPSec</a>
+<ul>
+<li><a href="#ipsec%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">IPSec安全体系结构</a>
+<ul>
+<li><a href="#ipsec%E7%9A%84%E6%A6%82%E5%BF%B5">IPSec的概念</a></li>
+<li><a href="#ipsec%E7%9A%84%E5%8A%9F%E8%83%BD">IPSec的功能</a></li>
+<li><a href="#ipsec%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">IPSec体系结构</a></li>
+<li><a href="#%E5%AE%89%E5%85%A8%E8%81%94%E7%9B%9F%E5%92%8C%E5%AE%89%E5%85%A8%E8%81%94%E7%9B%9F%E6%95%B0%E6%8D%AE%E5%BA%93">安全联盟和安全联盟数据库</a></li>
+<li><a href="#%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E5%92%8C%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E6%95%B0%E6%8D%AE%E5%BA%93">安全策略和安全策略数据库</a></li>
+<li><a href="#ipsec%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F">IPSec运行模式</a></li>
+</ul>
+</li>
+<li><a href="#ipsec%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AEan">IPSec安全协议——AN</a>
+<ul>
+<li><a href="#ah%E6%A6%82%E8%BF%B0">AH概述</a></li>
+<li><a href="#ah%E5%A4%B4%E9%83%A8%E6%A0%BC%E5%BC%8F">AH头部格式</a></li>
+<li><a href="#ah%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F">AH运行模式</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7%E6%A3%80%E6%9F%A5">数据完整性检查</a></li>
+</ul>
+</li>
+<li><a href="#ipsec%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AEesp">IPSec安全协议——ESP</a>
+<ul>
+<li><a href="#esp%E6%A6%82%E8%BF%B0">ESP概述</a></li>
+<li><a href="#esp%E5%A4%B4%E9%83%A8%E6%A0%BC%E5%BC%8F">ESP头部格式</a></li>
+<li><a href="#esp%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F">ESP运行模式</a></li>
+</ul>
+</li>
+<li><a href="#isakmp%E5%8D%8F%E8%AE%AE">ISAKMP协议</a>
+<ul>
+<li><a href="#isakmp%E6%A6%82%E8%BF%B0">ISAKMP概述</a></li>
+<li><a href="#isakmp%E5%8C%85%E5%A4%B4%E9%83%A8%E6%A0%BC%E5%BC%8F">ISAKMP包头部格式</a></li>
+<li><a href="#isakmp%E8%BD%BD%E8%8D%B7%E5%A4%B4%E9%83%A8">ISAKMP载荷头部</a></li>
+<li><a href="#isakmp%E8%BD%BD%E8%8D%B7">ISAKMP载荷</a></li>
+<li><a href="#isakmp%E5%8D%8F%E5%95%86%E9%98%B6%E6%AE%B5">ISAKMP协商阶段</a></li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E7%B1%BB%E5%9E%8B">交换类型</a></li>
+</ul>
+</li>
+<li><a href="#ike%E5%8D%8F%E8%AE%AE">IKE协议</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F">身份认证方式</a></li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E6%A8%A1%E5%BC%8F">交换模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2019-12-31，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2019-12-31 22:03:35";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

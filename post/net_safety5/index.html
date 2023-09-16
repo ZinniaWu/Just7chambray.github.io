@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>网络安全（五） | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/net_safety5/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>网络安全（五）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2019-12-31</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/net_safety/" class="tag">网络安全</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">4915字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">17 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>本章要点：<br>
+可信系统体系结构及其要素；网络安全的分层体系结构；OSI安全体系结构的安全服务与安全机制；ISO/IEC网络安全体系结构。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="第五章安全体系结构 思维导图" loading="lazy"></figure>
+<h1 id="第五章-安全体系结构">第五章 安全体系结构</h1>
+<h2 id="系统安全体系结构">系统安全体系结构</h2>
+<h3 id="可信系统体系结构概述">可信系统体系结构概述</h3>
+<ul>
+<li>
+<p>提要</p>
+<ul>
+<li>当构建一个计算机系统时，需要做出很多基本的设计决定</li>
+<li>安全是计算机系统的一个非常重要的目标</li>
+</ul>
+</li>
+<li>
+<p>要素</p>
+<ul>
+<li>定义主体和客体的子集、可信计算基、安全边界、基准监控器和安全内核、安全域、资源隔离、安全策略和最小特权等</li>
+</ul>
+</li>
+<li>
+<p>定义主体和客体的子集</p>
+<ul>
+<li>计算机系统中并非所有部件都必须是可信的，也不属于可信计算基</li>
+<li>可信主体和客体需要被识别，放在一个指定的子集</li>
+</ul>
+</li>
+<li>
+<p>可信计算基</p>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>在计算机系统中全部保护机制的组合定义为可信计算基（trusted computing base, TCB）</li>
+</ul>
+</li>
+<li>
+<p>来源</p>
+<ul>
+<li>美国国防部标准5200.28——可信计算机系统评估准则TCSEC（橘皮书）</li>
+</ul>
+</li>
+<li>
+<p>包括</p>
+<ul>
+<li>硬件</li>
+<li>软件</li>
+<li>固件</li>
+</ul>
+</li>
+<li>
+<p>并非系统的每个部分都需要是可信的，评估一个系统的可信级别是由构成TCB的结构、安全服务及保障机制确定的</p>
+</li>
+</ul>
+</li>
+<li>
+<p>安全边界</p>
+<ul>
+<li>不是每个部件和资源都在TCB内，用安全边界来区分可信和不可信</li>
+<li>某些资源不在TCB内即在安全边界外</li>
+<li>在可信部件和非可信部件之间的通信必须加以控制，以确保保密信息不以非期望的方式流动，通过控制接口保护通信</li>
+</ul>
+</li>
+<li>
+<p>基准监控器和安全内核</p>
+<ul>
+<li>基准监控器是一个抽象的机器，用来协调所有的访问主体和客体，以确保主体有必需的访问权，以及保护客体不被非授权访问、修改和破坏</li>
+<li>基准监控器是一个访问控制概念，故又可称为基准监控器概念</li>
+<li>安全内核由TCB内的一些机制构成，以实施和执行基准监控器概念</li>
+<li>安全内核是TCB的核心，是最常用的构造可信计算系统的方案</li>
+</ul>
+</li>
+<li>
+<p>安全域</p>
+<ul>
+<li>
+<p>域定义为主体能访问的客体的集合</p>
+</li>
+<li>
+<p>域必须是能识别的、分开的，而且必须严格实施</p>
+</li>
+<li>
+<p>操作系统工作模式</p>
+<ul>
+<li>
+<p>特权模式</p>
+<ul>
+<li>具有更大的工作域，即更多资源可访问</li>
+</ul>
+</li>
+<li>
+<p>用户模式</p>
+<ul>
+<li>应用程序不能直接访问内存，资源的应用有更多限制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>一个安全域和赋予主体或客体的保护环有直接的关联关系</p>
+</li>
+<li>
+<p>越是小的保护环号，特权越高，安全域越大</p>
+</li>
+</ul>
+</li>
+<li>
+<p>资源隔离</p>
+<ul>
+<li>
+<p>目的</p>
+<ul>
+<li>为了正确实施访问控制、审计、决定什么样的主体和客体存在于专门的域，每个资源必须清楚地相互分开</li>
+</ul>
+</li>
+<li>
+<p>隔离方法和实施是系统的体系结构及其安全模型的需求</p>
+</li>
+<li>
+<p>进程也是需要隔离的资源，通常通过不同的地址分配来实现</p>
+</li>
+<li>
+<p>对高可信级的系统，需要实施内存的硬件分段用于不同的进程</p>
+</li>
+</ul>
+</li>
+<li>
+<p>安全策略</p>
+<ul>
+<li>操作系统和应用程序的安全策略</li>
+<li>安全策略是一些规则的集合，指明敏感信息是如何管理、保护和分布的</li>
+<li>安全策略指明什么样的主体能访问什么样的客体，以及什么样的行为是可接受的或不可接受的</li>
+</ul>
+</li>
+<li>
+<p>最小特权</p>
+<ul>
+<li>一旦资源和进程被恰当地隔离，就需要实施最小特权。意味着只需要为了满足其功能必需的特权</li>
+<li>进程需要占有特权的时间只是在真正需要的时候</li>
+<li>只有需要完全特权的进程分布在内核，其他较低特权的进程调用它来处理敏感的操作</li>
+</ul>
+</li>
+<li>
+<p>分层、数据隐蔽和抽象</p>
+<ul>
+<li>
+<p>分层</p>
+<ul>
+<li>分层使不同进程工作在不同层，即在系统的不同层产生不同的功能</li>
+</ul>
+</li>
+<li>
+<p>数据隐蔽</p>
+<ul>
+<li>要求不同层的进程不能通信，这种进程称为数据隐蔽</li>
+</ul>
+</li>
+<li>
+<p>抽象</p>
+<ul>
+<li>当一类客体被赋予一定的允许权，定义可接受的活动，称为抽象</li>
+</ul>
+</li>
+<li>
+<p>分层、数据隐蔽和抽象都是保护主体、客体及客体内的数据的方法</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="isoiec网络安全体系结构">ISO/IEC网络安全体系结构</h2>
+<h3 id="isoiec安全体系结构参考模型">ISO/IEC安全体系结构参考模型</h3>
+<ul>
+<li>
+<p>ISO和IEC（国际电工委员会）18028-2定义了一个标准安全结构，描述支持网络安全规划、设计和实施的一致框架，以提供端到端的网络安全</p>
+</li>
+<li>
+<p>该结构将一组复杂的端到端网络安全相关的特性逻辑上分解成各个结构组成，从而生成端到端安全的有序的方案，既可用于评估生成现有网络的安全，也可用于规划新的安全方案</p>
+</li>
+<li>
+<p>结构组件</p>
+<ul>
+<li>
+<p>安全维</p>
+<ul>
+<li>访问控制</li>
+<li>身份鉴别</li>
+<li>不可否认</li>
+<li>数据保密</li>
+<li>通信流安全</li>
+<li>数据完整性</li>
+<li>可用性</li>
+<li>隐私</li>
+</ul>
+</li>
+<li>
+<p>安全层</p>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>安全维必须应用到网络设备和设施的层次结构上，称为安全层</li>
+</ul>
+</li>
+<li>
+<p>基础设施安全层</p>
+</li>
+<li>
+<p>服务安全层</p>
+</li>
+<li>
+<p>应用安全层</p>
+</li>
+</ul>
+</li>
+<li>
+<p>安全面</p>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>安全面是为实施安全维的机制所保护的某种类型的网络活动</li>
+</ul>
+</li>
+<li>
+<p>管理安全面</p>
+</li>
+<li>
+<p>控制安全面</p>
+</li>
+<li>
+<p>最终用户安全面</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="安全体系结构参考模型的应用">安全体系结构参考模型的应用</h3>
+<ul>
+<li>安全体系结构能应用到安全程序的所有方面，安全程序包括策略、过程及技术</li>
+<li>安全体系结构能应用到任何类型网络的协议栈的任何层</li>
+</ul>
+<h2 id="osi安全体系结构">OSI安全体系结构</h2>
+<h3 id="提要">提要</h3>
+<ul>
+<li>ISO7498-2标准定义了5类安全服务、8种特定的安全机制、5种普遍性安全机制。</li>
+<li>它确定了安全服务与安全机制的关系以及在OSI七层模型中安全服务的配置。它还确定了OSI安全体系的安全管理。</li>
+</ul>
+<h3 id="osi安全体系结构的5类安全服务">OSI安全体系结构的5类安全服务</h3>
+<ul>
+<li>
+<p>鉴别</p>
+<ul>
+<li>
+<p>分类</p>
+<ul>
+<li>
+<p>对等实体鉴别</p>
+<ul>
+<li>确认有关的对等实体是所需的实体</li>
+<li>在连接建立或在数据传送阶段的某些时刻提供使用，用以证实一个或多个连接实体的身份</li>
+<li>使用这种服务可以（仅仅在使用时间内）确信：一个实体此时没有试图冒充别的实体，或没有试图将先前的连接作非授权地重放</li>
+<li>实施单向或双向对等实体鉴别也是可能的，可以带有效期检验，也可以不带</li>
+<li>能够提供各种不同程度的鉴别保护</li>
+</ul>
+</li>
+<li>
+<p>数据原发鉴别</p>
+<ul>
+<li>确认接收到的数据的来源是所要求的</li>
+<li>数据原发鉴别服务对数据单元的来源提供确认，对数据单元的重放或篡改不提供鉴别保护</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>访问控制</p>
+<ul>
+<li>防止对资源的未授权使用，包括防止以未授权方式使用某一资源</li>
+<li>提供保护以对付开放系统互连可访问资源的非授权使用。这些资源可以是经开放系统互连协议访问到的OSI资源或非OSI资源</li>
+<li>可应用于对资源的各种不同类型的访问（例如，使用通信资源、读写或删除信息资源、处理资源的操作），或应用于对某种资源的所有访问</li>
+<li>要与不同的安全策略协调一致</li>
+</ul>
+</li>
+<li>
+<p>数据机密性</p>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>对数据提供保护，使之不被非授权地泄露</li>
+</ul>
+</li>
+<li>
+<p>分类</p>
+<ul>
+<li>连接机密性</li>
+<li>无连接机密性</li>
+<li>选择字段机密性</li>
+<li>通信业务流机密性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>数据完整性</p>
+<ul>
+<li>
+<p>概述</p>
+<ul>
+<li>对付主动威胁</li>
+<li>在一次连接上，连接开始时使用对某实体的鉴别服务，并在连接的存活期使用数据完整性服务就能联合起来为在此连接上传送的所有数据单元的来源提供确证，为这些数据单元的完整性提供确证</li>
+</ul>
+</li>
+<li>
+<p>分类</p>
+<ul>
+<li>带恢复的连接完整性</li>
+<li>无恢复的连接完整性</li>
+<li>选择字段的连接完整性</li>
+<li>无连接完整性</li>
+<li>选择字段无连接完整性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>抗否认</p>
+<ul>
+<li>有数据原发证明的抗否认</li>
+<li>有交付证明的抗否认</li>
+</ul>
+</li>
+</ul>
+<h3 id="osi安全体系结构的安全机制">OSI安全体系结构的安全机制</h3>
+<ul>
+<li>
+<p>概述</p>
+<ul>
+<li>
+<p>8种特定的安全机制</p>
+<ul>
+<li>可以设置在适当的N层上，以提供OSI安全体系结构的某些安全服务</li>
+</ul>
+</li>
+<li>
+<p>5种普遍性安全机制</p>
+<ul>
+<li>不是为任何特定的服务而特设的，因此在任一特定的层上，对它们都不作明确的说明</li>
+<li>某些普遍性安全机制可认为属于安全管理方面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>特定的安全机制</p>
+<ul>
+<li>
+<p>加密机制</p>
+<ul>
+<li>加密既能为数据提供机密性，也能为通信业务流信息提供机密性，并且是其他安全机制中的一部分或对安全机制起补充作用</li>
+<li>加密算法可以是可逆的，也可以是不可逆的</li>
+<li>可逆加密算法包括对称密钥加密算法和非对称密钥加密算法两种</li>
+<li>除了某些不可逆加密算法的情况外，加密机制的存在意味着要使用密钥管理机制</li>
+</ul>
+</li>
+<li>
+<p>数字签名机制</p>
+<ul>
+<li>
+<p>数字签名是附加在数据单元上的一些数据，或是对数据单元所作的密码变换，这种数据或变换允许数据单元的接收者确认数据单元来源和数据单元的完整性，并保护数据，防止被人（例如接收者）伪造</p>
+</li>
+<li>
+<p>确定两个过程</p>
+<ul>
+<li>对数据单元签名</li>
+<li>验证签过名的数据单元</li>
+</ul>
+</li>
+<li>
+<p>数字签名是解决网络通信中特有的安全问题的有效方法。</p>
+</li>
+<li>
+<p>针对通信双方发生争执时可能产生的安全问题</p>
+<ul>
+<li>否认</li>
+<li>伪造</li>
+<li>冒充</li>
+<li>篡改</li>
+</ul>
+</li>
+<li>
+<p>数字签名机制具有可证实性、不可否认性、不可伪造性和不可重用性</p>
+</li>
+<li>
+<p>特点</p>
+<ul>
+<li>签名过程使用签名者的私有信息作为私钥，或对数据单元进行加密，或产生出该数据单元的一个密码校验值</li>
+<li>验证过程使用公开的规程与信息来决定该签名是否是用签名者的私有信息产生的</li>
+<li>签名机制的本质特征为该签名只有使用签名者的私有信息才能产生出来。因而，当该签名得到验证后，它能在事后的任何时候向第三方（例如法官或仲裁人）证明只有那个私有信息的惟一拥有者才能产生这个签名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>访问控制机制</p>
+<ul>
+<li>
+<p>为了决定和实施一个实体的访问权，访问控制机制可以使用该实体已鉴别的身份，或使用有关该实体的信息（例如它与一个已知的实体集的从属关系），或使用该实体的权利</p>
+</li>
+<li>
+<p>如果这个实体试图使用非授权的资源，或者以不正当方式使用授权资源，那么访问控制功能将拒绝这一企图，另外还可能产生一个报警信号或记录它作为安全审计跟踪的一个部分来报告这一事件</p>
+</li>
+<li>
+<p>手段</p>
+<ul>
+<li>访问控制信息库</li>
+<li>鉴别信息</li>
+<li>权力</li>
+<li>安全标记</li>
+</ul>
+</li>
+<li>
+<p>访问控制机制可应用于通信联系中的端点，或应用于任一中间点</p>
+</li>
+<li>
+<p>涉及原发点或任一中间点的访问控制，是用来决定发送者是否被授权与指定的接收者进行通信，或是否被授权使用所要求的通信资源</p>
+</li>
+<li>
+<p>在无连接数据传输目的端上的对等级访问控制机制的要求在原发点必须事先知道，还必须记录在安全管理信息库中</p>
+</li>
+</ul>
+</li>
+<li>
+<p>数据完整性机制</p>
+<ul>
+<li>
+<p>两个方面</p>
+<ul>
+<li>单个数据单元或字段的完整性</li>
+<li>数据单元流或字段流的完整性</li>
+</ul>
+</li>
+<li>
+<p>一般来说，用来提供这两种类型完整性服务的机制是不相同的</p>
+</li>
+<li>
+<p>对于连接方式数据传送，保护数据单元序列（即数据单元流）的完整性（即防止乱序、数据的丢失、重放、插入或篡改）还另外需要某种明显的排序形式，例如，顺序号、时间标记等</p>
+</li>
+<li>
+<p>对于无连接数据传送，时间标记可以用来在一定程度上提供保护，防止个别数据单元的重放</p>
+</li>
+</ul>
+</li>
+<li>
+<p>鉴别交换机制</p>
+<ul>
+<li>
+<p>可设置在N层以提供对等实体鉴别</p>
+</li>
+<li>
+<p>如果在鉴别实体时，这一机制得到否定的结果，就会导致连接的拒绝或终止，也可能使在安全审计跟踪中增加一个记录，或给安全管理中心一个报告</p>
+</li>
+<li>
+<p>技术</p>
+<ul>
+<li>使用鉴别信息（eg.口令），由发送实体提供而有接收实体验证</li>
+<li>密码技术</li>
+<li>使用该实体的特征或占有物</li>
+</ul>
+</li>
+<li>
+<p>当采用密码技术时，这些技术可以与“握手”协议结合起来以防止重放（即确保存活期）</p>
+</li>
+<li>
+<p>鉴别交换技术的选用取决于使用它们的环境。在许多场合，它们必须与下列各项结合使用</p>
+<ul>
+<li>时间标记与同步时钟</li>
+<li>双方握手和三方握手（分别对应于单方鉴别和相互鉴别）</li>
+<li>由数字签名和公证机制实现的抗否认服务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>通信业务填充机制</p>
+<ul>
+<li>能用来提供各种不同级别的保护，对抗通信业务分析</li>
+<li>这种机制只有在通信业务填充受到机制服务保护时才是有效的</li>
+</ul>
+</li>
+<li>
+<p>路由选择控制机制</p>
+<ul>
+<li>
+<p>特点</p>
+<ul>
+<li>路由能动态地或预定地选取，以便只使用物理上安全的子网络、中继站或链路</li>
+<li>在检测到持续的操作攻击时，端系统可以指示网络服务的提供者经不同的路由建立连接</li>
+<li>带有某些安全标记的数据可能被安全策略禁止通过某些子网络、中继站或链路。连接的发起者（或无连接数据单元的发送者）可以指定路由选择说明，由它请求回避某些特定的子网络、中继站或链路</li>
+</ul>
+</li>
+<li>
+<p>路由控制机制可使信息发送者选择特殊的路由，以保证数据安全</p>
+</li>
+</ul>
+</li>
+<li>
+<p>公证机制</p>
+<ul>
+<li>有关在两个或多个实体之间通信的数据的性质，如它的完整性、原发、时间和目的地等能够借助公证机制得到确保。这种保证是由第三方公证人提供的</li>
+<li>公证人为通信实体所信任，并掌握必要信息以一种可证实方式提供所需的保证</li>
+<li>当这种公证机制被用到时，数据便在参与通信的实体之间经由受保护的通信实体和公证方进行通信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>普遍安全机制</p>
+<ul>
+<li>
+<p>概述</p>
+<ul>
+<li>不失为任何特定的服务而特设的，因此在任何一层上对他们都不做明确的说明</li>
+<li>管理者的角度</li>
+</ul>
+</li>
+<li>
+<p>可信功能度</p>
+<ul>
+<li>可以扩充其他安全机制的范围，或建立这些安全机制的有效性；用来保证对硬件与软件寄托信任的手段已超出本标准的范围，而且在任何情况下，这些手段随已察觉到的威胁的级别和被保护信息的价值而改变</li>
+<li>解决办法是选取一个体系结构，它允许安全功能在一些模块中实现，这些模块能与非安全功能分开来制作，并由非安全功能来提供</li>
+</ul>
+</li>
+<li>
+<p>安全标记</p>
+<ul>
+<li>安全标记是与某一资源（可以是数据单元）密切相关联的标记，为该资源命名或指定安全属性</li>
+</ul>
+</li>
+<li>
+<p>事件检测</p>
+<ul>
+<li>与安全有关的事件检测包括对安全明显事件的检测，也可以包括对“正常”事件的检测，例如，一次成功的访问（或注册）</li>
+</ul>
+</li>
+<li>
+<p>安全审计跟踪</p>
+<ul>
+<li>
+<p>安全审计就是对系统的记录与行为进行独立的评估考查，目的是测试系统的控制是否恰当，保证与既定策略和操作的协调一致，有助于做出损害评估，以及对在控制、策略与规程中指明的改变做出评价</p>
+</li>
+<li>
+<p>目的</p>
+<ul>
+<li>安全审计跟踪提供了一种不可忽视的安全机制，它的潜在价值在于经事后的安全审计可以检测和调查安全的漏洞。安全审计要求在安全审计跟踪中记录有关安全的信息，分析和报告从安全审计跟踪中得来的信息</li>
+<li>搜集审计跟踪的信息，通过列举被记录的安全事件的类别，能适应各种不同的需要。安全审计可对某些潜在的侵犯安全的攻击源起到威慑作用</li>
+<li>OSI安全审计跟踪将考虑要选择记录什么信息、在什么条件下记录信息，以及为了交换安全审计跟踪信息所采用的语法和语义定义</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>安全恢复</p>
+<ul>
+<li>
+<p>安全恢复处理来自诸如事件处置与管理功能等机制的请求，并把恢复动作当作应用一组规则的结果</p>
+</li>
+<li>
+<p>恢复动作</p>
+<ul>
+<li>立即动作</li>
+<li>暂时动作</li>
+<li>长期动作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三维信息系统安全体系结构框架">三维信息系统安全体系结构框架</h3>
+<ul>
+<li>反映了信息系统安全需求和体系结构的共性</li>
+<li>安全特性是基于ISO7498-2的5种安全服务，包括鉴别、访问控制、数据机密性、数据完整性、抗否认</li>
+<li>系统单元包括信息处理单元、网络系统、安全管理及物理和行政的环境</li>
+</ul>
+<h2 id="网络安全体系结构">网络安全体系结构</h2>
+<h3 id="提要-2">提要</h3>
+<ul>
+<li>网络体系结构是计算机之间相互通信的层次，以及各层中的协议和层次之间接口的集合</li>
+<li>威胁和漏洞可能存在于网络体系结构的不同层次，因此有必要深入了解网络的各个层次，以及如何保护每个层</li>
+</ul>
+<h3 id="不同层次的安全">不同层次的安全</h3>
+<ul>
+<li>安全的层次结构是抽象的，表示在各层次设置屏障以防止攻击和威胁</li>
+<li>仅仅在工作站上运行防病毒软件并非抵制病毒的层次结构</li>
+<li>必须在每个工作站、文件服务器、邮件服务器，以及通过代理服务器实施内容过滤才是抵制病毒的层次结构</li>
+</ul>
+<h3 id="网络体系结构的观点">网络体系结构的观点</h3>
+<ul>
+<li>不同类型的漏洞、攻击和威胁存在于网络的不同层次，需要研究网络环境的各种技术，实施不同层次的保护</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">第五章 安全体系结构</a>
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">系统安全体系结构</a>
+<ul>
+<li><a href="#%E5%8F%AF%E4%BF%A1%E7%B3%BB%E7%BB%9F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0">可信系统体系结构概述</a></li>
+</ul>
+</li>
+<li><a href="#isoiec%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">ISO/IEC网络安全体系结构</a>
+<ul>
+<li><a href="#isoiec%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B">ISO/IEC安全体系结构参考模型</a></li>
+<li><a href="#%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BA%94%E7%94%A8">安全体系结构参考模型的应用</a></li>
+</ul>
+</li>
+<li><a href="#osi%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">OSI安全体系结构</a>
+<ul>
+<li><a href="#%E6%8F%90%E8%A6%81">提要</a></li>
+<li><a href="#osi%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%845%E7%B1%BB%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1">OSI安全体系结构的5类安全服务</a></li>
+<li><a href="#osi%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6">OSI安全体系结构的安全机制</a></li>
+<li><a href="#%E4%B8%89%E7%BB%B4%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E6%A1%86%E6%9E%B6">三维信息系统安全体系结构框架</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">网络安全体系结构</a>
+<ul>
+<li><a href="#%E6%8F%90%E8%A6%81-2">提要</a></li>
+<li><a href="#%E4%B8%8D%E5%90%8C%E5%B1%82%E6%AC%A1%E7%9A%84%E5%AE%89%E5%85%A8">不同层次的安全</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%9A%84%E8%A7%82%E7%82%B9">网络体系结构的观点</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2019-12-31，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2019-12-31 20:05:29";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

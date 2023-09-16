@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>网络安全（八） | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/net_safety8/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>网络安全（八）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2019-12-31</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/net_safety/" class="tag">网络安全</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">5457字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">19 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%85%AB%E7%AB%A0%20%E9%98%B2%E7%81%AB%E5%A2%99.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>本章要点：<br>
+防火墙原理；防火墙主要技术；防火墙体系结构；堡垒主机的作用及部署；数据包的过滤规则；状态检测数据包过滤原理。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%AC%AC%E5%85%AB%E7%AB%A0%20%E9%98%B2%E7%81%AB%E5%A2%99.png" alt="第八章防火墙 思维导图" loading="lazy"></figure>
+<h1 id="第八章-防火墙">第八章 防火墙</h1>
+<h2 id="防火墙的原理">防火墙的原理</h2>
+<h3 id="防火墙的概念">防火墙的概念</h3>
+<ul>
+<li>
+<p>防火墙是建立在内外网络边界上的过滤封锁机制，内部网络被认为是安全和可信赖的，而外部网络（通常是Internet）被认为是不安全和不可信赖的。</p>
+</li>
+<li>
+<p>防火墙的作用是防止不希望的、未经授权的通信进出被保护的内部网络，通过边界控制强化内部网络的安全政策。</p>
+</li>
+<li>
+<p>防火墙的位置处于Internet和内部网络之间。防火墙隔离了内部网络和外部网络，内部网络中的主机将不再直接暴露给来自Internet的攻击</p>
+</li>
+<li>
+<p>对整个内部网络的主机的安全管理就变成了防火墙的安全管理，这样就使安全管理变得更为方便，易于控制，也会使内部网络更加安全。</p>
+</li>
+<li>
+<p>对于防火墙的要求</p>
+<ul>
+<li>所有进出被保护网络的通信必须通过防火墙</li>
+<li>所有通过防火墙的通信必须经过安全策略的过滤或者防火墙的授权</li>
+<li>防火墙是穿不透的（防火墙本身是不可被侵入的）</li>
+</ul>
+</li>
+</ul>
+<h3 id="防火墙的功能">防火墙的功能</h3>
+<ul>
+<li>
+<p>一般功能</p>
+<ul>
+<li>访问控制功能</li>
+<li>内容控制功能</li>
+<li>全面的日志功能</li>
+<li>集中管理功能</li>
+<li>自身的安全和可用性</li>
+</ul>
+</li>
+<li>
+<p>附加功能</p>
+<ul>
+<li>流量控制</li>
+<li>NAT</li>
+<li>VPN</li>
+</ul>
+</li>
+</ul>
+<h3 id="边界保护机制">边界保护机制</h3>
+<ul>
+<li>防火墙的安放位置是可信网络和不可信网络的边界，所保护的对象是网络中有明确闭合边界的网段</li>
+<li>防火墙是可信网络通向不可信网络的唯一出口</li>
+<li>防火墙是一种边界保护，仅对穿过边界的访问进行控制，对可信网络内部之间的访问无法控制</li>
+</ul>
+<h3 id="潜在的攻击和可能的对象">潜在的攻击和可能的对象</h3>
+<ul>
+<li>
+<p>防火墙直接面对的是不可信网络可能的攻击。</p>
+</li>
+<li>
+<p>攻击分类</p>
+<ul>
+<li>入侵内部网络，包括未经授权地访问内部网络，盗取信息。</li>
+<li>针对防火墙地攻击，使其失去功能。</li>
+<li>拒绝服务攻击。</li>
+</ul>
+</li>
+</ul>
+<h3 id="互操作性要求">互操作性要求</h3>
+<ul>
+<li>防火墙是一种安全设备，同时也是一种网络设备，需要和其他网络设备配合，以适应各种网络环境，这样才能做到安全性和可用性的统一</li>
+<li>防火墙除了安全防护的功能之外，还应具有网络功能，比如路由功能、VLAN的支持、ADSL的支持等。此外，还应做到尽量配置灵活，以适应复杂的网络环境</li>
+</ul>
+<h3 id="防火墙的局限性">防火墙的局限性</h3>
+<ul>
+<li>不能防范不经防火墙的攻击</li>
+<li>不能防止感染病毒的软件或文件的传输</li>
+<li>不能防止数据驱动式攻击</li>
+<li>不能防止内部用户的破坏</li>
+<li>不能防备不断更新的攻击</li>
+</ul>
+<h3 id="防火墙的分类">防火墙的分类</h3>
+<ul>
+<li>
+<p>实现技术方式分类</p>
+<ul>
+<li>包过滤防火墙</li>
+<li>应用网关防火墙</li>
+<li>代理防火墙</li>
+<li>状态检测防火墙</li>
+</ul>
+</li>
+<li>
+<p>形态分类</p>
+<ul>
+<li>软件防火墙</li>
+<li>硬件防火墙</li>
+</ul>
+</li>
+</ul>
+<h3 id="防火墙的访问效率和安全需求">防火墙的访问效率和安全需求</h3>
+<ul>
+<li>
+<p>防火墙的访问效率和安全需求是一对矛盾，应努力寻找平衡</p>
+</li>
+<li>
+<p>访问效率一般是指防火墙的性能</p>
+</li>
+<li>
+<p>防火墙的性能指标</p>
+<ul>
+<li>
+<p>吞吐量</p>
+<ul>
+<li>指防火墙在不丢失数据包的情况下能达到的最大的转发数据包的速率</li>
+</ul>
+</li>
+<li>
+<p>时延</p>
+<ul>
+<li>指从入口处进入的输入帧的最后一个比特到达，到从出口发出的输出帧的第一个比特输出所用的时间间隔。能衡量出防火墙处理数据的快慢。</li>
+</ul>
+</li>
+<li>
+<p>丢包率</p>
+<ul>
+<li>指防火墙由于资源不足应转发但却未转发帧所占的百分比。是防火墙稳定性和可靠性的重要指标。</li>
+</ul>
+</li>
+<li>
+<p>背对背</p>
+<ul>
+<li>指从空闲状态开始，以达到传输介质最小合法间隔极限的传输速率发送相当数量的固定长度的帧，当出现第一个帧丢失时所发送的帧数。反映防火墙的缓存能力、对网络突发数据流量的处理能力。</li>
+</ul>
+</li>
+<li>
+<p>并发连接数</p>
+<ul>
+<li>指穿越防火墙的主机之间或主机与防火墙之间能同时建立的最大连接数。主要用来测试防火墙建立和维持TCP连接的性能，同时也能体现防火墙对来自客户端TCP连接请求的响应能力。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="防火墙技术">防火墙技术</h2>
+<h3 id="包过滤技术">包过滤技术</h3>
+<ul>
+<li>
+<p>依据防火墙内事先设定的过滤规则，检查数据流中每个数据包头部，根据数据包的源地址、目的地址、TCP/UDP源端口号、TCP/UDP目的端口号及数据包头中的各种标志位等因素来确定是否允许数据包通过，其核心是安全策略即过滤规则的设计。</p>
+</li>
+<li>
+<p>包过滤技术在防火墙上的应用非常广泛，因为CPU用来处理包过滤的时间相对很小，而且这种防护措施对用户透明，合法用户在进出网络时，根本感觉不到它的存在，使用起来很方便。</p>
+</li>
+<li>
+<p>应用分类</p>
+<ul>
+<li>路由设备在完成路由选择和数据转发之外，同时进行包过滤，这是目前较常用的方式</li>
+<li>在一种称为屏蔽路由器的路由设备上启动包过滤功能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用网关技术">应用网关技术</h3>
+<ul>
+<li>应用网关与包过滤技术不同，它不使用通用目标机制来允许各种不同种类的通信，而是针对每个应用使用专用目的的处理方法</li>
+<li>应用网关技术是建立在应用层上的协议过滤，针对特别的网络应用服务协议即数据过滤协议，且能够对数据包进行分析并形成相关的报告</li>
+<li>有些应用网关还存储Internet上那些被频繁使用的页面</li>
+<li>当用户请求的页面在应用网关服务器缓存中存在时，服务器将检查所缓存的页面是否是最新的版本（即该页面是否已更新）。</li>
+<li>如果是最新版本，则直接提交给用户；否则，到真正的服务器上请求最新的页面，然后再转发给用户</li>
+<li>应用网关技术的缺点是需要为每种应用写不同的代码，维护比较困难，另外就是速度较慢</li>
+</ul>
+<h3 id="状态检测防火墙">状态检测防火墙</h3>
+<ul>
+<li>状态检测防火墙应用广泛，它既提供了比包过滤防火墙更高的安全性和更灵活的处理，也避免了应用层网关防火墙带来的速度降低的问题。</li>
+<li>要实现状态检测防火墙，最重要的是实现连接的跟踪功能</li>
+<li>对于单一连接的协议来说相对比较简单，只需要数据包头的信息就可以进行跟踪。</li>
+<li>对于一些复杂协议，除了使用一个公开端口的连接进行通信外，在通信过程中还会动态建立子连接进行数据传输，而子连接的端口信息是在主连接中通过协商得到的随机值。</li>
+<li>因此对于此类协议，用包过滤防火墙就只能打开所有端口才能允许通信，但这会带来很大的安全隐患。</li>
+<li>而对于状态检测防火墙，则能够进一步分析主连接中的内容信息，识别出所协商的子连接的端口而在防火墙上将其动态打开，连接结束时自动关闭，充分保证系统的安全。</li>
+</ul>
+<h3 id="电路级网关">电路级网关</h3>
+<ul>
+<li>电路级网关也被称为线路级网关，工作在会话层</li>
+<li>在两个主机首次建立TCP连接时创立一个电子屏障。它作为服务器接收外来请求，转发请求；与被保护的主机连接时则担当客户机角色，起代理服务的作用</li>
+<li>监视两主机建立连接时的握手信息，会话连接有效后网关仅复制、传递数据，而不进行过滤</li>
+<li>电路级网关的防火墙的安全性比较高，但它仍不能检查应用层的数据包以消除应用层攻击的威胁。</li>
+</ul>
+<h3 id="代理服务器技术">代理服务器技术</h3>
+<ul>
+<li>代理服务器（proxy server）作用在应用层，用来提供应用层服务的控制，在内部网络向外部网络申请服务时起到中间转接作用</li>
+<li>内部网络只接受代理提出的服务请求，拒绝外部网络其他结点的直接请求</li>
+<li>具体地说，代理服务器是运行在防火墙主机上的专门的应用程序或者服务器程序</li>
+<li>这些程序接受用户对Internet服务的请求（诸如FTP、Telnet），并按照一定的安全策略将它们转发到实际的服务中</li>
+<li>代理提供代替连接并且充当服务的网关</li>
+</ul>
+<h3 id="小结">小结</h3>
+<ul>
+<li>在实际应用当中，构筑防火墙的“真正的解决方案”很少采用单一的技术，通常是多种解决不同问题的技术的有机组合</li>
+<li>大多数防火墙将数据包过滤和代理服务器结合起来使用。</li>
+</ul>
+<h2 id="防火墙体系结构">防火墙体系结构</h2>
+<h3 id="双重宿主机体系结构">双重宿主机体系结构</h3>
+<ul>
+<li>双重宿主主机体系结构是围绕具有双重宿主的主机而构筑的。</li>
+<li>该计算机至少有两个网络接口，这样的主机可以充当与这些接口相连的网络之间的路由器，并能够从一个网络到另一个网络发送IP数据包</li>
+<li>防火墙内部的网络系统能与双重宿主主机通信，同时防火墙外部的网络系统（在因特网上）也能与双重宿主主机通信。</li>
+<li>通过双重宿主主机，防火墙内外的计算机便可进行通信了，但是这些系统不能直接互相通信，它们之间的通信必须经过双重宿主主机的过滤和控制。</li>
+<li>双重宿主主机的防火墙体系结构是比较简单的，它连接内部网络和外部网络。</li>
+<li>双重宿主主机直接暴露在外部网络中，充当了堡垒主机的角色，这种体系的弱点是，一旦堡垒主机被攻破，使其成为一个路由器，那么外部网络就可以直接访问内部网络。</li>
+</ul>
+<h3 id="被屏蔽主机体系结构">被屏蔽主机体系结构</h3>
+<ul>
+<li>双重宿主主机体系结构防火墙没有使用路由器。而被屏蔽主机体系结构防火墙则使用一个路由器把内部网络和外部网络隔离开。</li>
+<li>该体系结构中包括堡垒主机。堡垒主机是Internet上的主机能连接到的惟一的内部网络上的系统。</li>
+<li>任何外部的系统要访问内部的系统或服务都必须先连接到这台主机。因此堡垒主机要保持更高等级的主机安全。</li>
+<li>在屏蔽路由器上设置数据包过滤策略，让所有的外部连接只能到达内部堡垒主机，比如收发电子邮件。</li>
+<li>被屏蔽主机体系结构允许外部连接到内部堡垒主机，所以看上去比双重堡垒主机更不安全，但是路由器一般比主机有更高的安全性，所以这种结构比双重堡垒主机更具有可用性和安全性。但是这种结构相对比较复杂。</li>
+</ul>
+<h3 id="被屏蔽子网体系结构">被屏蔽子网体系结构</h3>
+<ul>
+<li>
+<p>被屏蔽子网体系结构将额外的安全层添加到被屏蔽主机体系结构，即通过添加周边网络更进一步地把内部网络和外部网络（通常是Internet）隔离开。</p>
+</li>
+<li>
+<p>周边网络是一个被隔离的独立子网，充当了内部网络和外部网络的缓冲区，在内部网络与外部网络之间形成了一个“隔离带”。这就构成一个所谓的“非军事区”（DeMilitarized Zone，DMZ）。</p>
+</li>
+<li>
+<p>DMZ是周边网络，是防火墙的重要概念，在实际应用中经常用到。</p>
+</li>
+<li>
+<p>被屏蔽子网体系结构的最简单的形式是两个屏蔽路由器，每一个都连接到周边网络。一个位于周边网络与内部网络之间，另一个位于周边网络与外部网络（通常为Internet）之间。</p>
+</li>
+<li>
+<p>有的屏蔽子网中还设有一堡垒主机作为惟一可访问点，支持终端交互或作为应用网关代理。</p>
+</li>
+<li>
+<p>被屏蔽子网体系结构具有很高的安全性，所以被广泛采用。</p>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>入侵者必须突破3个不同的设备（而且外部网络无法探测到）才能非法入侵内部网络、外部路由器、堡垒主机，还有内部路由器。</li>
+<li>网络管理员可以保证内部网络是“不可见”的，并且只有在DMZ网络上选定的服务才对Internet开放。</li>
+<li>内部网络上的系统不能直接通往Internet，保证了内部网络上的用户必须通过驻留在堡垒主机上的代理服务才能访问Internet</li>
+<li>包过滤路由器直接将数据引向DMZ网络上所指定的系统，消除了堡垒主机双重宿主的必要。</li>
+<li>能够支持比双重宿主堡垒主机更大的数据包吞吐量。</li>
+<li>NAT（网络地址变换）可以安装在堡垒主机上，从而避免在内部网络上重新编址或重新划分子网。</li>
+</ul>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>实施和管理比较复杂。</li>
+</ul>
+</li>
+</ul>
+<h3 id="堡垒主机">堡垒主机</h3>
+<ul>
+<li>
+<p>堡垒主机得名于古代战争中用于防守的坚固的堡垒，它位于内部网络的最外层，像堡垒一样对内部网络进行保护。</p>
+</li>
+<li>
+<p>在防火墙体系中，堡垒主机要高度暴露，是在Internet上公开的，是网络上最容易遭受非法入侵的设备。</p>
+</li>
+<li>
+<p>防火墙设计者和管理人员需要致力于堡垒主机的安全，而且在运行期间对堡垒主机的安全给予特别的注意</p>
+</li>
+<li>
+<p>构建要点</p>
+<ul>
+<li>选择合适的操作系统</li>
+<li>堡垒主机的安装位置。应该安装在不传输保密信息的网络上，最好它处于一个独立网络中，比如DMZ。</li>
+<li>堡垒主机提供的服务。需要提供内部网络访问Internet的服务，内部主机可以通过堡垒主机访问Internet，另外内部网络也需要向Internet提供服务</li>
+<li>保护系统日志。</li>
+<li>监测和备份。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据包过滤">数据包过滤</h2>
+<h3 id="数据包过滤的特点">数据包过滤的特点</h3>
+<ul>
+<li>
+<p>数据包过滤的安全策略基于以下几种方式</p>
+<ul>
+<li>数据包的源地址</li>
+<li>数据包的目的地址</li>
+<li>数据包的TCP/UDP源端口</li>
+<li>数据包的TCP/UDP目的端口</li>
+<li>数据包的标志位</li>
+<li>用来传输数据包的协议</li>
+</ul>
+</li>
+<li>
+<p>特点</p>
+<ul>
+<li>一般的包过滤防火墙对数据包数据内容不做任何检查，而只检查数据包头信息。</li>
+<li>数据包过滤在网络中起着重要的作用，可在单点位置为整个网络提供安全保护。</li>
+<li>数据包过滤对用户是透明的，不要求内部网络用户进行任何配置。</li>
+<li>数据包过滤路由器处于网络边界，很容易阻挡IP地址欺骗入侵。</li>
+</ul>
+</li>
+<li>
+<p>局限性</p>
+<ul>
+<li>不能进行内容级控制，如针对用户身份进行限制，不能做到对于一个Telnet服务器，禁止user1登录，而允许user2登录，因为用户名是包内容部分的信息，无法控制。</li>
+<li>数据包的过滤规则制定比较复杂，需要针对不同的IP或者服务制定很多的安全规则，而且过滤规则会存在冲突或者漏洞，检查起来相当困难。</li>
+<li>有些协议不适合包过滤。</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据包过滤的应用">数据包过滤的应用</h3>
+<ul>
+<li>
+<p>IP协议</p>
+<ul>
+<li>
+<p>根据IP信息指定相应的安全策略</p>
+<ul>
+<li>IP源地址，32位</li>
+<li>IP目的地址，32位</li>
+<li>IP协议类型，辨别TCP数据包类型和ICMP数据包类型</li>
+<li>IP选项字段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>TCP协议</p>
+<ul>
+<li>
+<p>针对数据包过滤，TCP层有几个重要的信息</p>
+<ul>
+<li>TCP源端口</li>
+<li>TCP目标端口</li>
+<li>TCP标志字段</li>
+</ul>
+</li>
+<li>
+<p>可根据TCP协议中的的源端口和目的端口来制定安全规则，因为TCP的源端口通常是随机的，所以通常不使用源端口进行控制</p>
+</li>
+<li>
+<p>通过检查TCP标志字段，可以辨认这个TCP数据包是SYN包，还是非SYN包</p>
+</li>
+</ul>
+</li>
+<li>
+<p>UDP协议</p>
+<ul>
+<li>
+<p>针对数据包过滤，UDP协议有几个重要的信息</p>
+<ul>
+<li>UDP源端口</li>
+<li>UDP目标端口</li>
+</ul>
+</li>
+<li>
+<p>可根据UDP协议中的源端口和目的端口来制定安全规则，因为UDP的源端口通常是随机的，所以通常不使用源端口进行控制</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ICMP协议</p>
+<ul>
+<li>ICMP协议主要用来进行错误信息和控制信息的传递</li>
+<li>ICMP报文易被伪造的缺陷，使得出现了不少基于ICMP的攻击软件</li>
+<li>包过滤器一般禁止从外部网络来的到内部网络和包过滤器本身的ICMP包，这样就可以避免危险</li>
+</ul>
+</li>
+</ul>
+<h3 id="过滤规则制定的策略">过滤规则制定的策略</h3>
+<ul>
+<li>
+<p>按地址过滤</p>
+<ul>
+<li>按地址过滤是最简单的过滤方式，它只限制数据包的源地址和目的地址，而不必考虑协议</li>
+</ul>
+</li>
+<li>
+<p>按服务过滤</p>
+<ul>
+<li>按服务过滤，就是根据相应的TCP/UDP端口进行过滤</li>
+<li>比如，禁止外部网络对内部网络的Telnet的访问，就需要检查数据包的目的端口和TCP标志位，如果是端口23，并且是SYN包，则拒绝这个包</li>
+<li>实际应用中，一般使用的是目的端口过滤</li>
+</ul>
+</li>
+<li>
+<p>对数据包做日志记录</p>
+<ul>
+<li>数据包过滤路由器应该详细记录所有被过滤掉的数据包，这样就可以了解过滤规则阻止了哪些访问，也可以了解究竟哪些人试图违反规则</li>
+<li>当然，记录所有通过的数据包也是一个保险的措施，虽然这样需要很多的存储空间，但是为了解决问题，这样做也是值得的</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据包过滤规则">数据包过滤规则</h3>
+<ul>
+<li>
+<p>在配置数据包过滤规则之前，需要明确要允许或者拒绝什么服务，并且需要把策略转换成为针对数据包的过滤规则</p>
+</li>
+<li>
+<p>网络协议一般都是双向的，如果发送了一个请求或者一条命令，另一边的主机就会发出某种响应，所以在规划数据包过滤规则时，一定要注意数据包是双向的</p>
+</li>
+<li>
+<p>基本的安全策略</p>
+<ul>
+<li>
+<p>默认接受</p>
+<ul>
+<li>指除非明确地指定禁止某个数据包，否则数据包是可以通过的</li>
+</ul>
+</li>
+<li>
+<p>默认拒绝</p>
+<ul>
+<li>除非明确地指定允许某个数据包通过，否则数据包是不可以通过的。更安全！</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>构建步骤</p>
+<ul>
+<li>建立安全策略（写出所允许的和禁止的任务）</li>
+<li>将安全策略转化为数据包分组字段的逻辑表达式</li>
+<li>用防火墙提供的过滤规则句法重写逻辑表达式并设置</li>
+</ul>
+</li>
+</ul>
+<h2 id="状态检测的数据包过滤">状态检测的数据包过滤</h2>
+<h3 id="状态检测防火墙对每个合法网络连接保存的信息包括源地址-目的地址-协议类型-协议相关信息如tcpudp协议的端口-连接状态和超时时间等防火墙把这些信息叫做状态">状态检测防火墙对每个合法网络连接保存的信息包括源地址、目的地址、协议类型、协议相关信息（如TCP/UDP协议的端口）、连接状态和超时时间等，防火墙把这些信息叫做状态</h3>
+<h3 id="通过状态检测可实现比简单包过滤防火墙具有更大的安全性">通过状态检测，可实现比简单包过滤防火墙具有更大的安全性</h3>
+<h3 id="状态检测防火墙的理论基础是使用客户机服务器模式进行的连接具有连接状态最典型的是tcp连接">状态检测防火墙的理论基础是使用客户机/服务器模式进行的连接具有连接状态，最典型的是TCP连接</h3>
+<h3 id="防火墙对于一个新tcp连接的判断是从syn包开始的一旦发现这些包不属于任何已经建立的连接就可将其作为状态异常包而丢弃">防火墙对于一个新TCP连接的判断是从SYN包开始的，一旦发现这些包不属于任何已经建立的连接，就可将其作为状态异常包而丢弃</h3>
+<h3 id="对于非连接协议如udp-icmp等协议防火墙同样也会建立连接来进行跟踪">对于非连接协议，如UDP、ICMP等协议，防火墙同样也会建立连接来进行跟踪</h3>
+<h2 id="防火墙的发展趋势">防火墙的发展趋势</h2>
+<h3 id="目前防火墙在安全性-效率和功能方面的矛盾还是比较突出-未来的防火墙要求是高安全性和高效率-使用专门的芯片负责访问控制功能-设计新的防火墙的技术架构是未来防火墙的方向">目前防火墙在安全性、效率和功能方面的矛盾还是比较突出。未来的防火墙要求是高安全性和高效率。使用专门的芯片负责访问控制功能、设计新的防火墙的技术架构是未来防火墙的方向</h3>
+<h3 id="数据加密技术的使用使合法访问更安全">数据加密技术的使用，使合法访问更安全</h3>
+<h3 id="混合使用包过滤技术-代理服务技术和其他一些新技术">混合使用包过滤技术、代理服务技术和其他一些新技术</h3>
+<h3 id="目前人们正在设计新的ip协议ipv6-ip协议的变化将对防火墙的建立与运行产生深刻的影响">目前，人们正在设计新的IP协议IPv6。IP协议的变化将对防火墙的建立与运行产生深刻的影响</h3>
+<h3 id="分布式防火墙">分布式防火墙</h3>
+<h3 id="对数据包的全方位的检查-不仅包括数据包头的信息而且包括数据包的内容信息查出恶意行为阻止通过">对数据包的全方位的检查。不仅包括数据包头的信息，而且包括数据包的内容信息，查出恶意行为，阻止通过</h3>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E9%98%B2%E7%81%AB%E5%A2%99">第八章 防火墙</a>
+<ul>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8E%9F%E7%90%86">防火墙的原理</a>
+<ul>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E6%A6%82%E5%BF%B5">防火墙的概念</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8A%9F%E8%83%BD">防火墙的功能</a></li>
+<li><a href="#%E8%BE%B9%E7%95%8C%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6">边界保护机制</a></li>
+<li><a href="#%E6%BD%9C%E5%9C%A8%E7%9A%84%E6%94%BB%E5%87%BB%E5%92%8C%E5%8F%AF%E8%83%BD%E7%9A%84%E5%AF%B9%E8%B1%A1">潜在的攻击和可能的对象</a></li>
+<li><a href="#%E4%BA%92%E6%93%8D%E4%BD%9C%E6%80%A7%E8%A6%81%E6%B1%82">互操作性要求</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7">防火墙的局限性</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%88%86%E7%B1%BB">防火墙的分类</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E8%AE%BF%E9%97%AE%E6%95%88%E7%8E%87%E5%92%8C%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82">防火墙的访问效率和安全需求</a></li>
+</ul>
+</li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E6%8A%80%E6%9C%AF">防火墙技术</a>
+<ul>
+<li><a href="#%E5%8C%85%E8%BF%87%E6%BB%A4%E6%8A%80%E6%9C%AF">包过滤技术</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8%E7%BD%91%E5%85%B3%E6%8A%80%E6%9C%AF">应用网关技术</a></li>
+<li><a href="#%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E9%98%B2%E7%81%AB%E5%A2%99">状态检测防火墙</a></li>
+<li><a href="#%E7%94%B5%E8%B7%AF%E7%BA%A7%E7%BD%91%E5%85%B3">电路级网关</a></li>
+<li><a href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8A%80%E6%9C%AF">代理服务器技术</a></li>
+<li><a href="#%E5%B0%8F%E7%BB%93">小结</a></li>
+</ul>
+</li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">防火墙体系结构</a>
+<ul>
+<li><a href="#%E5%8F%8C%E9%87%8D%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">双重宿主机体系结构</a></li>
+<li><a href="#%E8%A2%AB%E5%B1%8F%E8%94%BD%E4%B8%BB%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">被屏蔽主机体系结构</a></li>
+<li><a href="#%E8%A2%AB%E5%B1%8F%E8%94%BD%E5%AD%90%E7%BD%91%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">被屏蔽子网体系结构</a></li>
+<li><a href="#%E5%A0%A1%E5%9E%92%E4%B8%BB%E6%9C%BA">堡垒主机</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%87%E6%BB%A4">数据包过滤</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%87%E6%BB%A4%E7%9A%84%E7%89%B9%E7%82%B9">数据包过滤的特点</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%87%E6%BB%A4%E7%9A%84%E5%BA%94%E7%94%A8">数据包过滤的应用</a></li>
+<li><a href="#%E8%BF%87%E6%BB%A4%E8%A7%84%E5%88%99%E5%88%B6%E5%AE%9A%E7%9A%84%E7%AD%96%E7%95%A5">过滤规则制定的策略</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%87%E6%BB%A4%E8%A7%84%E5%88%99">数据包过滤规则</a></li>
+</ul>
+</li>
+<li><a href="#%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%85%E8%BF%87%E6%BB%A4">状态检测的数据包过滤</a>
+<ul>
+<li><a href="#%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E9%98%B2%E7%81%AB%E5%A2%99%E5%AF%B9%E6%AF%8F%E4%B8%AA%E5%90%88%E6%B3%95%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%BF%9D%E5%AD%98%E7%9A%84%E4%BF%A1%E6%81%AF%E5%8C%85%E6%8B%AC%E6%BA%90%E5%9C%B0%E5%9D%80-%E7%9B%AE%E7%9A%84%E5%9C%B0%E5%9D%80-%E5%8D%8F%E8%AE%AE%E7%B1%BB%E5%9E%8B-%E5%8D%8F%E8%AE%AE%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF%E5%A6%82tcpudp%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%AB%AF%E5%8F%A3-%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E5%92%8C%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E7%AD%89%E9%98%B2%E7%81%AB%E5%A2%99%E6%8A%8A%E8%BF%99%E4%BA%9B%E4%BF%A1%E6%81%AF%E5%8F%AB%E5%81%9A%E7%8A%B6%E6%80%81">状态检测防火墙对每个合法网络连接保存的信息包括源地址、目的地址、协议类型、协议相关信息（如TCP/UDP协议的端口）、连接状态和超时时间等，防火墙把这些信息叫做状态</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E5%8F%AF%E5%AE%9E%E7%8E%B0%E6%AF%94%E7%AE%80%E5%8D%95%E5%8C%85%E8%BF%87%E6%BB%A4%E9%98%B2%E7%81%AB%E5%A2%99%E5%85%B7%E6%9C%89%E6%9B%B4%E5%A4%A7%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7">通过状态检测，可实现比简单包过滤防火墙具有更大的安全性</a></li>
+<li><a href="#%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E6%98%AF%E4%BD%BF%E7%94%A8%E5%AE%A2%E6%88%B7%E6%9C%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%BC%8F%E8%BF%9B%E8%A1%8C%E7%9A%84%E8%BF%9E%E6%8E%A5%E5%85%B7%E6%9C%89%E8%BF%9E%E6%8E%A5%E7%8A%B6%E6%80%81%E6%9C%80%E5%85%B8%E5%9E%8B%E7%9A%84%E6%98%AFtcp%E8%BF%9E%E6%8E%A5">状态检测防火墙的理论基础是使用客户机/服务器模式进行的连接具有连接状态，最典型的是TCP连接</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E5%AF%B9%E4%BA%8E%E4%B8%80%E4%B8%AA%E6%96%B0tcp%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%88%A4%E6%96%AD%E6%98%AF%E4%BB%8Esyn%E5%8C%85%E5%BC%80%E5%A7%8B%E7%9A%84%E4%B8%80%E6%97%A6%E5%8F%91%E7%8E%B0%E8%BF%99%E4%BA%9B%E5%8C%85%E4%B8%8D%E5%B1%9E%E4%BA%8E%E4%BB%BB%E4%BD%95%E5%B7%B2%E7%BB%8F%E5%BB%BA%E7%AB%8B%E7%9A%84%E8%BF%9E%E6%8E%A5%E5%B0%B1%E5%8F%AF%E5%B0%86%E5%85%B6%E4%BD%9C%E4%B8%BA%E7%8A%B6%E6%80%81%E5%BC%82%E5%B8%B8%E5%8C%85%E8%80%8C%E4%B8%A2%E5%BC%83">防火墙对于一个新TCP连接的判断是从SYN包开始的，一旦发现这些包不属于任何已经建立的连接，就可将其作为状态异常包而丢弃</a></li>
+<li><a href="#%E5%AF%B9%E4%BA%8E%E9%9D%9E%E8%BF%9E%E6%8E%A5%E5%8D%8F%E8%AE%AE%E5%A6%82udp-icmp%E7%AD%89%E5%8D%8F%E8%AE%AE%E9%98%B2%E7%81%AB%E5%A2%99%E5%90%8C%E6%A0%B7%E4%B9%9F%E4%BC%9A%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E6%9D%A5%E8%BF%9B%E8%A1%8C%E8%B7%9F%E8%B8%AA">对于非连接协议，如UDP、ICMP等协议，防火墙同样也会建立连接来进行跟踪</a></li>
+</ul>
+</li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF">防火墙的发展趋势</a>
+<ul>
+<li><a href="#%E7%9B%AE%E5%89%8D%E9%98%B2%E7%81%AB%E5%A2%99%E5%9C%A8%E5%AE%89%E5%85%A8%E6%80%A7-%E6%95%88%E7%8E%87%E5%92%8C%E5%8A%9F%E8%83%BD%E6%96%B9%E9%9D%A2%E7%9A%84%E7%9F%9B%E7%9B%BE%E8%BF%98%E6%98%AF%E6%AF%94%E8%BE%83%E7%AA%81%E5%87%BA-%E6%9C%AA%E6%9D%A5%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E8%A6%81%E6%B1%82%E6%98%AF%E9%AB%98%E5%AE%89%E5%85%A8%E6%80%A7%E5%92%8C%E9%AB%98%E6%95%88%E7%8E%87-%E4%BD%BF%E7%94%A8%E4%B8%93%E9%97%A8%E7%9A%84%E8%8A%AF%E7%89%87%E8%B4%9F%E8%B4%A3%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD-%E8%AE%BE%E8%AE%A1%E6%96%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E6%98%AF%E6%9C%AA%E6%9D%A5%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E6%96%B9%E5%90%91">目前防火墙在安全性、效率和功能方面的矛盾还是比较突出。未来的防火墙要求是高安全性和高效率。使用专门的芯片负责访问控制功能、设计新的防火墙的技术架构是未来防火墙的方向</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BD%BF%E5%90%88%E6%B3%95%E8%AE%BF%E9%97%AE%E6%9B%B4%E5%AE%89%E5%85%A8">数据加密技术的使用，使合法访问更安全</a></li>
+<li><a href="#%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8%E5%8C%85%E8%BF%87%E6%BB%A4%E6%8A%80%E6%9C%AF-%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E6%8A%80%E6%9C%AF%E5%92%8C%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E6%96%B0%E6%8A%80%E6%9C%AF">混合使用包过滤技术、代理服务技术和其他一些新技术</a></li>
+<li><a href="#%E7%9B%AE%E5%89%8D%E4%BA%BA%E4%BB%AC%E6%AD%A3%E5%9C%A8%E8%AE%BE%E8%AE%A1%E6%96%B0%E7%9A%84ip%E5%8D%8F%E8%AE%AEipv6-ip%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%8F%98%E5%8C%96%E5%B0%86%E5%AF%B9%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%BF%90%E8%A1%8C%E4%BA%A7%E7%94%9F%E6%B7%B1%E5%88%BB%E7%9A%84%E5%BD%B1%E5%93%8D">目前，人们正在设计新的IP协议IPv6。IP协议的变化将对防火墙的建立与运行产生深刻的影响</a></li>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%98%B2%E7%81%AB%E5%A2%99">分布式防火墙</a></li>
+<li><a href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E5%85%A8%E6%96%B9%E4%BD%8D%E7%9A%84%E6%A3%80%E6%9F%A5-%E4%B8%8D%E4%BB%85%E5%8C%85%E6%8B%AC%E6%95%B0%E6%8D%AE%E5%8C%85%E5%A4%B4%E7%9A%84%E4%BF%A1%E6%81%AF%E8%80%8C%E4%B8%94%E5%8C%85%E6%8B%AC%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E5%86%85%E5%AE%B9%E4%BF%A1%E6%81%AF%E6%9F%A5%E5%87%BA%E6%81%B6%E6%84%8F%E8%A1%8C%E4%B8%BA%E9%98%BB%E6%AD%A2%E9%80%9A%E8%BF%87">对数据包的全方位的检查。不仅包括数据包头的信息，而且包括数据包的内容信息，查出恶意行为，阻止通过</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2019-12-31，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2019-12-31 21:19:27";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

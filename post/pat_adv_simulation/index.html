@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>PAT(Advanced)模拟篇 | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/pat_adv_simulation/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>PAT(Advanced)模拟篇</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2020-05-25</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/7A_LubBBp/" class="tag">PAT</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">2179字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">13 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://Just7chambray.github.io/post-images/pat_adv_simulation.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h2 id="a1042-shuffling-machine-20分">A1042 Shuffling Machine (20分)</h2>
+<h3 id="question">Question</h3>
+<p>Shuffling is a procedure used to randomize a deck of playing cards. Because standard shuffling techniques are seen as weak, and in order to avoid &quot;inside jobs&quot; where employees collaborate with gamblers by performing inadequate shuffles, many casinos employ <strong>automatic shuffling machines</strong>. Your task is to simulate a shuffling machine.</p>
+<p>The machine shuffles a deck of 54 cards according to a given random order and repeats for a given number of times. It is assumed that the initial status of a card deck is in the following order:</p>
+<pre><code>S1, S2, ..., S13,  H1, H2, ..., H13,  C1, C2, ..., C13,  D1, D2, ..., D13,  J1, J2
+</code></pre>
+<p>where &quot;S&quot; stands for &quot;Spade&quot;, &quot;H&quot; for &quot;Heart&quot;, &quot;C&quot; for &quot;Club&quot;, &quot;D&quot; for &quot;Diamond&quot;, and &quot;J&quot; for &quot;Joker&quot;. A given order is a permutation of distinct integers in [1, 54]. If the number at the <em>i</em>-th position is <em>j</em>, it means to move the card from position <em>i</em> to position <em>j</em>. For example, suppose we only have 5 cards: S3, H5, C1, D13 and J2. Given a shuffling order {4, 2, 5, 3, 1}, the result will be: J2, H5, D13, S3, C1. If we are to repeat the shuffling again, the result will be: C1, H5, S3, J2, D13.</p>
+<h3 id="input-specification">Input Specification</h3>
+<p>Each input file contains one test case. For each case, the first line contains a positive integer <em>K</em> (≤20) which is the number of repeat times. Then the next line contains the given order. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification</h3>
+<p>For each test case, print the shuffling results in one line. All the cards are separated by a space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input">Sample Input</h3>
+<pre><code>2
+36 52 37 38 3 39 40 53 54 41 11 12 13 42 43 44 2 4 23 24 25 26 27 6 7 8 48 49 50 51 9 10 14 15 16 5 17 18 19 1 20 21 22 28 29 30 31 32 33 34 35 45 46 47
+</code></pre>
+<h3 id="sample-output">Sample Output</h3>
+<pre><code>S7 C11 C10 C12 S1 H7 H8 H9 D8 D9 S11 S12 S13 D10 D11 D12 S3 S4 S6 S10 H1 H2 C13 D2 D3 D4 H6 H3 D13 J1 J2 C1 C2 C3 C4 D1 S5 H5 H11 H12 C6 C7 C8 C9 S2 S8 S9 H10 D5 D6 D7 H4 H13 C5
+</code></pre>
+<hr>
+<h3 id="analysis">Analysis</h3>
+<p>这题题意是将按序排好的54张扑克牌按照新给出的顺序重新排列一定次数。我们可以借助两个数组start[]和end[]来存放操作前和操作后的顺序，再将一次操作后的end[]数组重新赋值给start[]数组，进行下一次操作。执行规定次数操作后，start[]就是最终的结果。</p>
+<h3 id="code">Code</h3>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;cstdio&gt;
+using namespace std;
+const int N=54;
+char shcdj[5]={'S','H','C','D','J'};
+
+int main(){
+    int start[N+1],end[N+1],next[N+1];
+    int k;//repeat times
+    scanf(&quot;%d&quot;,&amp;k);
+    for(int i=1;i&lt;=N;i++){
+        start[i]=i;
+        scanf(&quot;%d&quot;, &amp;next[i]);
+    }
+    for(int i=0;i&lt;k;i++){
+        for(int j=1;j&lt;=N;j++){
+            end[next[j]]=start[j];
+        }
+        for(int j=1;j&lt;=N;j++){
+            start[j]=end[j];
+        }
+    }
+    for(int i=1;i&lt;=N;i++){
+        if(i!=1)printf(&quot; &quot;);
+        start[i]--;
+        printf(&quot;%c%d&quot;,shcdj[start[i] / 13],start[i]%13+1);
+    }
+    return 0;
+}
+</code></pre>
+<hr>
+<h2 id="a1046-shortest-distance-20分">A1046 Shortest Distance (20分)</h2>
+<h3 id="question-2">Question</h3>
+<p>The task is really simple: given N exits on a highway which forms a simple cycle, you are supposed to tell the shortest distance between any pair of exits.</p>
+<h3 id="input-specification-2">Input Specification</h3>
+<p>Each input file contains one test case. For each case, the first line contains an integer N (in [3,10^5]), followed by N integer distances D1 D2 ⋯ DN, where Di is the distance between the i-th and the (i+1)-st exits, and DN  is between the N-th and the 1st exits. All the numbers in a line are separated by a space. The second line gives a positive integer M (≤10^4 ), with M lines follow, each contains a pair of exit numbers, provided that the exits are numbered from 1 to N. It is guaranteed that the total round trip distance is no more than 10^7.</p>
+<h3 id="output-specification-2">Output Specification</h3>
+<p>For each test case, print your results in <em>M</em> lines, each contains the shortest distance between the corresponding given pair of exits.</p>
+<h3 id="sample-input-2">Sample Input</h3>
+<pre><code>5 1 2 4 14 9
+3
+1 3
+2 5
+4 1
+</code></pre>
+<h3 id="sample-output-2">Sample Output</h3>
+<pre><code>3
+10
+7
+</code></pre>
+<hr>
+<h3 id="analysis-2">Analysis</h3>
+<p>这题题意是给出一个由N个结点组成的闭环，并已知相邻两点的距离，求给出两点之间的最短距离。给出的两点编号存在第一个点编号大于第二个点编号的可能性，加一个判断交换即可。<br>
+原本是想用dis[]数组来保存第i个点到第i+1个点的距离，但是后面计算时需要大量循环，因此这里借鉴柳神的思路，用dis[]数组来保存第一个点到第n个点的距离，比较方便，就不用再循环计算！</p>
+<h3 id="code-2">Code</h3>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main(){
+	int n,m,sum=0,left,right;
+	scanf(&quot;%d&quot;,&amp;n);
+	vector&lt;int&gt;dis(n+1);
+	for(int i=1;i&lt;=n;i++){
+		int tmp;
+		scanf(&quot;%d&quot;,&amp;tmp);
+		sum+=tmp;
+		dis[i]=sum;
+	}
+	scanf(&quot;%d&quot;,&amp;m);
+	for(int i=0;i&lt;m;i++){
+		scanf(&quot;%d %d&quot;,&amp;left,&amp;right);
+		if(left&gt;right)swap(left,right);
+		int tmp=dis[right-1]-dis[left-1];
+		printf(&quot;%d\n&quot;,min(tmp,sum-tmp)); 
+	}
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="a1065-ab-and-c-64bit-20分">A1065 A+B and C (64bit) (20分)</h2>
+<h3 id="question-3">Question</h3>
+<p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2^63, 2^63], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
+<h3 id="input-specification-3">Input Specification</h3>
+<p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p>
+<h3 id="output-specification-3">Output Specification</h3>
+<p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p>
+<h3 id="sample-input-3">Sample Input</h3>
+<pre><code>3
+1 2 3
+2 3 4
+9223372036854775807 -9223372036854775808 0
+</code></pre>
+<h3 id="sample-output-3">Sample Output</h3>
+<pre><code>Case #1: false
+Case #2: true
+Case #3: false
+</code></pre>
+<hr>
+<h3 id="analysis-3">Analysis</h3>
+<p>这题题意是给出三个整数并且范围在 [−2^63, 2^63]，对于普通int整型来说，一个整数占4Byte=32bit，取值范围远远小于题目要求，因此这里采用长整型，一个长整型整数占8Byte=64bit。</p>
+<p>一开始写的时候没有考虑A+B的范围会溢出，因此只过了一个点的测试。</p>
+<p>溢出的情况有两种：</p>
+<ol>
+<li>A&gt;0,B&gt;0,A+B&lt;0</li>
+<li>A&lt;0,B&lt;0,A+B&gt;=0</li>
+</ol>
+<h3 id="code-3">Code</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+typedef long long int ll;
+int main() {
+	ll a,b,c;
+	int t;
+	scanf(&quot;%d&quot;,&amp;t);
+	for(int i=0;i&lt;t;i++){
+		scanf(&quot;%lld %lld %lld&quot;,&amp;a,&amp;b,&amp;c);
+		ll sum=a+b;
+		if(a&gt;0&amp;&amp;b&gt;0&amp;&amp;sum&lt;0)printf(&quot;Case #%d: true\n&quot;,i+1);
+		else if(a&lt;0&amp;&amp;b&lt;0&amp;&amp;sum&gt;=0)printf(&quot;Case #%d: false\n&quot;,i+1);
+		else if(sum&gt;c)printf(&quot;Case #%d: true\n&quot;,i+1);
+		else printf(&quot;Case #%d: false\n&quot;,i+1);
+	}
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="a1002-ab-for-polynomials-25分">A1002 A+B for Polynomials (25分)</h2>
+<h3 id="question-4">Question</h3>
+<p>This time, you are supposed to find A+B where A and B are two polynomials.</p>
+<h3 id="input-specification-4">Input Specification</h3>
+<p>Each input file contains one test case. Each case occupies 2 lines, and each line contains the information of a polynomial:</p>
+<p><em>K</em> <em>N</em>1 <em>aN</em>1 <em>N</em>2 <em>aN</em>2 ... <em>NK</em> <em>aNK</em></p>
+<p>where <em>K</em> is the number of nonzero terms in the polynomial, <em>Ni</em> and <em>aNi</em> (<em>i</em>=1,2,⋯,<em>K</em>) are the exponents and coefficients, respectively. It is given that 1≤<em>K</em>≤10，0≤<em>NK</em>&lt;⋯&lt;<em>N</em>2&lt;<em>N</em>1≤1000.</p>
+<h3 id="output-specification-4">Output Specification</h3>
+<p>For each test case you should output the sum of <em>A</em> and <em>B</em> in one line, with the same format as the input. Notice that there must be NO extra space at the end of each line. Please be accurate to 1 decimal place.</p>
+<h3 id="sample-input-4">Sample Input</h3>
+<pre><code>2 1 2.4 0 3.2
+2 2 1.5 1 0.5
+</code></pre>
+<h3 id="sample-output-4">Sample Output</h3>
+<pre><code>3 2 1.5 1 2.9 0 3.2
+</code></pre>
+<hr>
+<h3 id="analysis-4">Analysis</h3>
+<p>这题题意是做多项式的加法运算，比较简单，用数组即可搞定，数组下标对应指数，存的数为底数。</p>
+<h3 id="code-4">Code</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+int main() {
+	int k,cnt=0;double Num[1001]={0};
+	for(int i=0;i&lt;2;i++){
+		scanf(&quot;%d&quot;,&amp;k);
+		for(int j=0;j&lt;k;j++){
+			int exp;double coe;
+			scanf(&quot;%d %lf&quot;,&amp;exp,&amp;coe);
+			Num[exp]+=coe;
+		}
+	}
+	for(int i=0;i&lt;1001;i++){
+		if(Num[i]!=0)cnt++;
+	}
+	printf(&quot;%d&quot;,cnt);
+	for(int i=1000;i&gt;=0;i--){
+		if(Num[i]!=0.0)printf(&quot; %d %.1lf&quot;,i,Num[i]);
+	}
+	return 0;
+}
+</code></pre>
+<hr>
+<h2 id="a1009-product-of-polynomials-25分">A1009 Product of Polynomials (25分)</h2>
+<h3 id="question-5">Question</h3>
+<p>This time, you are supposed to find A×B where A and B are two polynomials.</p>
+<h3 id="input-specification-5">Input Specification</h3>
+<p>Each input file contains one test case. Each case occupies 2 lines, and each line contains the information of a polynomial:</p>
+<p><em>K</em> <em>N</em>1 <em>aN</em>1 <em>N</em>2 <em>aN</em>2 ... <em>NK</em> <em>aNK</em></p>
+<p>where <em>K</em> is the number of nonzero terms in the polynomial, <em>Ni</em> and <em>aNi</em> (<em>i</em>=1,2,⋯,<em>K</em>) are the exponents and coefficients, respectively. It is given that 1≤<em>K</em>≤10，0≤<em>NK</em>&lt;⋯&lt;<em>N</em>2&lt;<em>N</em>1≤1000.</p>
+<h3 id="output-specification-5">Output Specification</h3>
+<p>For each test case you should output the product of <em>A</em> and <em>B</em> in one line, with the same format as the input. Notice that there must be <strong>NO</strong> extra space at the end of each line. Please be accurate up to 1 decimal place.</p>
+<h3 id="sample-input-5">Sample Input</h3>
+<pre><code>2 1 2.4 0 3.2
+2 2 1.5 1 0.5
+</code></pre>
+<h3 id="sample-output-5">Sample Output</h3>
+<pre><code>3 3 3.6 2 6.0 1 1.6
+</code></pre>
+<hr>
+<h3 id="analysis-5">Analysis</h3>
+<p>这题和上题差不多，稍微有些不一样，是做多项式的乘法运算。</p>
+<p>这里借用两个数组arr[]和ans[]，前者存第一行数据，后者边计算边存；同样数组下标对应指数，存的数为底数。注意相乘之后的指数范围高达2000！</p>
+<h3 id="code-5">Code</h3>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+using namespace std;
+int main() {
+	int k1,k2,cnt=0,exp;
+	double coe,arr[1001]={0.0},ans[2001]={0.0};
+	scanf(&quot;%d&quot;,&amp;k1);
+	for(int i=0;i&lt;k1;i++){
+		scanf(&quot;%d %lf&quot;,&amp;exp,&amp;coe);
+		arr[exp]=coe;
+	}
+	scanf(&quot;%d&quot;,&amp;k2);
+	for(int i=0;i&lt;k2;i++){
+		scanf(&quot;%d %lf&quot;,&amp;exp,&amp;coe);
+		for(int j=0;j&lt;1001;j++){
+			ans[j+exp]+=coe*arr[j];
+		}
+	}
+	for(int i=0;i&lt;2001;i++){
+		if(ans[i]!=0.0)cnt++;
+	}
+	printf(&quot;%d&quot;,cnt);
+	for(int i=2000;i&gt;=0;i--){
+		if(ans[i]!=0.0)printf(&quot; %d %.1lf&quot;,i,ans[i]);
+	}
+	return 0;
+}
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#a1042-shuffling-machine-20%E5%88%86">A1042 Shuffling Machine (20分)</a>
+<ul>
+<li><a href="#question">Question</a></li>
+<li><a href="#input-specification">Input Specification</a></li>
+<li><a href="#output-specification">Output Specification</a></li>
+<li><a href="#sample-input">Sample Input</a></li>
+<li><a href="#sample-output">Sample Output</a></li>
+<li><a href="#analysis">Analysis</a></li>
+<li><a href="#code">Code</a></li>
+</ul>
+</li>
+<li><a href="#a1046-shortest-distance-20%E5%88%86">A1046 Shortest Distance (20分)</a>
+<ul>
+<li><a href="#question-2">Question</a></li>
+<li><a href="#input-specification-2">Input Specification</a></li>
+<li><a href="#output-specification-2">Output Specification</a></li>
+<li><a href="#sample-input-2">Sample Input</a></li>
+<li><a href="#sample-output-2">Sample Output</a></li>
+<li><a href="#analysis-2">Analysis</a></li>
+<li><a href="#code-2">Code</a></li>
+</ul>
+</li>
+<li><a href="#a1065-ab-and-c-64bit-20%E5%88%86">A1065 A+B and C (64bit) (20分)</a>
+<ul>
+<li><a href="#question-3">Question</a></li>
+<li><a href="#input-specification-3">Input Specification</a></li>
+<li><a href="#output-specification-3">Output Specification</a></li>
+<li><a href="#sample-input-3">Sample Input</a></li>
+<li><a href="#sample-output-3">Sample Output</a></li>
+<li><a href="#analysis-3">Analysis</a></li>
+<li><a href="#code-3">Code</a></li>
+</ul>
+</li>
+<li><a href="#a1002-ab-for-polynomials-25%E5%88%86">A1002 A+B for Polynomials (25分)</a>
+<ul>
+<li><a href="#question-4">Question</a></li>
+<li><a href="#input-specification-4">Input Specification</a></li>
+<li><a href="#output-specification-4">Output Specification</a></li>
+<li><a href="#sample-input-4">Sample Input</a></li>
+<li><a href="#sample-output-4">Sample Output</a></li>
+<li><a href="#analysis-4">Analysis</a></li>
+<li><a href="#code-4">Code</a></li>
+</ul>
+</li>
+<li><a href="#a1009-product-of-polynomials-25%E5%88%86">A1009 Product of Polynomials (25分)</a>
+<ul>
+<li><a href="#question-5">Question</a></li>
+<li><a href="#input-specification-5">Input Specification</a></li>
+<li><a href="#output-specification-5">Output Specification</a></li>
+<li><a href="#sample-input-5">Sample Input</a></li>
+<li><a href="#sample-output-5">Sample Output</a></li>
+<li><a href="#analysis-5">Analysis</a></li>
+<li><a href="#code-5">Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2020-05-25，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2020-05-25 20:33:26";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>

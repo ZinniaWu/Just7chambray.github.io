@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://Just7chambray.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="栖迟於一丘，则天下不易其乐。"><meta charset="UTF-8"><title>网络安全（十一） | 吴糖可乐</title>
+<link href="https://Just7chambray.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://Just7chambray.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://Just7chambray.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155298468-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-155298468-1');
+</script>
+<!--<script src='//unpkg.com/valine/dist/Valine.min.js'></script>-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="/media/scripts/Valine.min.js"></script>
+
+<link rel="canonical" href="https://Just7chambray.github.io/post/net_safety11/" />
+</head>
+
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://Just7chambray.github.io"><img alt="logo" style="display:inline-block;" src="https://Just7chambray.github.io/images/avatar.png"/></a><h1 title="吴糖可乐" class="weaklink"><a  href="/">吴糖可乐</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://Just7chambray.github.io/post/gallery" class="selected active current nav__item" >图廊</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="https://wuxinyi.notion.site/Python-e4c8a37db48b4565b2a35b5db5216819" class="selected active current nav__item" >Python</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="http://Just7chambray.github.io/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1694856993610" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>网络安全（十一）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2019-12-31</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://Just7chambray.github.io/tag/net_safety/" class="tag">网络安全</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">5460字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">19 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B.png" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>本章要点：<br>
+入侵检测的概念；入侵检测系统分类；入侵检测系统分析方式；入侵检测系统的设置域部署；入侵检测系统的优缺点。</p>
+<!-- more -->
+<figure data-type="image" tabindex="1"><img src="https://jc-gridea.oss-cn-shanghai.aliyuncs.com/images/net_safety/%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%20%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B.png" alt="第十三章入侵检测 思维导图" loading="lazy"></figure>
+<h1 id="第十三章-入侵检测">第十三章 入侵检测</h1>
+<h2 id="入侵检测概述">入侵检测概述</h2>
+<h3 id="入侵检测的概念">入侵检测的概念</h3>
+<ul>
+<li>入侵检测是从计算机网络或计算机系统中的若干关键点搜集信息并对其进行分析，从中发现网络或系统中是否有违反安全策略的行为和遭到袭击的迹象的一种机制</li>
+<li>入侵检测系统的英文缩写是IDS（Intrusion Detection System），它使用入侵检测技术对网络与其上的系统进行监视，并根据监视结果进行不同的安全动作，最大限度地降低可能的入侵危害</li>
+<li>入侵检测一般采用旁路侦听的机制，因此不会产生对网络带宽的大量占用，系统的使用对网内外的用户来说是透明的，不会有任何的影响</li>
+<li>入侵检测系统所扮演的是网络安全系统中侦察与预警的角色，协助网络管理员发现并处理任何已知的入侵。可以说，它是对其他安全系统有力的补充，弥补了防火墙在高层上的不足</li>
+<li>通过对入侵检测系统所发出警报的处理，网络管理员可以有效地配置其他的安全产品，以使整个网络安全系统达到最佳的工作状态，尽可能降低因攻击而带来的损失</li>
+<li>入侵防护以入侵检测技术为基础，依托高性能硬件，实现对数据包的高层应用分析，针对可能存在的应用攻击行为，实时进行阻断与数据丢弃，提高了网络对安全事件响应的实时性，更好地保护主机的安全</li>
+</ul>
+<h3 id="入侵检测系统的基本结构">入侵检测系统的基本结构</h3>
+<ul>
+<li>
+<p>CIDF(Common Intrusion Detection Framework，通用入侵检测框架）阐述了一个入侵检测系统的通用模型</p>
+</li>
+<li>
+<p>事件</p>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>入侵检测系统需要分析的数据的统称</li>
+</ul>
+</li>
+<li>
+<p>分类</p>
+<ul>
+<li>网络中的数据包</li>
+<li>从系统日志等其他途径得到的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基本结构</p>
+<ul>
+<li>
+<p>事件产生器</p>
+<ul>
+<li>事件产生器采集和监视被保护系统的数据</li>
+</ul>
+</li>
+<li>
+<p>事件分析器</p>
+<ul>
+<li>
+<p>功能</p>
+<ul>
+<li>实时：分析事件产生器搜集到的数据，区分数据的正确性，发现非法的或者具有潜在危险的、异常的数据现象，通知响应单元做出入侵防范</li>
+<li>事后：对数据库保存的数据做定期的统计分析，发现某段时期内的异常表现，进而对该时期内的异常数据进行详细分析</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>响应单元</p>
+<ul>
+<li>协同事件分析器工作的重要组成部分</li>
+<li>一旦事件分析器发现具有入侵企图的异常数据，响应单元就要发挥作用，对具有入侵企图的攻击施以拦截、阻断、反追踪等手段，保护被保护系统免受攻击和破坏</li>
+</ul>
+</li>
+<li>
+<p>事件数据库</p>
+<ul>
+<li>事件数据库记录事件分析单元提供的分析结果，同时记录下所有来自于事件产生器的事件，用来进行以后的分析与检查</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="入侵检测系统分类">入侵检测系统分类</h2>
+<h3 id="适用于加密和交换环境">适用于加密和交换环境</h3>
+<h3 id="根据入侵检测系统的检测对象分类">根据入侵检测系统的检测对象分类</h3>
+<ul>
+<li>
+<p>基于主机的入侵检测系统HIDS</p>
+<ul>
+<li>
+<p>用于保护单台主机不受网络攻击行为的侵害，需要安装在被保护的主机上</p>
+</li>
+<li>
+<p>根据检测对象不同分类</p>
+<ul>
+<li>
+<p>网络连接检测</p>
+<ul>
+<li>网络连接检测是对试图进入该主机的数据流进行检测，分析确定是否有入侵行为，避免或减少这些数据流进入主机系统后造成损害</li>
+<li>网络连接检测可以有效地检测出是否存在攻击探测行为，攻击探测几乎是所有攻击行为的前奏</li>
+<li>系统管理员可以设置好访问控制表，其中包括容易受到攻击探测的网络服务，并且为它们设置好访问权限</li>
+<li>如果入侵检测系统发现有对未开放的服务端口进行网络连接，说明有人在寻找系统漏洞，这些探测行为就会被入侵检测系统记录下来，同时这种未经授权的连接也被拒绝</li>
+</ul>
+</li>
+<li>
+<p>主机文件检测</p>
+<ul>
+<li>
+<p>通常入侵行为会在主机的各种相关文件中留下痕迹，主机文件检测能够帮助系统管理员发现入侵行为或入侵企图，及时采取补救措施</p>
+</li>
+<li>
+<p>检测对象</p>
+<ul>
+<li>系统日志</li>
+<li>文件系统</li>
+<li>进程记录</li>
+<li>系统运行控制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基于网络的入侵检测系统NIDS</p>
+<ul>
+<li>
+<p>通常是作为一个独立的个体放置于被保护的网络上，它使用原始的网络分组数据包作为进行攻击分析的数据源</p>
+</li>
+<li>
+<p>一般利用一个网络适配器来实时监视和分析所有通过网络进行传输的通信</p>
+</li>
+<li>
+<p>一旦检测到攻击，入侵检测系统应答模块通过通知、报警以及中断连接等方式来对攻击做出反应</p>
+</li>
+<li>
+<p>基于网络的入侵检测可以侦听某一个IP，保护特定服务器的安全，也可以侦听整个网段</p>
+</li>
+<li>
+<p>为了能够对整个网段进行侦听，系统会将本身的网卡设置为混杂模式以接收网段内的所有数据包</p>
+</li>
+<li>
+<p>通常系统会使用位于网络层和传输层的网络侦听底层实现对网络的侦听。它们的主要任务就是获取其所见到的所有包并传给上一层</p>
+</li>
+<li>
+<p>发展阶段</p>
+<ul>
+<li>
+<p>包嗅探器和网络监视器</p>
+<ul>
+<li>
+<p>可执行的任务</p>
+<ul>
+<li>对包进行统计</li>
+<li>详细地检查包</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基于网络的入侵检测</p>
+<ul>
+<li>
+<p>可执行的任务</p>
+<ul>
+<li>检测端口扫描</li>
+<li>检测常见的攻击行为</li>
+<li>识别各种各样可能的欺骗攻击</li>
+<li>检测到一个不希望的活动时，基于网络的入侵检测系统将采取行动，包括干涉从入侵者处发来的通信，或重新配置附近的防火墙策略以封锁从入侵者的计算机或网络发来的所有通信</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>入侵防护系统</p>
+<ul>
+<li>入侵防护系统（Intrusion Protection System，IPS）是网络入侵检测系统的一种特殊形式</li>
+<li>入侵防护系统主要采用入侵检测技术实现网络防护功能，在网络位置上，入侵防护系统位于网络主干位置，一般以透明网关形式存在</li>
+<li>所有进出网络的数据包均需要通过入侵防护系统。因此，入侵防护系统有时也被称为嵌入式IDS或网关IDS</li>
+<li>入侵防护系统通常是防火墙技术与入侵检测技术相结合的产物。通过防火墙技术过滤大部分数据，对于关键应用，如Web应用、邮件应用、文件共享应用等，根据应用端口选择性上传到入侵检测核心，根据分析结果，决定是否继续传送</li>
+<li>由于入侵检测技术对运算性能要求较高，目前成形的入侵防护产品以硬件形式的居多</li>
+</ul>
+</li>
+<li>
+<p>两种入侵检测系统的结合运用</p>
+<ul>
+<li>基于网络的入侵检测系统和基于主机的入侵检测系统都有各自的优势和不足，这两种方式各自都能发现对方无法检测到的一些网络入侵行为，如果同时使用互相弥补不足，会起到良好的检测效果</li>
+</ul>
+</li>
+<li>
+<p>分布式入侵检测系统</p>
+<ul>
+<li>目前的入侵检测系统一般采用集中式模式，在被保护网络的各个网段中分别放置检测器进行数据包搜集和分析，各个检测器将检测信息传送给中央控制台进行统一处理，中央控制台还会向各个检测器发送命令</li>
+<li>这种模式的缺点是难以及时对在复杂网络上发起的分布式攻击进行数据分析以至于无法完成检测任务，入侵检测系统本身所在的主机还可能面临因为负荷过重而崩溃的危险</li>
+<li>分布式结构的入侵检测模式是目前入侵检测技术的一个研究方向，这种模式的系统采用分布式智能代理的结构，由一个或者多个中央智能代理和大量分布在网络各处的本地代理组成</li>
+<li>本地代理负责处理本地事件，中央代理负责统一调控各个本地代理的工作以及从整体上完成对网络事件进行综合分析的工作</li>
+<li>检测工作通过全部代理互相协作共同完成</li>
+</ul>
+</li>
+</ul>
+<h2 id="入侵检测系统的分析方式">入侵检测系统的分析方式</h2>
+<h3 id="异常检测技术基于行为的检测">异常检测技术——基于行为的检测</h3>
+<ul>
+<li>
+<p>基本原理</p>
+<ul>
+<li>是指根据用户的行为和系统资源的使用状况判断是否存在网络入侵</li>
+<li>首先假设网络攻击行为是不常见的或是异常的，区别于所有的正常行为</li>
+<li>如果能够为用户和系统的所有正常行为总结活动规律并建立行为模型，那么入侵检测系统可以将当前捕获到的网络行为与行为模型相对比，若入侵行为偏离了正常的行为轨迹，就可以被检测出来</li>
+<li>异常检测技术给系统对象（如用户、文件、目录和设备等）创建一个统计描述，统计正常使用时的一些测量属性（如访问次数、操作失败次数和延时等）</li>
+<li>测量属性的平均值将用来与网络、系统的行为进行比较，任何观察值在正常值范围之外时，就认为有入侵发生</li>
+</ul>
+</li>
+<li>
+<p>评价</p>
+<ul>
+<li>
+<p>优点</p>
+<ul>
+<li>能够检测出新的网络入侵方法的攻击</li>
+<li>较少依赖于特定主机操作系统</li>
+<li>对于内部合法用户的越权违法行为的检测能力较强</li>
+</ul>
+</li>
+<li>
+<p>不足</p>
+<ul>
+<li>误报率高</li>
+<li>行为模型建立困难</li>
+<li>难以对入侵行为进行分类和命名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>核心问题</p>
+<ul>
+<li>建立行为模型</li>
+</ul>
+</li>
+<li>
+<p>技术分类</p>
+<ul>
+<li>统计分析异常检测</li>
+<li>贝叶斯推理异常检测</li>
+<li>模式预测异常检测</li>
+<li>数据采掘异常检测</li>
+<li>机器学习异常检测</li>
+</ul>
+</li>
+</ul>
+<h3 id="误用检测技术基于知识的检测">误用检测技术——基于知识的检测</h3>
+<ul>
+<li>
+<p>基本原理</p>
+<ul>
+<li>误用检测技术（Misuse Detection）也称为基于知识的检测技术或者模式匹配检测技术</li>
+<li>前提是假设所有的网络攻击行为和方法都具有一定的模式或特征</li>
+<li>如果把以往发现的所有网络攻击的特征总结出来并建立一个入侵信息库</li>
+<li>那么入侵检测系统可以将当前捕获到的网络行为特征与入侵信息库中的特征信息相比较，如果匹配，则当前行为就被认定为入侵行为</li>
+<li>误用检测就是将搜集到的信息与已知的网络入侵和系统误用模式数据库进行比较，从而发现违背安全策略的行为</li>
+</ul>
+</li>
+<li>
+<p>评价</p>
+<ul>
+<li>
+<p>优点</p>
+<ul>
+<li>检测准确度高</li>
+<li>技术相对成熟</li>
+<li>便于进行系统防护</li>
+</ul>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>不能检测出新的入侵检测行为</li>
+<li>完全依赖于入侵特征的有效性</li>
+<li>维护特征库的工作量巨大</li>
+<li>难以检测来自内部用户的攻击</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>技术分类</p>
+<ul>
+<li>专家系统误用检测</li>
+<li>特征分析误用检测</li>
+<li>模型推理误用检测</li>
+<li>条件概率误用检测</li>
+<li>键盘监控误用检测</li>
+</ul>
+</li>
+</ul>
+<h3 id="异常检测技术和误用检测技术的比较">异常检测技术和误用检测技术的比较</h3>
+<ul>
+<li>基于异常检测技术的入侵检测系统如果想检测到所有的网络入侵行为，必须掌握被保护系统已知行为和预期行为的所有信息，这一点实际上无法做到，因此入侵检测系统必须不断地学习并更新已有的行为轮廓</li>
+<li>对于基于误用检测技术的入侵检测系统而言，只有拥有所有可能的入侵行为的先验知识，而且必须能识别各种入侵行为的过程细节或者每种入侵行为的特征模式，才能检测到所有的入侵行为，而这种情况也是不存在的，该类入侵检测系统只能检测出已有的入侵模式，必须不断地对新出现的入侵行为进行总结和归纳</li>
+</ul>
+<h3 id="其他入侵检测技术的研究">其他入侵检测技术的研究</h3>
+<ul>
+<li>遗传算法</li>
+<li>免疫技术</li>
+<li>基于应用协议状态的跟踪型入侵检测技术</li>
+</ul>
+<h2 id="入侵检测系统的设置">入侵检测系统的设置</h2>
+<h3 id="网络安全的实际需求对于入侵检测的工作方式和检测位置都有十分重要的影响只有在了解和掌握这些实际需求的情况下才能正确地设计入侵检测系统的网络拓扑并对入侵检测系统进行正确的配置">网络安全的实际需求对于入侵检测的工作方式和检测位置都有十分重要的影响，只有在了解和掌握这些实际需求的情况下，才能正确地设计入侵检测系统的网络拓扑，并对入侵检测系统进行正确的配置</h3>
+<h3 id="步骤">步骤</h3>
+<ul>
+<li>确定入侵检测需求</li>
+<li>设计入侵检测系统在网络中的拓扑位置</li>
+<li>配置入侵检测系统</li>
+<li>入侵检测系统的磨合</li>
+<li>入侵检测系统的使用及自调节</li>
+</ul>
+<h3 id="入侵检测系统的设置需要经过多次的反复磨合才能够将误报警率和漏报警率降到最低实现对网络的有效监控和分析">入侵检测系统的设置需要经过多次的反复磨合，才能够将误报警率和漏报警率降到最低，实现对网络的有效监控和分析</h3>
+<h2 id="入侵检测系统的部署">入侵检测系统的部署</h2>
+<h3 id="基于网络的入侵检测系统可以在网络的多个位置进行部署-这里的部署主要指对网络入侵检测器的部署">基于网络的入侵检测系统可以在网络的多个位置进行部署。这里的部署主要指对网络入侵检测器的部署</h3>
+<h3 id="根据检测器部署位置的不同入侵检测系统具有不同的工作特点-用户需要根据自己的网络环境以及安全需求进行网络部署以达到预定的网络安全需求">根据检测器部署位置的不同，入侵检测系统具有不同的工作特点。用户需要根据自己的网络环境以及安全需求进行网络部署，以达到预定的网络安全需求</h3>
+<h3 id="基于网络入侵检测系统的部署">基于网络入侵检测系统的部署</h3>
+<ul>
+<li>
+<p>入侵检测的部署点</p>
+<ul>
+<li>
+<p>DMZ区</p>
+<ul>
+<li>
+<p>DMZ区部署点在DMZ区的总口上，是入侵检测器最常见的部署位置</p>
+</li>
+<li>
+<p>可检测到所有针对用户对外提供服务的服务器进行攻击的行为</p>
+</li>
+<li>
+<p>由于DMZ区中的服务器是外网可见的，因此，在这里的入侵检测是最为需要的</p>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>检测来自外部的攻击，这些攻击已经渗入过第一层防御体系</li>
+<li>易于检测网络防火墙性能并找到配置策略中的问题</li>
+<li>DMZ区通常放置的是对内外提供服务的重要的服务设备，因此，所检测的对象集中于关键的服务设备</li>
+<li>即使进入的攻击行为不可识别，入侵检测系统经过正确的配置也可以从被攻击主机的反馈中获得受到攻击的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>外网入口</p>
+<ul>
+<li>
+<p>外网入口部署点位于防火墙之前，可检测所有进出防火墙外网口的数据，即所有进出数据</p>
+</li>
+<li>
+<p>可检测到所有来自外部网络的可能的攻击行为并进行记录，这些攻击包括对内部服务器的攻击、对防火墙本身的攻击以及内网机器不正常的数据通信行为</p>
+</li>
+<li>
+<p>这种方式虽然对整体入侵行为记录有帮助，但由于入侵检测器本身性能上的局限，该部署点的入侵检测器目前的效果并不理想</p>
+</li>
+<li>
+<p>同时对于进行NAT的内部网来说，入侵检测器不能定位攻击的源或目的地址，系统管理员在处理攻击行为上存在一定的难度</p>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>可以对针对目标网络的攻击进行计数，并记录最为原始的攻击数据包</li>
+<li>可以记录针对目标网络的攻击类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>内网主干</p>
+<ul>
+<li>
+<p>内网主干部署点是最常用的部署位置，在这里入侵检测器主要检测内网流出和经过防火墙过滤后流入内网的网络数据</p>
+</li>
+<li>
+<p>可检测所有通过防火墙进入的攻击以及内部网向外部的不正常操作，并且可以准确地定位攻击的源和目的，方便系统管理员进行针对性的网络管理</p>
+</li>
+<li>
+<p>由于防火墙的过滤作用，降低了通过入侵检测器的数据流量，使得入侵检测器能够更有效地工作</p>
+</li>
+<li>
+<p>由于入侵检测器在防火墙的内部，防火墙已经根据规则要求阻断了部分攻击，所以入侵检测器并不能记录下所有可能的入侵行为</p>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>检测大量的网络通信提高了检测攻击的识别可能</li>
+<li>检测内网可信用户的越权行为</li>
+<li>实现对内部网络信息的检测</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>关键子网</p>
+<ul>
+<li>
+<p>在内部网中，总有一些子网因为存在关键性数据和服务，需要更严格的管理，比如资产管理子网、财务子网等，这些子网是整个网络系统中的关键子网</p>
+</li>
+<li>
+<p>通过对这些子网进行安全检测，可以检测到来自内部以及外部的所有不正常的网络行为，这样可以有效地保护关键的网络不会被外部或没有权限的内部用户侵入，造成关键数据泄漏或丢失</p>
+</li>
+<li>
+<p>由于关键子网位于内网的内部，因此流量相对要小一些，可以保证入侵检测器的有效检测</p>
+</li>
+<li>
+<p>优点</p>
+<ul>
+<li>集中资源对于检测针对关键系统和资源的来自企业内外部的攻击</li>
+<li>将有限的资源进行有效部署，获取最高的使用价值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="基于主机入侵检测系统的部署">基于主机入侵检测系统的部署</h3>
+<ul>
+<li>在基于网络的入侵检测系统部署并配置完成后，基于主机的入侵检测系统的部署可以给系统提供高级别的保护</li>
+<li>基于主机的入侵检测系统主要安装在关键主机上，这样可以减少规划部署的花费，使管理的精力集中在最重要最需要保护的主机上</li>
+</ul>
+<h3 id="报警策略">报警策略</h3>
+<ul>
+<li>入侵检测系统在检测到入侵行为的时候，需要报警并进行相应的反应。如何报警和选取什么样的报警，需要根据整个网络的环境和安全的需求进行确定</li>
+<li>由于报警的形式很多，大部分都需要其他网络设备和服务的协助，因此只有保证相关的设备和服务可以和入侵检测系统正确地通信，才可以保证报警信息的及时送达</li>
+</ul>
+<h2 id="入侵检测系统的优点与局限性">入侵检测系统的优点与局限性</h2>
+<h3 id="入侵检测系统的优点">入侵检测系统的优点</h3>
+<ul>
+<li>可以检测和分析系统事件以及用户的行为</li>
+<li>可以测试系统设置的安全状态</li>
+<li>以系统的安全状态为基础，跟踪任何对系统安全的修改操作</li>
+<li>通过模式识别等技术从通信行为中检测出已知的攻击行为</li>
+<li>可以对网络通信行为进行统计，并进行检测分析</li>
+<li>管理操作系统认证和日志机制并对产生的数据进行分析处理</li>
+<li>在检测到攻击的时候，通过适当的方式进行适当的报警处理</li>
+<li>通过对分析引擎的配置对网络的安全进行评估和监督</li>
+<li>允许非安全领域的管理人员对重要的安全事件进行有效的处理</li>
+</ul>
+<h3 id="入侵检测系统的局限性">入侵检测系统的局限性</h3>
+<ul>
+<li>入侵检测系统无法弥补安全防御系统中的安全缺陷和漏洞</li>
+<li>对于高负载的网络或主机，很难实现对网络入侵的实时检测、报警和迅速地进行攻击响应</li>
+<li>基于知识的入侵检测系统很难检测到未知的攻击行为，而基于行为特征的入侵检测系统只能在一定程度上检测到新的攻击行为</li>
+<li>入侵检测系统的主动防御功能和联动防御功能会对网络的行为产生影响，同样也会成为攻击者的目标，实现以入侵检测系统过敏自主防御为基础的攻击</li>
+<li>入侵检测系统无法单独防止攻击行为的渗透，只能调整相关网络设备的参数或人为地进行处理</li>
+<li>网络入侵检测系统在纯交换环境下无法正常工作，只有对交换环境进行一定的处理，利用镜像等技术，网络入侵检测系统才能对镜像的数据进行分析处理</li>
+<li>入侵检测系统主要是对网络行为进行分析检测，不能修正信息资源中存在的安全问题</li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0-%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B">第十三章 入侵检测</a>
+<ul>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E6%A6%82%E8%BF%B0">入侵检测概述</a>
+<ul>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%9A%84%E6%A6%82%E5%BF%B5">入侵检测的概念</a></li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">入侵检测系统的基本结构</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E5%88%86%E7%B1%BB">入侵检测系统分类</a>
+<ul>
+<li><a href="#%E9%80%82%E7%94%A8%E4%BA%8E%E5%8A%A0%E5%AF%86%E5%92%8C%E4%BA%A4%E6%8D%A2%E7%8E%AF%E5%A2%83">适用于加密和交换环境</a></li>
+<li><a href="#%E6%A0%B9%E6%8D%AE%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A3%80%E6%B5%8B%E5%AF%B9%E8%B1%A1%E5%88%86%E7%B1%BB">根据入侵检测系统的检测对象分类</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%88%86%E6%9E%90%E6%96%B9%E5%BC%8F">入侵检测系统的分析方式</a>
+<ul>
+<li><a href="#%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF%E5%9F%BA%E4%BA%8E%E8%A1%8C%E4%B8%BA%E7%9A%84%E6%A3%80%E6%B5%8B">异常检测技术——基于行为的检测</a></li>
+<li><a href="#%E8%AF%AF%E7%94%A8%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E7%9A%84%E6%A3%80%E6%B5%8B">误用检测技术——基于知识的检测</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF%E5%92%8C%E8%AF%AF%E7%94%A8%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF%E7%9A%84%E6%AF%94%E8%BE%83">异常检测技术和误用检测技术的比较</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E6%8A%80%E6%9C%AF%E7%9A%84%E7%A0%94%E7%A9%B6">其他入侵检测技术的研究</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E7%BD%AE">入侵检测系统的设置</a>
+<ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E5%AE%9E%E9%99%85%E9%9C%80%E6%B1%82%E5%AF%B9%E4%BA%8E%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%92%8C%E6%A3%80%E6%B5%8B%E4%BD%8D%E7%BD%AE%E9%83%BD%E6%9C%89%E5%8D%81%E5%88%86%E9%87%8D%E8%A6%81%E7%9A%84%E5%BD%B1%E5%93%8D%E5%8F%AA%E6%9C%89%E5%9C%A8%E4%BA%86%E8%A7%A3%E5%92%8C%E6%8E%8C%E6%8F%A1%E8%BF%99%E4%BA%9B%E5%AE%9E%E9%99%85%E9%9C%80%E6%B1%82%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%89%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E5%9C%B0%E8%AE%BE%E8%AE%A1%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E5%B9%B6%E5%AF%B9%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E8%BF%9B%E8%A1%8C%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%85%8D%E7%BD%AE">网络安全的实际需求对于入侵检测的工作方式和检测位置都有十分重要的影响，只有在了解和掌握这些实际需求的情况下，才能正确地设计入侵检测系统的网络拓扑，并对入侵检测系统进行正确的配置</a></li>
+<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a></li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E7%BD%AE%E9%9C%80%E8%A6%81%E7%BB%8F%E8%BF%87%E5%A4%9A%E6%AC%A1%E7%9A%84%E5%8F%8D%E5%A4%8D%E7%A3%A8%E5%90%88%E6%89%8D%E8%83%BD%E5%A4%9F%E5%B0%86%E8%AF%AF%E6%8A%A5%E8%AD%A6%E7%8E%87%E5%92%8C%E6%BC%8F%E6%8A%A5%E8%AD%A6%E7%8E%87%E9%99%8D%E5%88%B0%E6%9C%80%E4%BD%8E%E5%AE%9E%E7%8E%B0%E5%AF%B9%E7%BD%91%E7%BB%9C%E7%9A%84%E6%9C%89%E6%95%88%E7%9B%91%E6%8E%A7%E5%92%8C%E5%88%86%E6%9E%90">入侵检测系统的设置需要经过多次的反复磨合，才能够将误报警率和漏报警率降到最低，实现对网络的有效监控和分析</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%83%A8%E7%BD%B2">入侵检测系统的部署</a>
+<ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%BB%9C%E7%9A%84%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E5%8F%AF%E4%BB%A5%E5%9C%A8%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%9A%E4%B8%AA%E4%BD%8D%E7%BD%AE%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2-%E8%BF%99%E9%87%8C%E7%9A%84%E9%83%A8%E7%BD%B2%E4%B8%BB%E8%A6%81%E6%8C%87%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84%E9%83%A8%E7%BD%B2">基于网络的入侵检测系统可以在网络的多个位置进行部署。这里的部署主要指对网络入侵检测器的部署</a></li>
+<li><a href="#%E6%A0%B9%E6%8D%AE%E6%A3%80%E6%B5%8B%E5%99%A8%E9%83%A8%E7%BD%B2%E4%BD%8D%E7%BD%AE%E7%9A%84%E4%B8%8D%E5%90%8C%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E5%85%B7%E6%9C%89%E4%B8%8D%E5%90%8C%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%89%B9%E7%82%B9-%E7%94%A8%E6%88%B7%E9%9C%80%E8%A6%81%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E4%BB%A5%E5%8F%8A%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%BB%9C%E9%83%A8%E7%BD%B2%E4%BB%A5%E8%BE%BE%E5%88%B0%E9%A2%84%E5%AE%9A%E7%9A%84%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82">根据检测器部署位置的不同，入侵检测系统具有不同的工作特点。用户需要根据自己的网络环境以及安全需求进行网络部署，以达到预定的网络安全需求</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%BB%9C%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%83%A8%E7%BD%B2">基于网络入侵检测系统的部署</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E4%B8%BB%E6%9C%BA%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%83%A8%E7%BD%B2">基于主机入侵检测系统的部署</a></li>
+<li><a href="#%E6%8A%A5%E8%AD%A6%E7%AD%96%E7%95%A5">报警策略</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E7%82%B9%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7">入侵检测系统的优点与局限性</a>
+<ul>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E7%82%B9">入侵检测系统的优点</a></li>
+<li><a href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7">入侵检测系统的局限性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+
+
+
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+
+
+<section>
+
+
+<div class="doc_comments">
+
+	  
+		<div id="gitalk-container"></div>
+		<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/qyxtim/Static@3.8/gitalk.min.js"></script><link href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.css"rel="stylesheet"><script>var gitalk=new Gitalk({clientID:"",clientSecret:"",repo:"",owner:"",admin:[""],id:(location.pathname).substring(0, 49),distractionFreeMode:false});gitalk.render("gitalk-container");</script> -->
+
+
+<!--评论显示区，请插入合适的位置-->
+<div id="comment"></div>
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.6.1/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<!-- <script>
+    new Valine({
+        el:'#comment',
+        appId: '??????????',
+        appKey: '?????????',
+        placeholder: 'ヾﾉ≧∀≦)o快来评论一下吧!',
+        avatar:''
+    });
+</script> -->
+
+<script>
+    new Valine({
+        el: '#comment',
+	    lang: 'zh-cn',//设置评论语言
+  		app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',
+  		app_key: '6MeNR50UG8AfLoDVoQtab6iT',
+  		placeholder: '评论留言'
+    })
+</script>
+	  
+		  
+	  
+
+</div>
+</section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2019-12-31，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2019-12-31 22:06:26";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://github.com/Just7chambray"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:just7chambray@gmail.com"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://just7chambray.github.io/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>Copyright © 2018-2020 <a href="https://Just7chambray.github.io" style="margin:0;">吴糖可乐</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>77</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://Just7chambray.github.io/media/js/prism.js"></script>
+
+
+
+	<!-- <script>
+	    comment_el = '#comment';
+	    comment_count_el = 'span.comment-count';
+	    new Valine({
+	        el: comment_el,				// 评论区元素（要求div）
+	        count_el: comment_count_el,    // 评论计数元素（要求span）
+	        lang: 'zh-cn',							   // 语言（zh-cn或en）
+	        // emoticon_url: 'https://cloud.panjunwen.com/alu', // 表情包根目录（自行解决文件托管）
+	        // emoticon_list: ["吐.png", "狂汗.png", "不说话.png"], // 表情包文件列表
+	        app_id: '9jxs7DFUKyHw6619OPXUt30f-gzGzoHsz',			    										   	
+	        app_key: '6MeNR50UG8AfLoDVoQtab6iT',    										      
+	        placeholder: 'Write a comment',  // 提示符
+	        admin_email_hash: 'f32fc1c3f6674bfb5621a60901b5f96c', // 可选，管理员邮箱md5，用于显示管理员标志👮‍
+	        max_nest: 3,					// 嵌套评论深度，太大会影响加载速度
+	        page_size: 5					// 分页大小
+	    });
+	</script> -->
+
+</body>
+
+
+ 
+</html>
